@@ -1,6 +1,6 @@
 import React from "react";
 import ShallowRenderer from "react-test-renderer/shallow";
-import App from "../components/App/App";
+import App from "./App";
 
 it("renders snapshot correctly", () => {
 	const renderer = new ShallowRenderer();
