@@ -1,0 +1,15 @@
+.header {
+  background: darkblue;
+  color: white;
+  margin: 0;
+}
+
+.nav-bar {
+  background: green;
+}
+
+.main {
+  background: tomato;
+  height: 80vh;
+}
+
