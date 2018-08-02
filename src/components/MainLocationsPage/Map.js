@@ -25,13 +25,7 @@ export class MapContainer extends Component {
     }
 
     return (
-      <div
-        style={{
-          position: "relative",
-          height: "calc(100vh - 64px)",
-          width: "70%"
-        }}
-      >
+      <div className="map">
         <Map style={{}} google={this.props.google} zoom={14}>
           <Marker
             onClick={this.onMarkerClick}

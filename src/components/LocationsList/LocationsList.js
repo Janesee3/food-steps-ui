@@ -15,7 +15,7 @@ const LocationsList = (props) => {
   }
 
   return (
-    <div className="locations-list">
+    <div className={props.detailed ? "detailed-locations-list": "simple-locations-list"}>
       <List
         itemLayout="vertical"
         size="small"
