@@ -1,19 +1,1 @@
 @import '~antd/dist/antd.css';
-.App {
-  text-align: center;
-}
-.header {
-  background: darkblue;
-  color: white;
-  margin: 0;
-}
-
-.nav-bar {
-  background: green;
-}
-
-.main {
-
-  height: 80vh;
-}
-
