@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Avatar, Button, Spin } from 'antd';
 
 
-const AllLocations = () => {
+const AllLocation = () => {
     return (
         <div>
 
@@ -10,4 +10,4 @@ const AllLocations = () => {
     );
 }
 
-export default AllLocations;
+export default AllLocation;
