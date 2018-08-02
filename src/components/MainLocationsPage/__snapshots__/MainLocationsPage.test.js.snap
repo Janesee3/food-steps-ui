@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render snapshot correctly 1`] = `
+<div
+  className="main-locations"
+>
+  <div
+    id="map-locations-map"
+  >
+    <Wrapper />
+  </div>
+  <div
+    id="map-locations-list"
+  >
+    <LocationsList
+      userLocations={Array []}
+    />
+  </div>
+</div>
+`;

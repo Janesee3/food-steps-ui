@@ -2,7 +2,7 @@
 
 exports[`props.detailed false snapshot test 1`] = `
 <div
-  className="locations-list"
+  className="simple-locations-list"
 >
   <List
     bordered={false}
@@ -20,7 +20,7 @@ exports[`props.detailed false snapshot test 1`] = `
 
 exports[`props.detailed true snapshot test 1`] = `
 <div
-  className="locations-list"
+  className="detailed-locations-list"
 >
   <List
     bordered={false}
