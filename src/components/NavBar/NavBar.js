@@ -13,7 +13,9 @@ const NavBar = () => {
       <Menu.Item key="1">
         <Link to="/user-locations-page">User Locations Page</Link>
       </Menu.Item>
-      <Menu.Item key="2">nav 2</Menu.Item>
+      <Menu.Item key="2">
+        <Link to="/new-location">New Location</Link>
+      </Menu.Item>
       <Menu.Item key="3">nav 3</Menu.Item>
     </Menu>
   );
