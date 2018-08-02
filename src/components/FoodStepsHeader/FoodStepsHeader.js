@@ -3,6 +3,8 @@ import { Layout } from "antd";
 import NavBar from "../NavBar/NavBar";
 import "./FoodStepsHeader.css";
 
+import { Button } from "antd";
+
 const { Header } = Layout;
 
 const FoodStepsHeader = () => {
@@ -10,6 +12,7 @@ const FoodStepsHeader = () => {
     <div>
       <Header>
         <div className="logo" />
+        <Button className="sign-up-button" type="primary">Sign Up</Button>
         <NavBar />
       </Header>
     </div>
