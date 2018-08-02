@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AllLocations from './AllLocations';
 
+
 class LocationComponent extends Component {
     constructor() {
         super()
