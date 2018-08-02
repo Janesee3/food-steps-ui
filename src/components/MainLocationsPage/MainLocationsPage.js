@@ -6,15 +6,19 @@ class MainLocationsPage extends Component {
   constructor() {
     super();
     this.state = {
-      dummylocations: seedData
+      userLocations: []
   }
 }
+ async componentDidMount() {
+   this.setState({
+     userLocations: seedData
+   })
+ }
 
   render() {
     return (
       <div>
-        Hello from Locations Router
-        <LocationsList locations={this.state.dummylocations}/>
+        <LocationsList userLocations={this.state.userLocations}/>
       </div>
     );
   }

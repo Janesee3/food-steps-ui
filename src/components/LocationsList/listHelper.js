@@ -1,5 +1,13 @@
 import React from 'react';
-import { List, Avatar, Rate } from 'antd';
+import { List, Avatar, Rate, Icon } from 'antd';
+
+const IconText = ({ type, text }) => (
+    <span>
+        <Icon type={type} style={{ marginRight: 8 }} />
+        {text}
+    </span>
+);
+
 
 export const detailedListItem = (eachItemInDataSourceArray) => {
     return (<List.Item
@@ -32,14 +40,16 @@ export const simpleListItem = (eachItemInDataSourceArray) => {
         <List.Item>
             <List.Item.Meta
                 avatar={<Avatar src={eachItemInDataSourceArray.avatar} />}
-                title={<a href={eachItemInDataSourceArray.href}>{eachItemInDataSourceArray.gender}</a>}
+                title={
+                    <a href={eachItemInDataSourceArray.href}>
+                        {eachItemInDataSourceArray.locationName} {` | `}
+                        <IconText type="star" text={eachItemInDataSourceArray.rating} />
+                    </a>
+                }
                 description={eachItemInDataSourceArray.feedback}
             />
 
             {/* Content */}
             {eachItemInDataSourceArray.sahil}
-            <div>
-                <Rate allowHalf defaultValue={2.5} />
-            </div>
         </List.Item>);
 }

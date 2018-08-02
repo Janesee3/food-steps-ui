@@ -4,12 +4,6 @@ import '../../index.css';
 import { List } from 'antd';
 import { detailedListItem, simpleListItem } from './listHelper'
 
-// const IconText = ({ type, text }) => (
-//   <span>
-//     <Icon type={type} style={{ marginRight: 8 }} />
-//     {text}
-//   </span>
-// );
 
 
 const LocationsList = (props) => {
