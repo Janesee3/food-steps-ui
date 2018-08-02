@@ -1,3 +1,7 @@
+@import '~antd/dist/antd.css';
+.App {
+  text-align: center;
+}
 .header {
   background: darkblue;
   color: white;
@@ -9,7 +13,7 @@
 }
 
 .main {
-  background: tomato;
+
   height: 80vh;
 }
 
