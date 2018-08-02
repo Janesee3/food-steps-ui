@@ -1,11 +1,11 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import LocationComponent from '../Location/Location';
+import MainLocationsPage from '../MainLocationsPage/MainLocationsPage';
 
 const NavRoutes = () => {
   return (
     <div className="main">
-      <Route path="/location" component={LocationComponent} />
+      <Route path="/location" component={MainLocationsPage} />
     </div>
   );
 };
