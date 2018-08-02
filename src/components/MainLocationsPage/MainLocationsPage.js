@@ -6,10 +6,10 @@ class MainLocationsPage extends Component {
     super();
     this.state = {
       dummylocations: [
-        { lat: 1, lng: 1 },
-        { lat: 2, lng: 2 },
-        { lat: 3, lng: 3 },
-        { lat: 4, lng: 4 }
+        { lat: 1, lng: 1, placename: "Place 1" },
+        { lat: 2, lng: 2, placename: "Place 2" },
+        { lat: 3, lng: 3, placename: "Place 3" },
+        { lat: 4, lng: 4, placename: "Place 4" }
       ]
     };
   }
@@ -18,7 +18,7 @@ class MainLocationsPage extends Component {
     return (
       <div>
         Hello from Locations Router
-        <LocationsList />
+        <LocationsList locations={this.state.dummylocations}/>
       </div>
     );
   }
