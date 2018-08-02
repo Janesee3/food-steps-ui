@@ -19,6 +19,8 @@ exports[`renders snapshot correctly 1`] = `
     <SignInSignUpModal
       handleCancel={[Function]}
       isModalVisible={false}
+      onSignUpFail={[Function]}
+      onSignUpSuccess={[Function]}
     />
     <NavBar />
   </Adapter>
