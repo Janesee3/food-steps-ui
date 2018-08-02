@@ -18,7 +18,6 @@ exports[`renders snapshot correctly 1`] = `
     </Button>
     <SignInSignUpModal
       handleCancel={[Function]}
-      handleSignUpSubmit={[Function]}
       isModalVisible={false}
     />
     <NavBar />

@@ -1,19 +1,12 @@
 import React, { Component } from "react";
 
-import {
-  Form,
-  Input,
-  Tooltip,
-  Icon,
-  Button
-} from "antd";
+import { Form, Input, Tooltip, Icon, Button } from "antd";
 
 const FormItem = Form.Item;
 
 class RegistrationForm extends Component {
   state = {
-    confirmDirty: false,
-    autoCompleteResult: []
+    confirmDirty: false
   };
 
   handleSubmit = e => {
@@ -21,6 +14,8 @@ class RegistrationForm extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+      } else {
+        console.log(err);
       }
     });
   };
@@ -28,6 +23,7 @@ class RegistrationForm extends Component {
   handleConfirmBlur = e => {
     const value = e.target.value;
     this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+    // !!"value" = true
   };
 
   compareToFirstPassword = (rule, value, callback) => {
@@ -45,18 +41,6 @@ class RegistrationForm extends Component {
       form.validateFields(["confirm"], { force: true });
     }
     callback();
-  };
-
-  handleWebsiteChange = value => {
-    let autoCompleteResult;
-    if (!value) {
-      autoCompleteResult = [];
-    } else {
-      autoCompleteResult = [".com", ".org", ".net"].map(
-        domain => `${value}${domain}`
-      );
-    }
-    this.setState({ autoCompleteResult });
   };
 
   render() {
@@ -85,16 +69,21 @@ class RegistrationForm extends Component {
       }
     };
 
-
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormItem {...formItemLayout} label="Username">
-          {getFieldDecorator("nickname", {
+          {getFieldDecorator("username", {
             rules: [
               {
                 required: true,
-                message: "Please input your nickname!",
+                message: "Please input your username!",
                 whitespace: true
+              },
+              {
+                max: 20,
+                min: 6,
+                pattern:/^[a-zA-Z0-9]{6,20}\b/,
+                message: "Username should contain only 6 - 20 alphanumeric characters"
               }
             ]
           })(<Input />)}
@@ -163,12 +152,3 @@ class RegistrationForm extends Component {
 
 const SignUpForm = Form.create()(RegistrationForm);
 export default SignUpForm;
-// const SignUpForm = () => {
-//     return (
-//         <div>
-
-//         </div>
-//     );
-// }
-
-// export default SignUpForm;
