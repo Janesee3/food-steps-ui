@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import LocationComponent from '../location/Location';
+import LocationComponent from '../Location/Location';
 
 const NavRoutes = () => {
   return (
