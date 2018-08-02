@@ -1,22 +1,63 @@
-import React from "react";
 import { Layout } from "antd";
 import NavBar from "../NavBar/NavBar";
+import SignInSignUpModal from "../SignInSignUpModal/SignInSignUpModal";
+import React, { Component } from "react";
+import { Button } from "antd";
 import "./FoodStepsHeader.css";
 
-import { Button } from "antd";
-
 const { Header } = Layout;
+class FoodStepsHeader extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      visible: false
+    };
 
-const FoodStepsHeader = () => {
-  return (
-    <div>
-      <Header>
-        <div className="logo" />
-        <Button className="sign-up-button" type="primary">Sign Up</Button>
-        <NavBar />
-      </Header>
-    </div>
-  );
-};
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
+  }
+
+  // Sign In Sign Up Modal Callbacks
+  handleSignUpSubmit = () => {
+    // this.setState({ loading: true });
+    // setTimeout(() => {
+    //   this.setState({ loading: false, visible: false });
+    // }, 3000);
+    this.setState({ visible: false });
+  };
+
+  handleCancel = () => {
+    this.setState({ visible: false });
+  };
+
+  showModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <Header>
+          <div className="logo" />
+          <Button
+            className="sign-up-button"
+            type="primary"
+            onClick={this.showModal}
+          >
+            Sign Up
+          </Button>
+          <SignInSignUpModal
+            isModalVisible={this.state.visible}
+            handleSignUpSubmit={this.handleSignUpSubmit}
+            handleCancel={this.handleCancel}
+          />
+          <NavBar />
+        </Header>
+      </div>
+    );
+  }
+}
 
 export default FoodStepsHeader;

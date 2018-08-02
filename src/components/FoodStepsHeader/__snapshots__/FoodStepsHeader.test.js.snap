@@ -10,11 +10,17 @@ exports[`renders snapshot correctly 1`] = `
       className="sign-up-button"
       ghost={false}
       loading={false}
+      onClick={[Function]}
       prefixCls="ant-btn"
       type="primary"
     >
       Sign Up
     </Button>
+    <SignInSignUpModal
+      handleCancel={[Function]}
+      handleSignUpSubmit={[Function]}
+      isModalVisible={false}
+    />
     <NavBar />
   </Adapter>
 </div>
