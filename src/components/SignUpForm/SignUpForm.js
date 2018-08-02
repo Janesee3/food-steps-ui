@@ -97,6 +97,11 @@ class RegistrationForm extends Component {
               },
               {
                 validator: this.validateToNextPassword
+              },
+              {
+                max: 20,
+                min: 8,
+                message: "Password should be 8 - 20 characters"
               }
             ]
           })(<Input type="password" />)}
