@@ -19,9 +19,6 @@ jobs:
           name: Run Test
           command: npm test
   deploy:
-    branches:
-      only:
-        - master
     docker:
       - image: buildpack-deps:trusty
     steps:
@@ -35,5 +32,8 @@ workflows:
     jobs:
       - build
       - deploy:
+          filters:
+            branches:
+              only: master
           requires:
             - build
