@@ -1,12 +1,15 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import MainLocationsPage from '../MainLocationsPage/MainLocationsPage';
+import MainLocationsPage from "../MainLocationsPage/MainLocationsPage";
+import { Layout } from "antd";
+import './NavRoutes.css'
+const { Content } = Layout;
 
 const NavRoutes = () => {
   return (
-    <div className="main">
+    <Content className="content-container">
       <Route path="/location" component={MainLocationsPage} />
-    </div>
+    </Content>
   );
 };
 
