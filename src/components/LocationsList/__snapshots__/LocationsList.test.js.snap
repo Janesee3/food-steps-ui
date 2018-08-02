@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`props.detailed false snapshot test 1`] = `
+<div
+  className="locations-list"
+>
+  <List
+    bordered={false}
+    dataSource={Array []}
+    itemLayout="vertical"
+    loading={false}
+    pagination={false}
+    prefixCls="ant-list"
+    renderItem={[Function]}
+    size="small"
+    split={true}
+  />
+</div>
+`;
+
+exports[`props.detailed true snapshot test 1`] = `
+<div
+  className="locations-list"
+>
+  <List
+    bordered={false}
+    dataSource={Array []}
+    itemLayout="vertical"
+    loading={false}
+    pagination={
+      Object {
+        "onChange": [Function],
+        "pageSize": 2,
+      }
+    }
+    prefixCls="ant-list"
+    renderItem={[Function]}
+    size="small"
+    split={true}
+  />
+</div>
+`;
