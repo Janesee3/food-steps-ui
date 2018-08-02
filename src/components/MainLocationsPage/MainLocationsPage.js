@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LocationsList from "../LocationsList/LocationsList";
 import {seedData} from "../UserLocationsPage/seedData"
+import GoogleApiWrapper from './Map'
 
 class MainLocationsPage extends Component {
   constructor() {
@@ -17,8 +18,9 @@ class MainLocationsPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="main-locations">
         <LocationsList userLocations={this.state.userLocations}/>
+        <GoogleApiWrapper />
       </div>
     );
   }
