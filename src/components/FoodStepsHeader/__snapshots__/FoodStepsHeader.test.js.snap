@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders snapshot correctly 1`] = `
+<div>
+  <Adapter>
+    <div
+      className="logo"
+    />
+    <NavBar />
+  </Adapter>
+</div>
+`;
