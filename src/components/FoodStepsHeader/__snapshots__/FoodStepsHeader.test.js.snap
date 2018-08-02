@@ -6,6 +6,15 @@ exports[`renders snapshot correctly 1`] = `
     <div
       className="logo"
     />
+    <Button
+      className="sign-up-button"
+      ghost={false}
+      loading={false}
+      prefixCls="ant-btn"
+      type="primary"
+    >
+      Sign Up
+    </Button>
     <NavBar />
   </Adapter>
 </div>
