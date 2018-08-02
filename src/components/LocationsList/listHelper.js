@@ -8,12 +8,19 @@ export const detailedListItem = (eachItemInDataSourceArray) => {
     >
         <List.Item.Meta
             avatar={<Avatar src={eachItemInDataSourceArray.avatar} />}
-            title={<a href={eachItemInDataSourceArray.href}>{eachItemInDataSourceArray.gender}</a>}
-            description={eachItemInDataSourceArray.description}
+            title={<a href={eachItemInDataSourceArray.href}>{eachItemInDataSourceArray.locationName}</a>}
+            description={eachItemInDataSourceArray.feedback}
         />
 
         {/* Content */}
-        {eachItemInDataSourceArray.sahil}
+        <div>
+            <div>
+                {`Created on: ${eachItemInDataSourceArray.createdAt}`}
+            </div>
+            <div>
+                {`Updated on: ${eachItemInDataSourceArray.updatedAt}`}
+            </div>
+        </div>
         <div>
             <Rate allowHalf defaultValue={2.5} />
         </div>
@@ -26,7 +33,7 @@ export const simpleListItem = (eachItemInDataSourceArray) => {
             <List.Item.Meta
                 avatar={<Avatar src={eachItemInDataSourceArray.avatar} />}
                 title={<a href={eachItemInDataSourceArray.href}>{eachItemInDataSourceArray.gender}</a>}
-                description={eachItemInDataSourceArray.description}
+                description={eachItemInDataSourceArray.feedback}
             />
 
             {/* Content */}
