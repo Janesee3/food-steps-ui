@@ -1,5 +1,5 @@
 import React from "react";
-import NavBarForTesting from "./NavBarForTesting";
+import NavBarForTesting from "../NavBarForTesting/NavBarForTesting";
 
 const Header = () => {
   return (
