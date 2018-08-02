@@ -1,12 +1,29 @@
 import React, { Component } from "react";
-
-import { Form, Input, Tooltip, Icon, Button } from "antd";
+import { Form, Input, Tooltip, Icon, Button, message } from "antd";
 
 const FormItem = Form.Item;
+const API_HOST = process.env.REACT_API_HOST || "http://localhost:3000";
 
 class RegistrationForm extends Component {
   state = {
     confirmDirty: false
+  };
+
+  signUpFromServer = async userInfo => {
+    const res = await fetch(`${API_HOST}/account/signup`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+      body: JSON.stringify(userInfo),
+      credentials: "include"
+    });
+
+    if (res.ok) {
+      this.props.onSignUpSuccess(userInfo.username);
+    } else {
+      this.props.onSignUpFail();
+    }
   };
 
   handleSubmit = e => {
@@ -14,6 +31,7 @@ class RegistrationForm extends Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+        this.signUpFromServer(values);
       } else {
         console.log(err);
       }
@@ -82,8 +100,9 @@ class RegistrationForm extends Component {
               {
                 max: 20,
                 min: 6,
-                pattern:/^[a-zA-Z0-9]{6,20}\b/,
-                message: "Username should contain only 6 - 20 alphanumeric characters"
+                pattern: /^[a-zA-Z0-9]{6,20}\b/,
+                message:
+                  "Username should contain only 6 - 20 alphanumeric characters"
               }
             ]
           })(<Input />)}

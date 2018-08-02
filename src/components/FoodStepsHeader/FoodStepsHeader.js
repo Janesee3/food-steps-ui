@@ -2,7 +2,7 @@ import { Layout } from "antd";
 import NavBar from "../NavBar/NavBar";
 import SignInSignUpModal from "../SignInSignUpModal/SignInSignUpModal";
 import React, { Component } from "react";
-import { Button } from "antd";
+import { Button, message } from "antd";
 import "./FoodStepsHeader.css";
 
 const { Header } = Layout;
@@ -14,10 +14,23 @@ class FoodStepsHeader extends Component {
     };
 
     this.handleCancel = this.handleCancel.bind(this);
-
+    this.onSignUpSuccess = this.onSignUpSuccess.bind(this);
   }
 
   // Sign In Sign Up Modal Callbacks
+
+  onSignUpSuccess = username => {
+    this.setState({ visible: false });
+    message.success(`Successfully created account! Welcome ${username}!`, 3);
+  };
+
+  onSignUpFail = () => {
+    this.setState({ visible: false });
+    message.error(
+      `Sign up failed due to unexpected error, please contact admin!`,
+      3
+    );
+  };
 
   handleCancel = () => {
     this.setState({ visible: false });
@@ -44,6 +57,8 @@ class FoodStepsHeader extends Component {
           <SignInSignUpModal
             isModalVisible={this.state.visible}
             handleCancel={this.handleCancel}
+            onSignUpSuccess={this.onSignUpSuccess}
+            onSignUpFail={this.onSignUpFail}
           />
           <NavBar />
         </Header>

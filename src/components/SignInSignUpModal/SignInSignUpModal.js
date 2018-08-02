@@ -1,4 +1,4 @@
-import { Button, Modal, Tabs } from "antd";
+import { Modal, Tabs } from "antd";
 import React, { Component } from "react";
 import SignUpForm from "../SignUpForm/SignUpForm";
 
@@ -9,9 +9,6 @@ function callback(key) {
 }
 
 class SignInSignUpModal extends Component {
-  constructor(props) {
-    super(props);
-  }
   render() {
     return (
       <div>
@@ -26,7 +23,10 @@ class SignInSignUpModal extends Component {
               Content of Tab Pane 1
             </TabPane>
             <TabPane tab="Sign Up" key="2">
-              <SignUpForm />
+              <SignUpForm
+                onSignUpSuccess={this.props.onSignUpSuccess}
+                onSignUpFail={this.props.onSignUpFail}
+              />
             </TabPane>
           </Tabs>
         </Modal>
