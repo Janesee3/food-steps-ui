@@ -21,9 +21,9 @@ exports[`renders snapshot correctly 1`] = `
   <MenuItem>
     <Link
       replace={false}
-      to="/location-list"
+      to="/user-locations-page"
     >
-      Locations List
+      User Locations Page
     </Link>
   </MenuItem>
   <MenuItem>

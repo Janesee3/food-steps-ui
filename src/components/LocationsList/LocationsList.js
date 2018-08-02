@@ -1,32 +1,37 @@
-
 import React, { Component } from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
 import { List, Avatar, Icon, Rate } from 'antd';
 
+// const IconText = ({ type, text }) => (
+//   <span>
+//     <Icon type={type} style={{ marginRight: 8 }} />
+//     {text}
+//   </span>
+// );
 
-const listData = [];
-for (let i = 1; i < 23; i++) {
-  listData.push({
-    href: 'http://ant.design',
-    title: `Location Name ${i}`,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    description: 'Description',
-    content: 'Content.',
-  });
+const listItem = (eachItemInDataSourceArray) => {
+  return (<List.Item
+    actions={[<a>edit</a>, <a>more</a>]}
+    extra={<img width={200} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
+  >
+    <List.Item.Meta
+      avatar={<Avatar src={eachItemInDataSourceArray.avatar} />}
+      title={<a href={eachItemInDataSourceArray.href}>{eachItemInDataSourceArray.gender}</a>}
+      description={eachItemInDataSourceArray.description}
+    />
+
+    {/* Content */}
+    {eachItemInDataSourceArray.sahil}
+    <div>
+      <Rate allowHalf defaultValue={2.5} />
+    </div>
+  </List.Item>);
 }
 
-const IconText = ({ type, text }) => (
-  <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-    {text}
-  </span>
-);
-
-class LocationsList extends Component {
-  render() {
-    return (
-      <div className="locations-list">
+const LocationsList = (props) => {
+  return (
+    <div className="locations-list">
         <List
           itemLayout="vertical"
           size="small"
@@ -34,30 +39,15 @@ class LocationsList extends Component {
             onChange: (page) => {
               console.log(page);
             },
-            pageSize: 5,
+            pageSize: 2,
           }}
-          dataSource={listData}
-          footer={<div><b>ant design</b> footer part</div>}
-          renderItem={item => (
-            <List.Item
-              actions={[<a>edit</a>, <a>more</a>]}
-              extra={<img width={200} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
-            >
-              <List.Item.Meta
-                avatar={<Avatar src={item.avatar} />}
-                title={<a href={item.href}>{item.title}</a>}
-                description={item.description}
-              />
-              {item.content}
-              <div>
-                <Rate allowHalf defaultValue={2.5} />
-              </div>
-            </List.Item>
-          )}
+          // DataSource takes in an array that renderItem will map through
+          dataSource={props.userLocations}
+          // footer={<div><b>ant design</b> footer part</div>}
+          renderItem={eachItemInDataSourceArray => listItem(eachItemInDataSourceArray)}
         />
       </div>
-    );
-  }
+  );
 }
 
 export default LocationsList;
