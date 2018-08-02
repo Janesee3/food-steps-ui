@@ -1,10 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders snapshot correctly 1`] = `
-<BrowserRouter>
-  <div>
-    <Header />
-    <NavRoutes />
-  </div>
-</BrowserRouter>
+<Adapter
+  className="layout"
+>
+  <BrowserRouter>
+    <div>
+      <FoodStepsHeader />
+      <NavRoutes />
+    </div>
+  </BrowserRouter>
+</Adapter>
 `;
