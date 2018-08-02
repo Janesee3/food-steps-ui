@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AllLocations from './AllLocations';
+// import AllLocations from './AllLocations';
 
 
 class LocationComponent extends Component {
@@ -14,7 +14,7 @@ class LocationComponent extends Component {
         return (
             <div>
                 Hello from Locations Router
-                <AllLocations />
+                {/* <AllLocations /> */}
             </div>
         );
     }
