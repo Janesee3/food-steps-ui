@@ -23,7 +23,7 @@ class UserLocationsPage extends Component {
         console.log("saifhaif", this.state.userLocations)
         return (
             <div>
-                <LocationsLists userLocations={this.state.userLocations}/>
+                <LocationsLists userLocations={this.state.userLocations} detailed={true}/>
             </div>
         );
     }

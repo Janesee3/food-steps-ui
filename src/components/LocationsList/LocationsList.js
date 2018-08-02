@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import 'antd/dist/antd.css';
 import '../../index.css';
-import { List, Avatar, Icon, Rate } from 'antd';
+import { List } from 'antd';
+import { detailedListItem, simpleListItem } from './listHelper'
 
 // const IconText = ({ type, text }) => (
 //   <span>
@@ -10,43 +11,27 @@ import { List, Avatar, Icon, Rate } from 'antd';
 //   </span>
 // );
 
-const listItem = (eachItemInDataSourceArray) => {
-  return (<List.Item
-    actions={[<a>edit</a>, <a>more</a>]}
-    extra={<img width={200} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
-  >
-    <List.Item.Meta
-      avatar={<Avatar src={eachItemInDataSourceArray.avatar} />}
-      title={<a href={eachItemInDataSourceArray.href}>{eachItemInDataSourceArray.gender}</a>}
-      description={eachItemInDataSourceArray.description}
-    />
-
-    {/* Content */}
-    {eachItemInDataSourceArray.sahil}
-    <div>
-      <Rate allowHalf defaultValue={2.5} />
-    </div>
-  </List.Item>);
-}
 
 const LocationsList = (props) => {
+  const paginationProps = {
+    onChange: (page) => {
+      console.log(page);
+    },
+    pageSize: 2,
+  }
+
   return (
     <div className="locations-list">
-        <List
-          itemLayout="vertical"
-          size="small"
-          pagination={{
-            onChange: (page) => {
-              console.log(page);
-            },
-            pageSize: 2,
-          }}
-          // DataSource takes in an array that renderItem will map through
-          dataSource={props.userLocations}
-          // footer={<div><b>ant design</b> footer part</div>}
-          renderItem={eachItemInDataSourceArray => listItem(eachItemInDataSourceArray)}
-        />
-      </div>
+      <List
+        itemLayout="vertical"
+        size="small"
+        pagination={props.detailed ? paginationProps : false}
+        // DataSource takes in an array that renderItem will map through
+        dataSource={props.userLocations}
+        // footer={<div><b>ant design</b> footer part</div>}
+        renderItem={eachItemInDataSourceArray => props.detailed ? detailedListItem(eachItemInDataSourceArray) : simpleListItem(eachItemInDataSourceArray)}
+      />
+    </div>
   );
 }
 
