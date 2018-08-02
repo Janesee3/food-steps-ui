@@ -14,17 +14,10 @@ class FoodStepsHeader extends Component {
     };
 
     this.handleCancel = this.handleCancel.bind(this);
-    this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
+
   }
 
   // Sign In Sign Up Modal Callbacks
-  handleSignUpSubmit = () => {
-    // this.setState({ loading: true });
-    // setTimeout(() => {
-    //   this.setState({ loading: false, visible: false });
-    // }, 3000);
-    this.setState({ visible: false });
-  };
 
   handleCancel = () => {
     this.setState({ visible: false });
@@ -50,7 +43,6 @@ class FoodStepsHeader extends Component {
           </Button>
           <SignInSignUpModal
             isModalVisible={this.state.visible}
-            handleSignUpSubmit={this.handleSignUpSubmit}
             handleCancel={this.handleCancel}
           />
           <NavBar />
