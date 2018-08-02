@@ -35,7 +35,12 @@ exports[`renders snapshot correctly 1`] = `
     </Link>
   </MenuItem>
   <MenuItem>
-    nav 3
+    <Link
+      replace={false}
+      to="/location"
+    >
+      Main Location Page
+    </Link>
   </MenuItem>
 </Menu>
 `;

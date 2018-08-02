@@ -16,7 +16,9 @@ const NavBar = () => {
       <Menu.Item key="2">
         <Link to="/new-location">New Location</Link>
       </Menu.Item>
-      <Menu.Item key="3">nav 3</Menu.Item>
+      <Menu.Item key="3">
+        <Link to="/location">Main Location Page</Link>
+      </Menu.Item>
     </Menu>
   );
 };
