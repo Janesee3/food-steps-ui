@@ -13,7 +13,7 @@ class FoodStepsHeader extends Component {
       visible: false
     };
 
-    this.handleCancel = this.handleCancel.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.onSignUpSuccess = this.onSignUpSuccess.bind(this);
   }
 
@@ -32,7 +32,7 @@ class FoodStepsHeader extends Component {
     );
   };
 
-  handleCancel = () => {
+  closeModal = () => {
     this.setState({ visible: false });
   };
 
@@ -56,7 +56,7 @@ class FoodStepsHeader extends Component {
           </Button>
           <SignInSignUpModal
             isModalVisible={this.state.visible}
-            handleCancel={this.handleCancel}
+            handleCancel={this.closeModal}
             onSignUpSuccess={this.onSignUpSuccess}
             onSignUpFail={this.onSignUpFail}
           />
