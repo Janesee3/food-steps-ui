@@ -12,12 +12,12 @@ const IconText = ({ type, text }) => (
 export const detailedListItem = (eachItemInDataSourceArray) => {
     return (<List.Item
         actions={[<a>edit</a>, <a>more</a>]}
-        extra={<img width={200} alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />}
+        extra={<img width={200} alt="logo" src="https://orig00.deviantart.net/a39f/f/2013/084/5/1/cat_drawing_by_blacktailedwolf-d5zak6l.png" />}
     >
         <List.Item.Meta
             avatar={<Avatar src={eachItemInDataSourceArray.avatar} />}
             title={<a href={eachItemInDataSourceArray.href}>{eachItemInDataSourceArray.locationName}</a>}
-            description={eachItemInDataSourceArray.feedback}
+            description={eachItemInDataSourceArray.globalLocation.geocodedLocationName}
         />
 
         {/* Content */}
@@ -46,7 +46,7 @@ export const simpleListItem = (eachItemInDataSourceArray) => {
                         <IconText type="star" text={eachItemInDataSourceArray.rating} />
                     </a>
                 }
-                description={eachItemInDataSourceArray.feedback}
+                description={eachItemInDataSourceArray.globalLocation.geocodedLocationName}
             />
 
             {/* Content */}
