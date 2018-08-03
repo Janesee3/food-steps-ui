@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Form, Input, Tooltip, Icon, Button, message } from "antd";
-import { signUpFromServer } from "../../userService";
+import { Form, Input, Tooltip, Icon, Button } from "antd";
+import { signUpFromServer } from "../../services/userService/userService";
 
 const FormItem = Form.Item;
 
