@@ -16,15 +16,17 @@ it("test signUpFromServer should call success callback for valid input", async (
   expect(signUpSuccessCb).toBeCalled();
   expect(signUpFaillCb).not.toBeCalled();
 });
-//TODO
-// it("test signUpFromServer should call success callback for valid input", async () => {
-//   const mockUserInfo = {};
 
-//   fetch.mockReject(new Error("fake error message"));
-//   const signUpSuccessCb = jest.fn();
-//   const signUpFaillCb = jest.fn();
+it("test signUpFromServer should call fail callback if fetch fails", async () => {
+  const mockUserInfo = {};
+  const signUpSuccessCb = jest.fn();
+  const signUpFaillCb = jest.fn();
 
-//   await signUpFromServer(mockUserInfo, signUpSuccessCb, signUpFaillCb);
-//   expect(signUpSuccessCb).not.toBeCalled();
-//   expect(signUpFaillCb).toBeCalled();
-// });
+  try {
+    fetch.mockReject();
+    await signUpFromServer(mockUserInfo, signUpSuccessCb, signUpFaillCb);
+  } catch (err) {
+    expect(signUpSuccessCb).not.toBeCalled();
+    expect(signUpFaillCb).toBeCalled();
+  }
+});
