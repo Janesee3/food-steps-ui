@@ -1,13 +1,12 @@
 import React from "react";
 import { Form, Input, InputNumber, Button, notification } from "antd";
+import { API_HOST, postToServer } from "../../utils/networkUtils";
 
-const API_HOST = process.env.REACT_API_HOST || "http://localhost:3000";
-
+const CREATE_BUTTON_DISPLAY_TEXT = "Create";
 const SUCCESS_MESSAGE = "Location created successfully";
 const ERROR_MESSAGE = "An error occurred while creating the location";
 
 class LocationForm extends React.Component {
-
   render() {
     const { getFieldDecorator } = this.props.form;
 
@@ -91,7 +90,7 @@ class LocationForm extends React.Component {
 
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
-            Create
+            {CREATE_BUTTON_DISPLAY_TEXT}
           </Button>
         </Form.Item>
       </Form>
@@ -99,31 +98,36 @@ class LocationForm extends React.Component {
   }
 
   async createLocation(values) {
+    console.log("CREATE LOCATION...", values);
     try {
-      const response = await fetch(`${API_HOST}/locations/user`, {
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include"
-      });
-  
+      const response = await postToServer(
+        `${API_HOST}/locations/user`,
+        values,
+        true
+      );
+      // const response = await fetch(`${API_HOST}/locations/user`, {
+      //   method: "POST",
+      //   body: JSON.stringify(values),
+      //   headers: { "Content-Type": "application/json" },
+      //   credentials: "include"
+      // });
+
       let dataErrorMessage;
       if (response.status === 400) {
         const responseBody = await response.json();
         dataErrorMessage = responseBody.message;
       }
-  
+
       const result = {
         ok: response.ok,
         message: dataErrorMessage
       };
       return result;
-  
     } catch (e) {
       console.error(e);
       return { status: false };
     }
-  };
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -140,8 +144,7 @@ class LocationForm extends React.Component {
         } else {
           notification.error({
             message: "Error",
-            description:
-              result.message || ERROR_MESSAGE
+            description: result.message || ERROR_MESSAGE
           });
         }
       }
