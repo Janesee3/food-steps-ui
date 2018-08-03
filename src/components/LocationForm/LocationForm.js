@@ -6,6 +6,8 @@ const CREATE_BUTTON_DISPLAY_TEXT = "Create";
 const SUCCESS_MESSAGE = "Location created successfully";
 const ERROR_MESSAGE = "An error occurred while creating the location";
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 class LocationForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -70,7 +72,7 @@ class LocationForm extends React.Component {
                 message: "Please input latitude!"
               }
             ]
-          })(<InputNumber />)}
+          })(<InputNumber disabled={!isDevelopment} />)}
         </Form.Item>
 
         <Form.Item {...formItemLayout} label="Longitude">
@@ -85,7 +87,7 @@ class LocationForm extends React.Component {
                 message: "Please input longitude!"
               }
             ]
-          })(<InputNumber />)}
+          })(<InputNumber disabled={!isDevelopment} />)}
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
@@ -97,8 +99,35 @@ class LocationForm extends React.Component {
     );
   }
 
+  componentDidMount() {
+    const handlePositioning = position => {
+      this.props.form.setFieldsValue({
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      });
+    };
+
+    const handlePositioningError = positionError => {
+      if(isDevelopment) console.error(positionError);
+
+      let errorMessage = positionError.message;
+      if (positionError.code === 1) {
+        errorMessage = "Please enable browser positioning"
+      }
+      notification.error({
+        message: "Error",
+        description: errorMessage
+      });
+    };
+
+    navigator.geolocation.getCurrentPosition(
+      handlePositioning,
+      handlePositioningError,
+      { enableHighAccuracy: true }
+    );
+  }
+
   async createLocation(values) {
-    console.log("CREATE LOCATION...", values);
     try {
       const response = await postToServer(
         `${API_HOST}/locations/user`,
@@ -133,6 +162,10 @@ class LocationForm extends React.Component {
     event.preventDefault();
 
     this.props.form.validateFieldsAndScroll(async (err, values) => {
+      if(isDevelopment) {
+        console.log('LocationForm SUBMITTED VALUES', values);
+      }
+      
       if (!err) {
         const result = await this.createLocation(values);
         if (result.ok) {
