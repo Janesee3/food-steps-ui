@@ -15,6 +15,10 @@ class FoodStepsHeader extends Component {
 
     this.closeModal = this.closeModal.bind(this);
     this.onSignUpSuccess = this.onSignUpSuccess.bind(this);
+    this.onSignUpFail = this.onSignUpFail.bind(this);
+
+    this.onSignInSuccess = this.onSignInSuccess.bind(this);
+    this.onSignInFail = this.onSignInFail.bind(this);
   }
 
   // Sign In Sign Up Modal Callbacks
@@ -28,6 +32,19 @@ class FoodStepsHeader extends Component {
     this.setState({ visible: false });
     message.error(
       `Sign up failed due to unexpected error, please contact admin!`,
+      3
+    );
+  };
+
+  onSignInSuccess = username => {
+    this.setState({ visible: false });
+    message.success(`Successfully signed in! Welcome ${username}!`, 3);
+  };
+
+  onSignInFail = () => {
+    this.setState({ visible: false });
+    message.error(
+      `Sign in failed due to unexpected error, please contact admin!`,
       3
     );
   };
@@ -52,13 +69,15 @@ class FoodStepsHeader extends Component {
             type="primary"
             onClick={this.showModal}
           >
-            Sign Up
+            Sign Up / Sign In
           </Button>
           <SignInSignUpModal
             isModalVisible={this.state.visible}
             handleCancel={this.closeModal}
             onSignUpSuccess={this.onSignUpSuccess}
             onSignUpFail={this.onSignUpFail}
+            onSignInSuccess={this.onSignInSuccess}
+            onSignInFail={this.onSignInFail}
           />
           <NavBar />
         </Header>

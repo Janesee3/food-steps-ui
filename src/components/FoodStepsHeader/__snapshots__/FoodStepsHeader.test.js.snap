@@ -14,11 +14,13 @@ exports[`renders snapshot correctly 1`] = `
       prefixCls="ant-btn"
       type="primary"
     >
-      Sign Up
+      Sign Up / Sign In
     </Button>
     <SignInSignUpModal
       handleCancel={[Function]}
       isModalVisible={false}
+      onSignInFail={[Function]}
+      onSignInSuccess={[Function]}
       onSignUpFail={[Function]}
       onSignUpSuccess={[Function]}
     />
@@ -41,11 +43,13 @@ exports[`renders snapshot correctly showModal is called 1`] = `
       prefixCls="ant-btn"
       type="primary"
     >
-      Sign Up
+      Sign Up / Sign In
     </Button>
     <SignInSignUpModal
       handleCancel={[Function]}
       isModalVisible={true}
+      onSignInFail={[Function]}
+      onSignInSuccess={[Function]}
       onSignUpFail={[Function]}
       onSignUpSuccess={[Function]}
     />
@@ -68,11 +72,13 @@ exports[`renders snapshot correctly when cancelModal is called  1`] = `
       prefixCls="ant-btn"
       type="primary"
     >
-      Sign Up
+      Sign Up / Sign In
     </Button>
     <SignInSignUpModal
       handleCancel={[Function]}
       isModalVisible={false}
+      onSignInFail={[Function]}
+      onSignInSuccess={[Function]}
       onSignUpFail={[Function]}
       onSignUpSuccess={[Function]}
     />
@@ -95,11 +101,13 @@ exports[`renders snapshot correctly when signup failed 1`] = `
       prefixCls="ant-btn"
       type="primary"
     >
-      Sign Up
+      Sign Up / Sign In
     </Button>
     <SignInSignUpModal
       handleCancel={[Function]}
       isModalVisible={false}
+      onSignInFail={[Function]}
+      onSignInSuccess={[Function]}
       onSignUpFail={[Function]}
       onSignUpSuccess={[Function]}
     />
@@ -122,11 +130,13 @@ exports[`renders snapshot correctly when signup is successfull 1`] = `
       prefixCls="ant-btn"
       type="primary"
     >
-      Sign Up
+      Sign Up / Sign In
     </Button>
     <SignInSignUpModal
       handleCancel={[Function]}
       isModalVisible={false}
+      onSignInFail={[Function]}
+      onSignInSuccess={[Function]}
       onSignUpFail={[Function]}
       onSignUpSuccess={[Function]}
     />
