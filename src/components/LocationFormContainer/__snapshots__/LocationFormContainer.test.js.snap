@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render the container correctly for LoggedInUser 1`] = `<Form(LocationForm) />`;
+
+exports[`should render the container correctly for non-LoggedInUser 1`] = `
+<SignInRequired
+  onUserSignedIn={[Function]}
+/>
+`;
