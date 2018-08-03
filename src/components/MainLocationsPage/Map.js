@@ -19,7 +19,6 @@ export class MapContainer extends Component {
     });
   }
   render() {
-      const {google} = this.props
     if (!this.props.google) {
       return <div>Loading...</div>;
     }
