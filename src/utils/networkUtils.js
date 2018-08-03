@@ -1,4 +1,4 @@
-export const API_HOST = process.env.REACT_API_HOST || "http://localhost:3000";
+export const API_HOST = process.env.REACT_APP_API_HOST || "http://localhost:3000";
 
 export const postToServer = async (url, body, includeCredentials) => {
   const credentials = includeCredentials ? "include" : "omit";
