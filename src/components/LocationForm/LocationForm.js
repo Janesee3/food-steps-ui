@@ -1,51 +1,12 @@
 import React from "react";
 import { Form, Input, InputNumber, Button, notification } from "antd";
 
-const createLocation = async values => {
-  try {
-    const response = await fetch("http://localhost:3000/locations/user", {
-      method: "POST",
-      body: JSON.stringify(values),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include"
-    });
+const API_HOST = process.env.REACT_API_HOST || "http://localhost:3000";
 
-    if (!response.ok) {
-      console.log(`POST REQUEST return status ${response.status}`);
-      console.log("RESPONSE BODY:", await response.json());
-    }
-
-    return response.ok;
-  } catch (e) {
-    console.error(e);
-    return false;
-  }
-};
+const SUCCESS_MESSAGE = "Location created successfully";
+const ERROR_MESSAGE = "An error occurred while creating the location";
 
 class LocationForm extends React.Component {
-  handleSubmit = event => {
-    event.preventDefault();
-
-    this.props.form.validateFieldsAndScroll(async (err, values) => {
-      if (!err) {
-        const isLocationCreated = await createLocation(values);
-        if (isLocationCreated) {
-          this.props.form.resetFields();
-          notification.success({
-            message: "Success",
-            description: "Location created successfully"
-          });
-        } else {
-          notification.error({
-            message: "Error",
-            description: "An error occurred while creating the location"
-          });
-        }
-      } else {
-        console.error(err);
-      }
-    });
-  };
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -103,7 +64,7 @@ class LocationForm extends React.Component {
             rules: [
               {
                 type: "number",
-                message: "Latitude should be a number"
+                message: "Latitude should be a number."
               },
               {
                 required: true,
@@ -118,7 +79,7 @@ class LocationForm extends React.Component {
             rules: [
               {
                 type: "number",
-                message: "Longitude should be a number"
+                message: "Longitude should be a number."
               },
               {
                 required: true,
@@ -136,6 +97,56 @@ class LocationForm extends React.Component {
       </Form>
     );
   }
+
+  async createLocation(values) {
+    try {
+      const response = await fetch(`${API_HOST}/locations/user`, {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include"
+      });
+  
+      let dataErrorMessage;
+      if (response.status === 400) {
+        const responseBody = await response.json();
+        dataErrorMessage = responseBody.message;
+      }
+  
+      const result = {
+        ok: response.ok,
+        message: dataErrorMessage
+      };
+      return result;
+  
+    } catch (e) {
+      console.error(e);
+      return { status: false };
+    }
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    this.props.form.validateFieldsAndScroll(async (err, values) => {
+      if (!err) {
+        const result = await this.createLocation(values);
+        if (result.ok) {
+          this.props.form.resetFields();
+          notification.success({
+            message: "Success",
+            description: SUCCESS_MESSAGE
+          });
+        } else {
+          notification.error({
+            message: "Error",
+            description:
+              result.message || ERROR_MESSAGE
+          });
+        }
+      }
+    });
+  };
 }
 
 export default Form.create()(LocationForm);
