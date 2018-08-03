@@ -7,7 +7,10 @@ exports[`renders snapshot correctly 1`] = `
   <BrowserRouter>
     <div>
       <FoodStepsHeader />
-      <NavRoutes />
+      <NavRoutes
+        isLoggedInUser={false}
+        onUserSignedIn={[Function]}
+      />
     </div>
   </BrowserRouter>
 </Adapter>

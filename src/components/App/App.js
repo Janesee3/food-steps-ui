@@ -5,7 +5,16 @@ import NavRoutes from "../NavRoutes/NavRoutes";
 import "./App.css";
 import { Layout } from "antd";
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isLoggedInUser: isDevelopment
+    }
+  }
+  
   render() {
     return (
       <Layout className="layout">
@@ -13,11 +22,17 @@ class App extends Component {
           {/* Router can only have 1 child, hence a div wrapper required */}
           <div>
             <FoodStepsHeader />
-            <NavRoutes />
+            <NavRoutes isLoggedInUser={this.state.isLoggedInUser} onUserSignedIn={this.onUserSignedIn} />
           </div>
         </Router>
       </Layout>
     );
+  }
+
+  onUserSignedIn = () => {
+    this.setState({
+      isLoggedInUser: true
+    })
   }
 }
 
