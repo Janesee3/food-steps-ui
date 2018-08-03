@@ -11,6 +11,7 @@ jest.mock('./listHelper', () => {
     }
 })
 
+
 test('detailedListItem() should be called when props.detailed is true ', () => {
     const renderer = new ShallowRenderer();
     renderer.render(<LocationsList detailed={true} />)
@@ -43,4 +44,10 @@ test('props.detailed true snapshot test', () => {
     renderer.render(<LocationsList detailed={true} />)
     const result = renderer.getRenderOutput()
     expect(result).toMatchSnapshot()
-})
+}); 
+
+
+
+test('Fetch-ed data should be used in locationList as DataSource', () => {
+    
+});

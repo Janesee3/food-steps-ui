@@ -13,7 +13,7 @@ class UserLocationsPage extends Component {
         }
     }
 
-    async componentDidMount() {
+    async componentDidMount() { 
         const response = await fetch(URL, {
             credentials: 'include'
         });

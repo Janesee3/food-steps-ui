@@ -4,8 +4,6 @@ import '../../index.css';
 import { List } from 'antd';
 import { detailedListItem, simpleListItem } from './listHelper'
 
-
-
 const LocationsList = (props) => {
   const paginationProps = {
     onChange: (page) => {
