@@ -1,6 +1,4 @@
 export const API_HOST = process.env.REACT_APP_API_HOST || "http://localhost:3000";
-console.log('Say Hi to check API endpoint');
-console.log('The API_HOST is', API_HOST);
 
 export const postToServer = async (url, body, includeCredentials) => {
   const credentials = includeCredentials ? "include" : "omit";
