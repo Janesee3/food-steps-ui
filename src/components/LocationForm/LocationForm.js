@@ -162,9 +162,7 @@ class LocationForm extends React.Component {
     event.preventDefault();
 
     this.props.form.validateFieldsAndScroll(async (err, values) => {
-      if(isDevelopment) {
-        console.log('LocationForm SUBMITTED VALUES', values);
-      }
+      if(isDevelopment) console.log('LocationForm SUBMITTED VALUES', values);
       
       if (!err) {
         const result = await this.createLocation(values);

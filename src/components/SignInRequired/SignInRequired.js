@@ -25,7 +25,6 @@ class SignInRequired extends Component {
   };
 
   onFailure = () => {
-    console.log("FAILED signup/signin");
     message.error(
       "signup/signin failed due to unexpected error, please contact admin!",
       3
