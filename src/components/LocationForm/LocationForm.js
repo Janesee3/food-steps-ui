@@ -118,84 +118,40 @@ class LocationForm extends React.Component {
   };
 
   handlePositioningError = positionError => {
-    if (isDevelopment) console.error(positionError);
+    isDevelopment && console.error(positionError);
 
     let errorMessage = positionError.message;
     if (positionError.code === 1) {
       errorMessage = "Please enable browser positioning";
     }
+    this.notifyError(errorMessage);
+  };
+
+  notifyError = errorMessage => {
     notification.error({
       message: "Error",
       description: errorMessage
     });
   };
 
-  componentDidMount() {
-    this._isMounted = true;
-    navigator.geolocation.getCurrentPosition(
-      this.handlePositioning,
-      this.handlePositioningError,
-      { enableHighAccuracy: true }
-    );
-  }
+  onFieldValidationResponse = async (err, values) => {
+    if (err) return isDevelopment && console.error(err);
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
-
-  async createLocation(values) {
-    try {
-      const response = await postToServer(
-        `${API_HOST}/locations/user`,
-        values,
-        true
-      );
-      // const response = await fetch(`${API_HOST}/locations/user`, {
-      //   method: "POST",
-      //   body: JSON.stringify(values),
-      //   headers: { "Content-Type": "application/json" },
-      //   credentials: "include"
-      // });
-
-      let dataErrorMessage;
-      if (response.status === 400) {
-        const responseBody = await response.json();
-        dataErrorMessage = responseBody.message;
+    const result = await createUserLocation(values);
+    if (!result.ok) {
+      this.notifyError(result.message || ERROR_MESSAGE);
+      return;
       }
-
-      const result = {
-        ok: response.ok,
-        message: dataErrorMessage
-      };
-      return result;
-    } catch (e) {
-      console.error(e);
-      return { status: false };
-    }
-  }
-
-  handleSubmit = event => {
-    event.preventDefault();
-
-    this.props.form.validateFieldsAndScroll(async (err, values) => {
-      if (isDevelopment) console.log("LocationForm SUBMITTED VALUES", values);
-
-      if (!err) {
-        const result = await this.createLocation(values);
-        if (result.ok) {
           this.props.form.resetFields();
           notification.success({
             message: "Success",
             description: SUCCESS_MESSAGE
           });
-        } else {
-          notification.error({
-            message: "Error",
-            description: result.message || ERROR_MESSAGE
-          });
-        }
-      }
-    });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.form.validateFieldsAndScroll(this.onFieldValidationResponse);
   };
 }
 
