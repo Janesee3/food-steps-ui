@@ -104,6 +104,19 @@ class LocationForm extends React.Component {
     );
   }
 
+  componentDidMount() {
+    this._isMounted = true;
+    navigator.geolocation.getCurrentPosition(
+      this.handlePositioning,
+      this.handlePositioningError,
+      { enableHighAccuracy: true }
+    );
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   // When switching page too fast, this warning is shown
   // Console Error: You cannot set field before registering it.
   // Intermittent console: Warning: Can't call setState (or forceUpdate) on an unmounted component.
@@ -111,7 +124,8 @@ class LocationForm extends React.Component {
   // To look into optimal solution, if necessary
 
   handlePositioning = position => {
-    this._isMounted && this.props.form.setFieldsValue({
+    this._isMounted &&
+      this.props.form.setFieldsValue({
       lat: position.coords.latitude,
       lng: position.coords.longitude
     });
