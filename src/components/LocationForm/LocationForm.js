@@ -126,13 +126,15 @@ class LocationForm extends React.Component {
   handlePositioning = position => {
     this._isMounted &&
       this.props.form.setFieldsValue({
-      lat: position.coords.latitude,
-      lng: position.coords.longitude
-    });
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      });
   };
 
   handlePositioningError = positionError => {
     isDevelopment && console.error(positionError);
+
+    if(!this._isMounted) return;
 
     let errorMessage = positionError.message;
     if (positionError.code === 1) {
@@ -155,12 +157,12 @@ class LocationForm extends React.Component {
     if (!result.ok) {
       this.notifyError(result.message || ERROR_MESSAGE);
       return;
-      }
-          this.props.form.resetFields();
-          notification.success({
-            message: "Success",
-            description: SUCCESS_MESSAGE
-          });
+    }
+    this.props.form.resetFields();
+    notification.success({
+      message: "Success",
+      description: SUCCESS_MESSAGE
+    });
   };
 
   handleSubmit = event => {
@@ -168,5 +170,11 @@ class LocationForm extends React.Component {
     this.props.form.validateFieldsAndScroll(this.onFieldValidationResponse);
   };
 }
+
+export const testExports = {
+  LocationForm,
+  SUCCESS_MESSAGE,
+  ERROR_MESSAGE
+};
 
 export default Form.create()(LocationForm);
