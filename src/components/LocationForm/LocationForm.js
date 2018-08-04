@@ -6,9 +6,14 @@ const CREATE_BUTTON_DISPLAY_TEXT = "Create";
 const SUCCESS_MESSAGE = "Location created successfully";
 const ERROR_MESSAGE = "An error occurred while creating the location";
 
-const isDevelopment = process.env.NODE_ENV === 'development';
+const isDevelopment = process.env.NODE_ENV === "development";
 
 class LocationForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this._isMounted = false;
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form;
 
@@ -99,32 +104,43 @@ class LocationForm extends React.Component {
     );
   }
 
+  // When switching page too fast, this warning is shown
+  // Console Error: You cannot set field before registering it.
+  // Intermittent console: Warning: Can't call setState (or forceUpdate) on an unmounted component.
+  // REF FOR FIX: https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html
+  // To look into optimal solution, if necessary
+
+  handlePositioning = position => {
+    this._isMounted && this.props.form.setFieldsValue({
+      lat: position.coords.latitude,
+      lng: position.coords.longitude
+    });
+  };
+
+  handlePositioningError = positionError => {
+    if (isDevelopment) console.error(positionError);
+
+    let errorMessage = positionError.message;
+    if (positionError.code === 1) {
+      errorMessage = "Please enable browser positioning";
+    }
+    notification.error({
+      message: "Error",
+      description: errorMessage
+    });
+  };
+
   componentDidMount() {
-    const handlePositioning = position => {
-      this.props.form.setFieldsValue({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      });
-    };
-
-    const handlePositioningError = positionError => {
-      if(isDevelopment) console.error(positionError);
-
-      let errorMessage = positionError.message;
-      if (positionError.code === 1) {
-        errorMessage = "Please enable browser positioning"
-      }
-      notification.error({
-        message: "Error",
-        description: errorMessage
-      });
-    };
-
+    this._isMounted = true;
     navigator.geolocation.getCurrentPosition(
-      handlePositioning,
-      handlePositioningError,
+      this.handlePositioning,
+      this.handlePositioningError,
       { enableHighAccuracy: true }
     );
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   async createLocation(values) {
@@ -162,8 +178,8 @@ class LocationForm extends React.Component {
     event.preventDefault();
 
     this.props.form.validateFieldsAndScroll(async (err, values) => {
-      if(isDevelopment) console.log('LocationForm SUBMITTED VALUES', values);
-      
+      if (isDevelopment) console.log("LocationForm SUBMITTED VALUES", values);
+
       if (!err) {
         const result = await this.createLocation(values);
         if (result.ok) {
