@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Input, InputNumber, Button, notification } from "antd";
-import { API_HOST, postToServer } from "../../utils/networkUtils";
+import { createUserLocation } from "../../services/userLocationService/userLocationService";
 
 const CREATE_BUTTON_DISPLAY_TEXT = "Create";
 const SUCCESS_MESSAGE = "Location created successfully";
@@ -9,8 +9,8 @@ const ERROR_MESSAGE = "An error occurred while creating the location";
 const isDevelopment = process.env.NODE_ENV === "development";
 
 class LocationForm extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this._isMounted = false;
   }
 
