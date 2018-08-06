@@ -19,7 +19,5 @@ test("userlocation component calls for a fetch", async () => {
   const instance = renderer.getMountedInstance();
   await instance.componentDidMount();
 
-  console.log("HELLO!", fetch);
-
   expect(fetch).toHaveBeenCalledWith(`${API_HOST}/locations/user/`, {credentials: 'include'});
 });
