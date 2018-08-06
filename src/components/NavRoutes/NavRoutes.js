@@ -15,7 +15,7 @@ const NavRoutes = (props) => {
       <Route path="/location" component={MainLocationsPage} />
       <Route path="/user-locations-page" component={UserLocationsPage} />
       <Route path="/location-list" component={LocationsList} />
-      <Route path="/new-location" render={() => <LocationFormContainer isLoggedInUser={props.isLoggedInUser} onUserSignedIn={props.onUserSignedIn} />} />
+      <Route path="/new-location" render={() => <LocationFormContainer isLoggedInUser={props.isLoggedInUser} />} />
     </Content>
 
   );

@@ -3,7 +3,7 @@ import LocationForm from "../LocationForm/LocationForm";
 import SignInRequired from "../SignInRequired/SignInRequired";
 
 const LocationFormContainer = props => {
-  return props.isLoggedInUser ? <LocationForm /> : <SignInRequired onUserSignedIn={props.onUserSignedIn} />;
+	return props.isLoggedInUser ? <LocationForm /> : <SignInRequired />;
 };
 
 export default LocationFormContainer;
