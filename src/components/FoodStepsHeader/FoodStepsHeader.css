@@ -1,12 +1,34 @@
- .logo {
-     width: 120px;
-     height: 31px;
-     background: rgba(255, 255, 255, .2);
-     margin: 16px 24px 16px 0;
-     float: left;
- }
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 24px 16px 0;
+  float: left;
+}
 
- .sign-up-button {
-     float: right;
-     margin: 1.1em;
- }
+.sign-up-button {
+  float: right;
+  margin: 1.1em;
+}
+
+.navbar-mobile-btn {
+  margin: 1.1em;
+}
+
+/* @media screen and (max-width: 600px) {
+  .navbar-mobile {
+    display: block;
+  }
+  .navbar {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .navbar-mobile {
+    display: none;
+  }
+  .navbar {
+    display: block;
+  }
+} */

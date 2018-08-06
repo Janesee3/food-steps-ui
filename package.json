@@ -14,7 +14,7 @@
   "scripts": {
     "start": "env PORT=3001 react-scripts start",
     "start:api3002": "REACT_APP_API_HOST=http://localhost:3002 PORT=3001 react-scripts start",
-    "start:sim": "REACT_APP_API_HOST=https://food-steps-api.herokuapp.com react-scripts start",
+    "start:sim": "NODE_ENV=production REACT_APP_API_HOST=https://food-steps-api.herokuapp.com react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
