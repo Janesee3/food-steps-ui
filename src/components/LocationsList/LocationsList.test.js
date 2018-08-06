@@ -45,9 +45,3 @@ test('props.detailed true snapshot test', () => {
     const result = renderer.getRenderOutput()
     expect(result).toMatchSnapshot()
 }); 
-
-
-
-test('Fetch-ed data should be used in locationList as DataSource', () => {
-    
-});

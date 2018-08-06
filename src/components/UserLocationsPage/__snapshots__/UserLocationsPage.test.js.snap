@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot fetch should match mocked data 1`] = `
+<div>
+  <LocationsList
+    detailed={true}
+    userLocations={
+      Array [
+        "data1",
+        "data2",
+      ]
+    }
+  />
+</div>
+`;
