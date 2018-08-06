@@ -22,8 +22,8 @@ class SignInSignUpModal extends Component {
           <Tabs defaultActiveKey="1" onChange={callback}>
             <TabPane tab="Sign In" key="1">
             <SignInForm
-                onSignUpSuccess={this.props.onSignUpSuccess}
-                onSignUpFail={this.props.onSignUpFail}
+                onSignInSuccess={this.props.onSignInSuccess}
+                onSignInFail={this.props.onSignInFail}
               />
             </TabPane>
             <TabPane tab="Sign Up" key="2">

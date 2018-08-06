@@ -44,12 +44,17 @@ class FoodStepsHeader extends Component {
 		message.success(`Successfully signed in! Welcome ${username}!`, 3);
 	};
 
-	onSignInFail = () => {
-		this.setState({ visible: false });
-		message.error(
-			`Sign in failed due to unexpected error, please contact admin!`,
-			3
-		);
+	onSignInFail = errMessage => {
+		let displayMessage = `Sign in failed due to unexpected error, please contact admin!`;
+
+		if (
+			errMessage &&
+			(errMessage.includes("match") || errMessage.includes("found"))
+		) {
+			displayMessage = "Username or password is incorrect.";
+		}
+
+		message.error(displayMessage, 3);
 	};
 
 	closeModal = () => {
@@ -57,9 +62,7 @@ class FoodStepsHeader extends Component {
 	};
 
 	showModal = () => {
-		this.setState({
-			visible: true
-		});
+		this.setState({ visible: true });
 	};
 
 	render() {
