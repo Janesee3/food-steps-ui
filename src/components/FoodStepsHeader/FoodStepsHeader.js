@@ -7,83 +7,86 @@ import "./FoodStepsHeader.css";
 
 const { Header } = Layout;
 class FoodStepsHeader extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      visible: false
-    };
+	constructor(props) {
+		super(props);
+		this.state = {
+			visible: false
+		};
 
-    this.closeModal = this.closeModal.bind(this);
-    this.onSignUpSuccess = this.onSignUpSuccess.bind(this);
-    this.onSignUpFail = this.onSignUpFail.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+		this.onSignUpSuccess = this.onSignUpSuccess.bind(this);
+		this.onSignUpFail = this.onSignUpFail.bind(this);
 
-    this.onSignInSuccess = this.onSignInSuccess.bind(this);
-    this.onSignInFail = this.onSignInFail.bind(this);
-  }
+		this.onSignInSuccess = this.onSignInSuccess.bind(this);
+		this.onSignInFail = this.onSignInFail.bind(this);
+	}
 
-  // Sign In Sign Up Modal Callbacks
+	// Sign In Sign Up Modal Callbacks
 
-  onSignUpSuccess = username => {
-    this.setState({ visible: false });
-    message.success(`Successfully created account! Welcome ${username}!`, 3);
-  };
+	onSignUpSuccess = username => {
+		this.setState({ visible: false });
+		message.success(`Successfully created account! Welcome ${username}!`, 3);
+	};
 
-  onSignUpFail = () => {
-    this.setState({ visible: false });
-    message.error(
-      `Sign up failed due to unexpected error, please contact admin!`,
-      3
-    );
-  };
+	onSignUpFail = errMessage => {
+		let displayMessage = `Sign up failed due to unexpected error, please contact admin!`;
 
-  onSignInSuccess = username => {
-    this.setState({ visible: false });
-    message.success(`Successfully signed in! Welcome ${username}!`, 3);
-  };
+		if (errMessage && errMessage.includes("unique")) {
+			displayMessage =
+				"This username is already used! Please choose another username.";
+		}
 
-  onSignInFail = () => {
-    this.setState({ visible: false });
-    message.error(
-      `Sign in failed due to unexpected error, please contact admin!`,
-      3
-    );
-  };
+		message.error(displayMessage, 3);
+	};
 
-  closeModal = () => {
-    this.setState({ visible: false });
-  };
+	onSignInSuccess = username => {
+		this.setState({ visible: false });
+		message.success(`Successfully signed in! Welcome ${username}!`, 3);
+	};
 
-  showModal = () => {
-    this.setState({
-      visible: true
-    });
-  };
+	onSignInFail = () => {
+		this.setState({ visible: false });
+		message.error(
+			`Sign in failed due to unexpected error, please contact admin!`,
+			3
+		);
+	};
 
-  render() {
-    return (
-      <div>
-        <Header>
-          <div className="logo" />
-          <Button
-            className="sign-up-button"
-            type="primary"
-            onClick={this.showModal}
-          >
-            Sign Up / Sign In
-          </Button>
-          <SignInSignUpModal
-            isModalVisible={this.state.visible}
-            handleCancel={this.closeModal}
-            onSignUpSuccess={this.onSignUpSuccess}
-            onSignUpFail={this.onSignUpFail}
-            onSignInSuccess={this.onSignInSuccess}
-            onSignInFail={this.onSignInFail}
-          />
-          <NavBar />
-        </Header>
-      </div>
-    );
-  }
+	closeModal = () => {
+		this.setState({ visible: false });
+	};
+
+	showModal = () => {
+		this.setState({
+			visible: true
+		});
+	};
+
+	render() {
+		return (
+			<div>
+				<Header>
+					<div className="logo" />
+					<Button
+						className="sign-up-button"
+						type="primary"
+						onClick={this.showModal}
+					>
+						Sign Up / Sign In
+					</Button>
+					<SignInSignUpModal
+						isModalVisible={this.state.visible}
+						handleCancel={this.closeModal}
+						onSignUpSuccess={this.onSignUpSuccess}
+						onSignUpFail={this.onSignUpFail}
+						onSignInSuccess={this.onSignInSuccess}
+						onSignInFail={this.onSignInFail}
+					/>
+					<NavBar />
+				</Header>
+			</div>
+		);
+	}
 }
 
 export default FoodStepsHeader;
