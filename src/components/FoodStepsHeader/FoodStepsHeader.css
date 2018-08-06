@@ -1,16 +1,11 @@
-.header-logo {
-  height: 80px;
-  margin: auto 0;
+.header-mobile {
+  background: #001529
 }
 
 .logo {
   width: 48px;
   height: 48px;
   margin: 8px 0;
-  /* text-align: center; */
-  /* background: rgba(255, 255, 255, 0.2); */
-  /* margin: 16px 24px 16px 0; */
-  /*float: left; */
   background-image: url('../../Logo/FoodStepsLogo.png');
   background-size: cover;
 }
@@ -23,21 +18,3 @@
 .navbar-mobile-btn {
   margin: 1.1em;
 }
-
-/* @media screen and (max-width: 600px) {
-  .navbar-mobile {
-    display: block;
-  }
-  .navbar {
-    display: none;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  .navbar-mobile {
-    display: none;
-  }
-  .navbar {
-    display: block;
-  }
-} */

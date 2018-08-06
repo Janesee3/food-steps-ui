@@ -72,8 +72,8 @@ class FoodStepsHeader extends Component {
   render() {
     return (
       <div>
-        <Row className="header-logo">
-          <Col xs={24} lg={0}>
+        <Row className="header-mobile" align="middle" justify="center" type="flex">
+          <Col xs={2} lg={0}>
             <div className="logo" />
           </Col>
         </Row>
