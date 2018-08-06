@@ -17,11 +17,16 @@ class UserLocationsPage extends Component {
         const response = await fetch(URL, {
             credentials: 'include'
         });
-        const userLocationData = await response.json()
-        console.log("UserLocations Data", userLocationData)
-        this.setState({
-            userLocations: userLocationData
-        })
+        if (response.status === 401){
+            // NEED TO FIX THIS PAGE WHEN USER IS NOT LOGGED IN
+            console.log("You need to log in")
+        } else{
+            const userLocationData = await response.json()
+            console.log("UserLocations Data", userLocationData)
+            this.setState({
+                userLocations: userLocationData
+            })
+        }
     }
 
 
