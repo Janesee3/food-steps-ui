@@ -7,57 +7,17 @@ exports[`Snapshot Test for rendering 1`] = `
   onSubmit={[Function]}
   prefixCls="ant-form"
 >
-  <FormItem
-    colon={true}
-    hasFeedback={false}
+  <FormItemWithInput
+    getFieldDecorator={[Function]}
+    id="locationName"
     label="Location Name"
-    labelCol={
-      Object {
-        "sm": Object {
-          "span": 8,
-        },
-        "xs": Object {
-          "span": 24,
-        },
-      }
-    }
-    prefixCls="ant-form"
-    wrapperCol={
-      Object {
-        "sm": Object {
-          "span": 16,
-        },
-        "xs": Object {
-          "span": 24,
-        },
-      }
-    }
+    required={true}
   />
-  <FormItem
-    colon={true}
-    hasFeedback={false}
+  <FormItemWithInput
+    getFieldDecorator={[Function]}
+    id="geocodedLocationName"
     label="Geocoded Location Name"
-    labelCol={
-      Object {
-        "sm": Object {
-          "span": 8,
-        },
-        "xs": Object {
-          "span": 24,
-        },
-      }
-    }
-    prefixCls="ant-form"
-    wrapperCol={
-      Object {
-        "sm": Object {
-          "span": 16,
-        },
-        "xs": Object {
-          "span": 24,
-        },
-      }
-    }
+    required={true}
   />
   <FormItem
     colon={true}

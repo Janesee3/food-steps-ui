@@ -1,5 +1,7 @@
 import React from "react";
-import { Form, Input, InputNumber, Button, notification } from "antd";
+import { Form, InputNumber, Button, notification } from "antd";
+import { formItemLayout, tailFormItemLayout } from "./layout";
+import FormItemWithInput from "./FormItemWithInput";
 import { createUserLocation } from "../../services/userLocationService/userLocationService";
 
 const CREATE_BUTTON_DISPLAY_TEXT = "Create";
@@ -17,53 +19,20 @@ class LocationForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 }
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 }
-      }
-    };
-
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0
-        },
-        sm: {
-          span: 16,
-          offset: 8
-        }
-      }
-    };
-
     return (
       <Form onSubmit={this.handleSubmit}>
-        <Form.Item {...formItemLayout} label="Location Name">
-          {getFieldDecorator("locationName", {
-            rules: [
-              {
-                required: true,
-                message: "Please input location name!"
-              }
-            ]
-          })(<Input />)}
-        </Form.Item>
-
-        <Form.Item {...formItemLayout} label="Geocoded Location Name">
-          {getFieldDecorator("geocodedLocationName", {
-            rules: [
-              {
-                required: true,
-                message: "Please input geocoded name!"
-              }
-            ]
-          })(<Input />)}
-        </Form.Item>
+        <FormItemWithInput
+          id="locationName"
+          label="Location Name"
+          required={true}
+          getFieldDecorator={getFieldDecorator}
+        />
+        <FormItemWithInput
+          id="geocodedLocationName"
+          label="Geocoded Location Name"
+          required={true}
+          getFieldDecorator={getFieldDecorator}
+        />
 
         <Form.Item {...formItemLayout} label="Latitude">
           {getFieldDecorator("lat", {
@@ -72,6 +41,7 @@ class LocationForm extends React.Component {
                 type: "number",
                 message: "Latitude should be a number."
               },
+              
               {
                 required: true,
                 message: "Please input latitude!"
@@ -134,7 +104,7 @@ class LocationForm extends React.Component {
   handlePositioningError = positionError => {
     isDevelopment && console.error(positionError);
 
-    if(!this._isMounted) return;
+    if (!this._isMounted) return;
 
     let errorMessage = positionError.message;
     if (positionError.code === 1) {

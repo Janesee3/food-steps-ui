@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test 1`] = `
+<FormItem
+  colon={true}
+  hasFeedback={false}
+  label="Location Name"
+  labelCol={
+    Object {
+      "sm": Object {
+        "span": 8,
+      },
+      "xs": Object {
+        "span": 24,
+      },
+    }
+  }
+  prefixCls="ant-form"
+  wrapperCol={
+    Object {
+      "sm": Object {
+        "span": 16,
+      },
+      "xs": Object {
+        "span": 24,
+      },
+    }
+  }
+/>
+`;
