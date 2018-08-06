@@ -1,9 +1,18 @@
+.header-logo {
+  height: 80px;
+  margin: auto 0;
+}
+
 .logo {
-  width: 120px;
-  height: 31px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px 24px 16px 0;
-  float: left;
+  width: 48px;
+  height: 48px;
+  margin: 8px 0;
+  /* text-align: center; */
+  /* background: rgba(255, 255, 255, 0.2); */
+  /* margin: 16px 24px 16px 0; */
+  /*float: left; */
+  background-image: url('../../Logo/FoodStepsLogo.png');
+  background-size: cover;
 }
 
 .sign-up-button {

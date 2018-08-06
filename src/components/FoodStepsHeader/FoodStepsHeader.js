@@ -72,18 +72,23 @@ class FoodStepsHeader extends Component {
   render() {
     return (
       <div>
+        <Row className="header-logo">
+          <Col xs={24} lg={0}>
+            <div className="logo" />
+          </Col>
+        </Row>
         <Header>
-          <Row gutter={24}>
-            <Col xs={0} sm={0} md={4}>
+          <Row>
+            <Col xs={0} lg={2}>
               <div className="logo" />
             </Col>
-            <Col xs={0} md={0} lg={16}>
+            <Col xs={0} md={18} lg={16}>
               <NavBar />
             </Col>
-            <Col xs={8} sm={14} md={16} lg={0}>
+            <Col xs={18} sm={16} md={0} lg={0}>
               <NavBarMobile />
             </Col>
-            <Col xs={12} sm={6} md={4} lg={4}>
+            <Col xs={6} sm={8} md={6} lg={6}>
               <Button
                 className="sign-up-button"
                 type="primary"
