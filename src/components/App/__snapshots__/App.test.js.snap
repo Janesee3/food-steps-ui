@@ -6,7 +6,9 @@ exports[`renders snapshot correctly 1`] = `
 >
   <BrowserRouter>
     <div>
-      <FoodStepsHeader />
+      <FoodStepsHeader
+        onSignInAppCallback={[Function]}
+      />
       <NavRoutes
         isLoggedInUser={false}
         onUserSignedIn={[Function]}

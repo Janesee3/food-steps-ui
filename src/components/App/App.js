@@ -21,7 +21,7 @@ class App extends Component {
         <Router>
           {/* Router can only have 1 child, hence a div wrapper required */}
           <div>
-            <FoodStepsHeader />
+            <FoodStepsHeader onSignInAppCallback={this.onUserSignedIn}/>
             <NavRoutes isLoggedInUser={this.state.isLoggedInUser} onUserSignedIn={this.onUserSignedIn} />
           </div>
         </Router>

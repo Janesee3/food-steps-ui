@@ -25,6 +25,7 @@ class FoodStepsHeader extends Component {
 
 	onSignUpSuccess = username => {
 		this.setState({ visible: false });
+		this.props.onSignInAppCallback();
 		message.success(`Successfully created account! Welcome ${username}!`, 3);
 	};
 
@@ -41,6 +42,7 @@ class FoodStepsHeader extends Component {
 
 	onSignInSuccess = username => {
 		this.setState({ visible: false });
+		this.props.onSignInAppCallback();
 		message.success(`Successfully signed in! Welcome ${username}!`, 3);
 	};
 
