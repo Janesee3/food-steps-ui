@@ -1,5 +1,9 @@
+.header {
+  overflow-y: overlay;  /* css 'visible will distort the page', but 'overlay' might not be supported in firefox */
+}
+
 .header-mobile {
-  background: #001529
+  background: #001529;
 }
 
 .logo {

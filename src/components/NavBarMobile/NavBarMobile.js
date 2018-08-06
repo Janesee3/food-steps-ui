@@ -28,9 +28,11 @@ class NavBarMobile extends Component {
         </Button>
         <Menu
           theme="dark"
-          mode="inline"
           defaultSelectedKeys={[]}
+          mode="inline"
           style={{ display: this.state.collapsed ? "none" : "" }}
+          inlineCollapsed={this.state.collapsed}
+          onSelect={this.toggleCollapsed}
         >
           <Menu.Item key="1">
             <Link to="/user-locations-page">User Locations Page</Link>

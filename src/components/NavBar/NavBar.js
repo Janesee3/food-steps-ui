@@ -6,8 +6,8 @@ const NavBar = () => {
   return (
     <Menu
       theme="dark"
-      mode="horizontal"
       defaultSelectedKeys={[]}
+      mode="horizontal"
       style={{ lineHeight: "64px" }}
     >
       <Menu.Item key="1">
