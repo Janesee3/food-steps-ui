@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import FoodStepsHeader from "../FoodStepsHeader/FoodStepsHeader";
 import NavRoutes from "../NavRoutes/NavRoutes";
-import "./App.css";
-import { Layout } from "antd";
+import { Layout, message } from "antd";
 import {
 	saveLoginStatusAndUser,
 	removeLoginStatusAndUser,
 	getLocalStorageLoggedInStatus
 } from "../../utils/userManager";
+import { logout } from "../../services/userService/userService";
+import "./App.css";
 
 class App extends Component {
 	constructor() {
@@ -45,9 +46,21 @@ class App extends Component {
 
 	onUserLogout = () => {
 		removeLoginStatusAndUser();
+		logout(this.onLogoutSucess, this.onLogoutFailed);
 		this.setState({
 			isUserLoggedIn: false
 		});
+	};
+
+	onLogoutSucess = () => {
+		message.success("Successfully logged out", 3);
+	};
+
+	onLogoutFailed = () => {
+		message.error(
+			"Something unexpected occured while logging out. Please try again or contact admin.",
+			3
+		);
 	};
 }
 

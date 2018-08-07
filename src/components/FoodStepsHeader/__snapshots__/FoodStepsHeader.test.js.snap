@@ -1,6 +1,93 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders snapshot correctly 1`] = `
+exports[`renders snapshot correctly when user is logged in 1`] = `
+<div
+  className="header"
+>
+  <Row
+    align="middle"
+    className="header-mobile"
+    gutter={0}
+    justify="center"
+    type="flex"
+  >
+    <Col
+      lg={0}
+      xs={2}
+    >
+      <div
+        className="logo"
+      />
+    </Col>
+  </Row>
+  <Adapter>
+    <Row
+      gutter={0}
+    >
+      <Col
+        lg={2}
+        xs={0}
+      >
+        <div
+          className="logo"
+        />
+      </Col>
+      <Col
+        lg={16}
+        md={18}
+        xs={0}
+      >
+        <NavBar />
+      </Col>
+      <Col
+        lg={0}
+        md={0}
+        sm={16}
+        xs={18}
+      >
+        <NavBarMobile />
+      </Col>
+      <Col
+        lg={6}
+        md={6}
+        sm={8}
+        xs={6}
+      >
+        <div
+          className="avatar"
+        >
+          <Avatar
+            icon="user"
+            prefixCls="ant-avatar"
+            shape="circle"
+            size="default"
+          />
+          <span
+            className="avatar-username"
+          />
+          <Button
+            className="sign-out-button"
+            ghost={false}
+            loading={false}
+            onClick={undefined}
+            prefixCls="ant-btn"
+            type="normal"
+          >
+            Sign Out
+          </Button>
+        </div>
+        <SignInSignUpModal
+          closeModal={[Function]}
+          isModalVisible={false}
+          onUserLogin={undefined}
+        />
+      </Col>
+    </Row>
+  </Adapter>
+</div>
+`;
+
+exports[`renders snapshot correctly when user is not logged in 1`] = `
 <div
   className="header"
 >
@@ -66,9 +153,7 @@ exports[`renders snapshot correctly 1`] = `
         <SignInSignUpModal
           closeModal={[Function]}
           isModalVisible={false}
-          onSignInAppCallback={undefined}
-          onSignOutAppCallback={undefined}
-          showAvatarInHeader={[Function]}
+          onUserLogin={undefined}
         />
       </Col>
     </Row>

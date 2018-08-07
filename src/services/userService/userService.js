@@ -30,3 +30,13 @@ export const signUpFromServer = async (userInfo, successCb, failCb) => {
 		failCb
 	);
 };
+
+export const logout = async (successCb, failCb) => {
+	try {
+		const res = await postToServer(`${API_HOST}/account/signout`, {}, true);
+		if (res.ok) return successCb();
+		return failCb();
+	} catch (err) {
+		failCb();
+	}
+};
