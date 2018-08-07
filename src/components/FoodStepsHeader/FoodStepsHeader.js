@@ -2,106 +2,70 @@ import { Layout } from "antd";
 import NavBar from "../NavBar/NavBar";
 import SignInSignUpModal from "../SignInSignUpModal/SignInSignUpModal";
 import React, { Component } from "react";
-import { Button, message, Avatar } from "antd";
+import { Button, Avatar } from "antd";
 import "./FoodStepsHeader.css";
 
 const { Header } = Layout;
 class FoodStepsHeader extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isModalVisible: false,
-      isButtonVisible: true,
-      displayName: ""
-    };
+	constructor(props) {
+		super(props);
+		this.state = {
+			isModalVisible: false,
+			isButtonVisible: true,
+			displayName: ""
+		};
 
-    this.closeModal = this.closeModal.bind(this);
-    this.onSignUpSuccess = this.onSignUpSuccess.bind(this);
-    this.onSignUpFail = this.onSignUpFail.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+	}
 
-    this.onSignInSuccess = this.onSignInSuccess.bind(this);
-    this.onSignInFail = this.onSignInFail.bind(this);
-  }
+	// callback
+	closeModal = () => {
+		this.setState({ isModalVisible: false });
+	};
 
-  // Sign In Sign Up Modal Callbacks
+	showModal = () => {
+		this.setState({ isModalVisible: true });
+	};
 
-  onSignUpSuccess = username => {
-    this.setState({
-      isModalVisible: false,
-      isButtonVisible: false,
-      displayName: username
-    });
-    message.success(`Successfully created account! Welcome ${username}!`, 3);
-  };
+	showAvatar = username => {
+		this.setState({ isButtonVisible: false, displayName: username });
+	};
 
-  onSignUpFail = () => {
-    message.error(
-      `Sign up failed due to unexpected error, please contact admin!`,
-      3
-    );
-  };
+	render() {
+		const loginButton = (
+			<Button
+				className="sign-up-button"
+				type="primary"
+				onClick={this.showModal}
+			>
+				Sign Up / Sign In
+			</Button>
+		);
 
-  onSignInSuccess = username => {
-    this.setState({ isModalVisible: false, isButtonVisible: false });
-    this.displayName = username;
-    message.success(`Successfully signed in! Welcome ${username}!`, 3);
-  };
+		const userAvatar = (
+			<div className="avatar">
+				<Avatar icon="user" />
+				<span className="avatar-username">{this.state.displayName}</span>
+			</div>
+		);
 
-  onSignInFail = () => {
-    message.error(
-      `Sign in failed due to unexpected error, please contact admin!`,
-      3
-    );
-  };
-
-  closeModal = () => {
-    this.setState({ isModalVisible: false });
-  };
-
-  showModal = () => {
-    this.setState({
-      isModalVisible: true
-    });
-  };
-
-  render() {
-    const loginButton = (
-      <Button
-        className="sign-up-button"
-        type="primary"
-        onClick={this.showModal}
-      >
-        Sign Up / Sign In
-      </Button>
-    );
-
-    const userAvatar = (
-      <div className="avatar">
-        <Avatar icon="user" />
-        {this.state.displayName}
-      </div>
-    );
-
-    return (
-      <div>
-        <Header>
-          <div className="logo" />
-          {this.state.isButtonVisible ? loginButton : userAvatar}
-          <SignInSignUpModal
-            isModalVisible={this.state.isModalVisible}
-            handleCancel={this.closeModal}
-            onSignUpSuccess={this.onSignUpSuccess}
-            onSignUpFail={this.onSignUpFail}
-            onSignInSuccess={this.onSignInSuccess}
-            onSignInFail={this.onSignInFail}
-          />
-          <NavBar />
-        </Header>
-      </div>
-    );
-  }
+		return (
+			<div>
+				<Header>
+					<div className="logo" />
+					{this.state.isButtonVisible ? loginButton : userAvatar}
+					<SignInSignUpModal
+						isModalVisible={this.state.isModalVisible}
+						closeModal={this.closeModal}
+						onSignInAppCallback={this.props.onSignInAppCallback}
+						onSignOutAppCallback={this.props.onSignInAppCallback} // TODO: CHANGE THIS !!!!!!!
+						showAvatarInHeader={this.showAvatar}
+					/>
+					<NavBar />
+				</Header>
+			</div>
+		);
+	}
 }
-
-
 
 export default FoodStepsHeader;

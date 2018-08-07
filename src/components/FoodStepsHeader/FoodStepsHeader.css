@@ -16,6 +16,6 @@
      color: white
  }
 
- .avatar Avatar {
-     margin-right: 5em;
+ .avatar .avatar-username {
+    margin-left: .75em;
  }
