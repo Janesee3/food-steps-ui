@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders snapshot correctly 1`] = `
+<div>
+  <Modal
+    cancelButtonDisabled={false}
+    confirmLoading={false}
+    footer={Array []}
+    maskTransitionName="fade"
+    okButtonDisabled={false}
+    okType="primary"
+    onCancel={undefined}
+    prefixCls="ant-modal"
+    title="Welcome To Food Steps"
+    transitionName="zoom"
+    visible={false}
+    width={520}
+  >
+    <Tabs
+      defaultActiveKey="1"
+      hideAdd={false}
+      onChange={[Function]}
+      prefixCls="ant-tabs"
+    >
+      <TabPane
+        placeholder={null}
+        tab="Sign In"
+      >
+        <Form(RegistrationForm)
+          onSignInFail={[Function]}
+          onSignInSuccess={[Function]}
+        />
+      </TabPane>
+      <TabPane
+        placeholder={null}
+        tab="Sign Up"
+      >
+        <Form(RegistrationForm)
+          onSignUpFail={[Function]}
+          onSignUpSuccess={[Function]}
+        />
+      </TabPane>
+    </Tabs>
+  </Modal>
+</div>
+`;
