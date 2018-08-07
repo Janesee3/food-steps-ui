@@ -1,29 +1,78 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders snapshot correctly 1`] = `
-<div>
-  <Adapter>
-    <div
-      className="logo"
-    />
-    <Button
-      className="sign-up-button"
-      ghost={false}
-      loading={false}
-      onClick={[Function]}
-      prefixCls="ant-btn"
-      type="primary"
+<div
+  className="header"
+>
+  <Row
+    align="middle"
+    className="header-mobile"
+    gutter={0}
+    justify="center"
+    type="flex"
+  >
+    <Col
+      lg={0}
+      xs={2}
     >
-      Sign Up / Sign In
-    </Button>
-    <SignInSignUpModal
-      closeModal={[Function]}
-      isModalVisible={false}
-      onSignInAppCallback={undefined}
-      onSignOutAppCallback={undefined}
-      showAvatarInHeader={[Function]}
-    />
-    <NavBar />
+      <div
+        className="logo"
+      />
+    </Col>
+  </Row>
+  <Adapter>
+    <Row
+      gutter={0}
+    >
+      <Col
+        lg={2}
+        xs={0}
+      >
+        <div
+          className="logo"
+        />
+      </Col>
+      <Col
+        lg={16}
+        md={18}
+        xs={0}
+      >
+        <NavBar />
+      </Col>
+      <Col
+        lg={0}
+        md={0}
+        sm={16}
+        xs={18}
+      >
+        <NavBarMobile />
+      </Col>
+      <Col
+        lg={6}
+        md={6}
+        sm={8}
+        xs={6}
+      >
+        <Button
+          className="sign-up-button"
+          ghost={false}
+          loading={false}
+          onClick={[Function]}
+          prefixCls="ant-btn"
+          type="primary"
+        >
+          Sign Up / Sign In
+        </Button>
+        <SignInSignUpModal
+          handleCancel={[Function]}
+          isModalVisible={false}
+          onSignInFail={[Function]}
+          onSignInSuccess={[Function]}
+          onSignUpFail={[Function]}
+          onSignUpSuccess={[Function]}
+        />
+      </Col>
+    </Row>
   </Adapter>
 </div>
 `;

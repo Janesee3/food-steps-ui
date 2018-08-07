@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders snapshot correctly 1`] = `
+<Dropdown
+  mouseEnterDelay={0.15}
+  mouseLeaveDelay={0.1}
+  overlay={
+    <Menu
+      className=""
+      defaultSelectedKeys={Array []}
+      focusable={false}
+      mode="horizontal"
+      prefixCls="ant-menu"
+      style={
+        Object {
+          "lineHeight": "64px",
+        }
+      }
+      theme="dark"
+    >
+      <MenuItem>
+        <Link
+          replace={false}
+          to="/user-locations-page"
+        >
+          User Locations Page
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link
+          replace={false}
+          to="/new-location"
+        >
+          New Location
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link
+          replace={false}
+          to="/location"
+        >
+          Main Location Page
+        </Link>
+      </MenuItem>
+    </Menu>
+  }
+  placement="bottomLeft"
+  prefixCls="ant-dropdown"
+  trigger={
+    Array [
+      "click",
+    ]
+  }
+>
+  <Button
+    ghost={false}
+    loading={false}
+    prefixCls="ant-btn"
+    type="primary"
+  >
+    Menu 
+    <Icon
+      type="down"
+    />
+  </Button>
+</Dropdown>
+`;

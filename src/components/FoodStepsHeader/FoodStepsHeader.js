@@ -4,6 +4,8 @@ import SignInSignUpModal from "../SignInSignUpModal/SignInSignUpModal";
 import React, { Component } from "react";
 import { Button, Avatar } from "antd";
 import "./FoodStepsHeader.css";
+import { Row, Col } from "antd";
+import NavBarMobile from "../NavBarMobile/NavBarMobile";
 
 const { Header } = Layout;
 class FoodStepsHeader extends Component {
@@ -50,9 +52,24 @@ class FoodStepsHeader extends Component {
 		);
 
 		return (
-			<div>
-				<Header>
-					<div className="logo" />
+			<div className="header">
+        <Row className="header-mobile" align="middle" justify="center" type="flex">
+          <Col xs={2} lg={0}>
+            <div className="logo" />
+          </Col>
+        </Row>
+        <Header>
+          <Row>
+            <Col xs={0} lg={2}>
+              <div className="logo" />
+            </Col>
+            <Col xs={0} md={18} lg={16}>
+              <NavBar />
+            </Col>
+            <Col xs={18} sm={16} md={0} lg={0}>
+              <NavBarMobile />
+            </Col>
+            <Col xs={6} sm={8} md={6} lg={6}>
 					{this.state.isButtonVisible ? loginButton : userAvatar}
 					<SignInSignUpModal
 						isModalVisible={this.state.isModalVisible}
@@ -61,7 +78,8 @@ class FoodStepsHeader extends Component {
 						onSignOutAppCallback={this.props.onSignInAppCallback} // TODO: CHANGE THIS !!!!!!!
 						showAvatarInHeader={this.showAvatar}
 					/>
-					<NavBar />
+          </Col>
+        </Row>
 				</Header>
 			</div>
 		);

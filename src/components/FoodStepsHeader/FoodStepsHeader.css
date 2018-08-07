@@ -1,21 +1,34 @@
- .logo {
-     width: 120px;
-     height: 31px;
-     background: rgba(255, 255, 255, .2);
-     margin: 16px 24px 16px 0;
-     float: left;
- }
+.header {
+  /* css 'visible will distort the page', but 'overlay' might not be supported in firefox */
+  overflow-y: overlay;
+}
 
- .sign-up-button {
-     float: right;
-     margin: 1.1em;
- }
+.header-mobile {
+  background: #001529;
+}
 
- .avatar {
-     float: right;
-     color: white
- }
+.logo {
+  width: 48px;
+  height: 48px;
+  margin: 8px 0;
+  background-image: url('../../Logo/FoodStepsLogo.png');
+  background-size: cover;
+}
 
- .avatar .avatar-username {
-    margin-left: .75em;
- }
+.sign-up-button {
+  float: right;
+  margin: 1.1em;
+}
+
+.navbar-mobile-btn {
+  margin: 1.1em;
+}
+
+.avatar {
+    float: right;
+    color: white
+}
+
+.avatar .avatar-username {
+   margin-left: .75em;
+}
