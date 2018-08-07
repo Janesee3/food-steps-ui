@@ -20,37 +20,7 @@ export class MapContainer extends Component {
       showingInfoWindow: true
     });
   }
-  fetchPlaces(mapProps, map) {
-    const { google } = mapProps;
-
-    const geocoder = new google.maps.Geocoder();
-    const infowindow = new google.maps.InfoWindow();
-
-    const latlng = { lat: 1.2834, lng: 103.8607 };
-    geocoder.geocode({ location: latlng }, function(results, status) {
-      if (status === "OK") {
-        if (results[0]) {
-          map.setZoom(11);
-          var marker = new google.maps.Marker({
-            position: latlng,
-            map: map
-          });
-          infowindow.setContent(
-            results[0].formatted_address +
-              "lat: " +
-              results[0].geometry.location.lat()
-          );
-
-          infowindow.open(map, marker);
-          console.log("locations", results);
-        } else {
-          window.alert("No results found");
-        }
-      } else {
-        window.alert("Geocoder failed due to: " + status);
-      }
-    });
-  }
+  
 
   render() {
     if (!this.props.google) {
@@ -76,7 +46,7 @@ export class MapContainer extends Component {
             lat: this.state.userCurrentPostion.lat,
             lng: this.state.userCurrentPostion.lng
           }}
-          onReady={this.fetchPlaces}
+          onReady={this.props.fetchPlaces}
           zoom={this.state.mapZoom}
         >
           <Marker
