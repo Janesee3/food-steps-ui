@@ -1,5 +1,6 @@
 .header {
-  overflow-y: overlay;  /* css 'visible will distort the page', but 'overlay' might not be supported in firefox */
+  /* css 'visible will distort the page', but 'overlay' might not be supported in firefox */
+  overflow-y: overlay;
 }
 
 .header-mobile {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Menu, Button, Icon } from "antd";
+import { Button, Icon } from "antd";
+import NavBar from "../NavBar/NavBar";
 
 class NavBarMobile extends Component {
   constructor() {
@@ -26,24 +26,11 @@ class NavBarMobile extends Component {
         >
           <Icon type={this.state.collapsed ? "menu-unfold" : "menu-fold"} />
         </Button>
-        <Menu
-          theme="dark"
-          defaultSelectedKeys={[]}
-          mode="inline"
-          style={{ display: this.state.collapsed ? "none" : "" }}
-          inlineCollapsed={this.state.collapsed}
+        <NavBar
+          mobile={true}
+          collapsed={this.state.collapsed}
           onSelect={this.toggleCollapsed}
-        >
-          <Menu.Item key="1">
-            <Link to="/user-locations-page">User Locations Page</Link>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <Link to="/new-location">New Location</Link>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Link to="/location">Main Location Page</Link>
-          </Menu.Item>
-        </Menu>
+        />
       </div>
     );
   }

@@ -40,3 +40,46 @@ exports[`renders snapshot correctly 1`] = `
   </MenuItem>
 </Menu>
 `;
+
+exports[`renders snapshot for mobile (collapsed) correctly 1`] = `
+<Menu
+  className=""
+  defaultSelectedKeys={Array []}
+  focusable={false}
+  inlineCollapsed={true}
+  mode="inline"
+  onSelect={[Function]}
+  prefixCls="ant-menu"
+  style={
+    Object {
+      "display": "none",
+    }
+  }
+  theme="dark"
+>
+  <MenuItem>
+    <Link
+      replace={false}
+      to="/user-locations-page"
+    >
+      User Locations Page
+    </Link>
+  </MenuItem>
+  <MenuItem>
+    <Link
+      replace={false}
+      to="/new-location"
+    >
+      New Location
+    </Link>
+  </MenuItem>
+  <MenuItem>
+    <Link
+      replace={false}
+      to="/location"
+    >
+      Main Location Page
+    </Link>
+  </MenuItem>
+</Menu>
+`;

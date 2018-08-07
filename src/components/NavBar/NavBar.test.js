@@ -9,3 +9,15 @@ it("renders snapshot correctly", () => {
 
   expect(output).toMatchSnapshot();
 });
+
+it("renders snapshot for mobile (collapsed) correctly", () => {
+  const renderer = new ShallowRenderer();
+  renderer.render(<NavBar 
+    mobile={true}
+    collapsed={true}
+    onSelect={jest.fn()}
+  />);
+  const output = renderer.getRenderOutput();
+
+  expect(output).toMatchSnapshot();
+});

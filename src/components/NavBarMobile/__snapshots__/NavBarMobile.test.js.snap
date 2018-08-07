@@ -14,45 +14,10 @@ exports[`renders snapshot correctly 1`] = `
       type="menu-unfold"
     />
   </Button>
-  <Menu
-    className=""
-    defaultSelectedKeys={Array []}
-    focusable={false}
-    inlineCollapsed={true}
-    mode="inline"
+  <NavBar
+    collapsed={true}
+    mobile={true}
     onSelect={[Function]}
-    prefixCls="ant-menu"
-    style={
-      Object {
-        "display": "none",
-      }
-    }
-    theme="dark"
-  >
-    <MenuItem>
-      <Link
-        replace={false}
-        to="/user-locations-page"
-      >
-        User Locations Page
-      </Link>
-    </MenuItem>
-    <MenuItem>
-      <Link
-        replace={false}
-        to="/new-location"
-      >
-        New Location
-      </Link>
-    </MenuItem>
-    <MenuItem>
-      <Link
-        replace={false}
-        to="/location"
-      >
-        Main Location Page
-      </Link>
-    </MenuItem>
-  </Menu>
+  />
 </div>
 `;

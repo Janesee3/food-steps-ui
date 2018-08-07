@@ -2,13 +2,26 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "antd";
 
-const NavBar = () => {
+const NavBar = (props) => {
+  
+  const menuStylingForDesktop = {
+    mode: "horizontal",
+    style: {lineHeight: "64px"}
+  };
+  const menuStylingForMobile = {
+    mode: "inline",
+    style: {display: props.collapsed ? "none" : ""},
+    inlineCollapsed: props.collapsed,
+    onSelect: props.onSelect
+  };
+
+  const menuStyle = props.mobile ? menuStylingForMobile : menuStylingForDesktop;
+
   return (
     <Menu
       theme="dark"
       defaultSelectedKeys={[]}
-      mode="horizontal"
-      style={{ lineHeight: "64px" }}
+      {...menuStyle}
     >
       <Menu.Item key="1">
         <Link to="/user-locations-page">User Locations Page</Link>
