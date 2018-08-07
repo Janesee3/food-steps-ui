@@ -6,18 +6,15 @@ import { Button, Avatar } from "antd";
 import "./FoodStepsHeader.css";
 import { Row, Col } from "antd";
 import NavBarMobile from "../NavBarMobile/NavBarMobile";
+import { getUsername } from "../../utils/userManager";
 
 const { Header } = Layout;
 class FoodStepsHeader extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isModalVisible: false,
-			isButtonVisible: true,
-			displayName: ""
+			isModalVisible: false
 		};
-
-		this.closeModal = this.closeModal.bind(this);
 	}
 
 	// callback
@@ -27,10 +24,6 @@ class FoodStepsHeader extends Component {
 
 	showModal = () => {
 		this.setState({ isModalVisible: true });
-	};
-
-	showAvatar = username => {
-		this.setState({ isButtonVisible: false, displayName: username });
 	};
 
 	render() {
@@ -47,7 +40,14 @@ class FoodStepsHeader extends Component {
 		const userAvatar = (
 			<div className="avatar">
 				<Avatar icon="user" />
-				<span className="avatar-username">{this.state.displayName}</span>
+				<span className="avatar-username">{getUsername()}</span>
+				<Button
+					className="sign-out-button"
+					type="normal"
+					onClick={this.props.onUserLogout}
+				>
+					Sign Out
+				</Button>
 			</div>
 		);
 
@@ -70,13 +70,11 @@ class FoodStepsHeader extends Component {
               <NavBarMobile />
             </Col>
             <Col xs={6} sm={8} md={6} lg={6}>
-					{this.state.isButtonVisible ? loginButton : userAvatar}
+						{this.props.isUserLoggedIn ? userAvatar : loginButton}
 					<SignInSignUpModal
 						isModalVisible={this.state.isModalVisible}
 						closeModal={this.closeModal}
-						onSignInAppCallback={this.props.onSignInAppCallback}
-						onSignOutAppCallback={this.props.onSignInAppCallback} // TODO: CHANGE THIS !!!!!!!
-						showAvatarInHeader={this.showAvatar}
+						onUserLogin={this.props.onUserLogin}
 					/>
           </Col>
         </Row>

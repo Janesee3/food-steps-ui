@@ -5,18 +5,16 @@ import NavRoutes from "../NavRoutes/NavRoutes";
 import "./App.css";
 import { Layout } from "antd";
 import {
-	setLocalStorageLoggedInStatus,
+	saveLoginStatusAndUser,
+	removeLoginStatusAndUser,
 	getLocalStorageLoggedInStatus
 } from "../../utils/userManager";
-
-
-// const isDevelopment = process.env.NODE_ENV === "development";
 
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isLoggedInUser: getLocalStorageLoggedInStatus() //IM HERE!! TEST THIS ONE!!
+			isUserLoggedIn: getLocalStorageLoggedInStatus() // Use localStorage to remember login status
 		};
 	}
 
@@ -26,17 +24,29 @@ class App extends Component {
 				<Router>
 					{/* Router can only have 1 child, hence a div wrapper required */}
 					<div>
-						<FoodStepsHeader onSignInAppCallback={this.onUserSignedIn} />
-						<NavRoutes isLoggedInUser={this.state.isLoggedInUser} />
+						<FoodStepsHeader
+							onUserLogin={this.onUserLogin}
+							onUserLogout={this.onUserLogout}
+							isUserLoggedIn={this.state.isUserLoggedIn}
+						/>
+						<NavRoutes isUserLoggedIn={this.state.isUserLoggedIn} />
 					</div>
 				</Router>
 			</Layout>
 		);
 	}
 
-	onUserSignedIn = () => {
+	onUserLogin = user => {
+		saveLoginStatusAndUser(user);
 		this.setState({
-			isLoggedInUser: true
+			isUserLoggedIn: true
+		});
+	};
+
+	onUserLogout = () => {
+		removeLoginStatusAndUser();
+		this.setState({
+			isUserLoggedIn: false
 		});
 	};
 }

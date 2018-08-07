@@ -7,10 +7,12 @@ exports[`renders snapshot correctly 1`] = `
   <BrowserRouter>
     <div>
       <FoodStepsHeader
-        onSignInAppCallback={[Function]}
+        isUserLoggedIn={false}
+        onUserLogin={[Function]}
+        onUserLogout={[Function]}
       />
       <NavRoutes
-        isLoggedInUser={false}
+        isUserLoggedIn={false}
       />
     </div>
   </BrowserRouter>

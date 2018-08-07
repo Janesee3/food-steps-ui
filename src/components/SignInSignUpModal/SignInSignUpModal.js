@@ -2,10 +2,6 @@ import { Modal, Tabs, message } from "antd";
 import React, { Component } from "react";
 import SignUpForm from "../SignUpForm/SignUpForm";
 import SignInForm from "../SignInForm/SignInForm";
-import {
-	setLocalStorageLoggedInStatus,
-	getLocalStorageLoggedInStatus
-} from "../../utils/userManager";
 
 const TabPane = Tabs.TabPane;
 
@@ -16,9 +12,7 @@ function callback(key) {
 class SignInSignUpModal extends Component {
 	onSignUpSuccess = username => {
 		this.props.closeModal();
-		this.props.onSignInAppCallback();
-		this.props.showAvatarInHeader(username);
-		setLocalStorageLoggedInStatus(true);
+		this.props.onUserLogin({ username });
 		message.success(`Successfully created account! Welcome ${username}!`, 3);
 	};
 
@@ -35,9 +29,7 @@ class SignInSignUpModal extends Component {
 
 	onSignInSuccess = username => {
 		this.props.closeModal();
-		this.props.onSignInAppCallback();
-		this.props.showAvatarInHeader(username);
-		setLocalStorageLoggedInStatus(true);
+		this.props.onUserLogin({ username });
 		message.success(`Successfully signed in! Welcome ${username}!`, 3);
 	};
 
