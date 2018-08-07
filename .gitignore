@@ -5,6 +5,10 @@
 
 # testing
 /coverage
+/cypress/integration/examples
+/cypress/fixtures/example.json
+/cypress/plugins/index.js
+/cypress/support
 
 # production
 /build

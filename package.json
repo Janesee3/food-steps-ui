@@ -17,7 +17,9 @@
     "start:sim": "NODE_ENV=production REACT_APP_API_HOST=https://food-steps-api.herokuapp.com react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject", 
+    "test:cypress": "cypress open",      
+    "test:cypress-headless": "cypress run"
   },
   "devDependencies": {
     "jest-fetch-mock": "^1.6.5"
