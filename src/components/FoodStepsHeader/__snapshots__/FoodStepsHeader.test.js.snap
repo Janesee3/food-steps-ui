@@ -17,12 +17,11 @@ exports[`renders snapshot correctly 1`] = `
       Sign Up / Sign In
     </Button>
     <SignInSignUpModal
-      handleCancel={[Function]}
+      closeModal={[Function]}
       isModalVisible={false}
-      onSignInFail={[Function]}
-      onSignInSuccess={[Function]}
-      onSignUpFail={[Function]}
-      onSignUpSuccess={[Function]}
+      onSignInAppCallback={undefined}
+      onSignOutAppCallback={undefined}
+      showAvatarInHeader={[Function]}
     />
     <NavBar />
   </Adapter>
