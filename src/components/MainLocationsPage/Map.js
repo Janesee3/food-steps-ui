@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
-
-
-
-
 export class MapContainer extends Component {
   constructor(props) {
     super(props);
@@ -13,7 +9,7 @@ export class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      userCurrentPostion: {lat: 1.35, lng: 103.82},
+      userCurrentPostion: { lat: 1.35, lng: 103.82 },
       mapZoom: 2
     };
   }
@@ -21,27 +17,58 @@ export class MapContainer extends Component {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
-      showingInfoWindow: true,
-
+      showingInfoWindow: true
     });
   }
+  fetchPlaces(mapProps, map) {
+    const { google } = mapProps;
 
+    const geocoder = new google.maps.Geocoder();
+    const infowindow = new google.maps.InfoWindow();
+
+    const latlng = { lat: 1.2834, lng: 103.8607 };
+    geocoder.geocode({ location: latlng }, function(results, status) {
+      if (status === "OK") {
+        if (results[0]) {
+          map.setZoom(11);
+          var marker = new google.maps.Marker({
+            position: latlng,
+            map: map
+          });
+          infowindow.setContent(
+            results[0].formatted_address +
+              "lat: " +
+              results[0].geometry.location.lat()
+          );
+
+          infowindow.open(map, marker);
+          console.log("locations", results);
+        } else {
+          window.alert("No results found");
+        }
+      } else {
+        window.alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
 
   render() {
     if (!this.props.google) {
       return <div>Loading...</div>;
     }
 
-    navigator.geolocation.getCurrentPosition((position) => {
+    navigator.geolocation.getCurrentPosition(position => {
       this.setState({
-        userCurrentPostion: { lat: position.coords.latitude, lng: position.coords.longitude },
+        userCurrentPostion: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        },
         mapZoom: 14
-      })
-    })
-
+      });
+    });
 
     return (
-      <div className="map" >
+      <div className="map">
         <Map
           style={{}}
           google={this.props.google}
@@ -49,7 +76,9 @@ export class MapContainer extends Component {
             lat: this.state.userCurrentPostion.lat,
             lng: this.state.userCurrentPostion.lng
           }}
-          zoom={this.state.mapZoom}>
+          onReady={this.fetchPlaces}
+          zoom={this.state.mapZoom}
+        >
           <Marker
             onClick={this.onMarkerClick}
             // icon={{
@@ -57,7 +86,10 @@ export class MapContainer extends Component {
             //   anchor: new google.maps.Point(32, 32),
             //   scaledSize: new google.maps.Size(64, 64)
             // }}
-            position= {{lat: this.state.userCurrentPostion.lat,lng: this.state.userCurrentPostion.lng}}
+            position={{
+              lat: this.state.userCurrentPostion.lat,
+              lng: this.state.userCurrentPostion.lng
+            }}
             name={"You are here!"}
           />
           <InfoWindow
