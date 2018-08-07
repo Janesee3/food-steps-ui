@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 
+
+
+
+
 export class MapContainer extends Component {
   constructor(props) {
     super(props);
@@ -8,24 +12,44 @@ export class MapContainer extends Component {
     this.state = {
       showingInfoWindow: false,
       activeMarker: {},
-      selectedPlace: {}
+      selectedPlace: {},
+      userCurrentPostion: {lat: 1.35, lng: 103.82},
+      mapZoom: 2
     };
   }
   onMarkerClick(props, marker, e) {
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
-      showingInfoWindow: true
+      showingInfoWindow: true,
+
     });
   }
+
+
   render() {
     if (!this.props.google) {
       return <div>Loading...</div>;
     }
 
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.setState({
+        userCurrentPostion: { lat: position.coords.latitude, lng: position.coords.longitude },
+        mapZoom: 14
+      })
+    })
+
+
     return (
-      <div className="map">
-        <Map style={{}} google={this.props.google} zoom={14}>
+      <div className="map" >
+        <Map
+          style={{}}
+          google={this.props.google}
+          center={{
+            lat: this.state.userCurrentPostion.lat,
+            lng: this.state.userCurrentPostion.lng
+          }}
+          zoom={this.state.mapZoom}>
           <Marker
             onClick={this.onMarkerClick}
             // icon={{
@@ -33,7 +57,8 @@ export class MapContainer extends Component {
             //   anchor: new google.maps.Point(32, 32),
             //   scaledSize: new google.maps.Size(64, 64)
             // }}
-            name={"Current location"}
+            position= {{lat: this.state.userCurrentPostion.lat,lng: this.state.userCurrentPostion.lng}}
+            name={"You are here!"}
           />
           <InfoWindow
             marker={this.state.activeMarker}
