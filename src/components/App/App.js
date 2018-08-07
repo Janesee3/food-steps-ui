@@ -4,14 +4,19 @@ import FoodStepsHeader from "../FoodStepsHeader/FoodStepsHeader";
 import NavRoutes from "../NavRoutes/NavRoutes";
 import "./App.css";
 import { Layout } from "antd";
+import {
+	setLocalStorageLoggedInStatus,
+	getLocalStorageLoggedInStatus
+} from "../../utils/userManager";
 
-const isDevelopment = process.env.NODE_ENV === "development";
+
+// const isDevelopment = process.env.NODE_ENV === "development";
 
 class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isLoggedInUser: isDevelopment
+			isLoggedInUser: getLocalStorageLoggedInStatus() //IM HERE!! TEST THIS ONE!!
 		};
 	}
 

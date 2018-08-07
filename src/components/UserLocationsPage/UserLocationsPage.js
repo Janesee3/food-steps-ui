@@ -15,6 +15,13 @@ class UserLocationsPage extends Component {
   }
 
   async componentDidMount() {
+
+    if (this.isLoggedIn) {
+      // fetch data
+    } else {
+      // dont do anything
+    }
+
     const response = await fetch(URL, {
       credentials: "include"
     });
