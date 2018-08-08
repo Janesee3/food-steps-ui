@@ -8,7 +8,9 @@
 /cypress/integration/examples
 /cypress/fixtures/example.json
 /cypress/plugins/index.js
+/cypress/screenshots
 /cypress/support
+/cypress/videos
 
 # production
 /build

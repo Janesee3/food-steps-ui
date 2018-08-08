@@ -13,17 +13,17 @@
   },
   "scripts": {
     "start": "env PORT=3001 react-scripts start",
-    "start:api3002": "REACT_APP_API_HOST=http://localhost:3002 PORT=3001 react-scripts start",
     "start:sim": "NODE_ENV=production REACT_APP_API_HOST=https://food-steps-api.herokuapp.com react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "test:cypress": " env CYPRESS_baseUrl=http://localhost:3001 cypress open",
-    "test:cypress:heroku": "cypress open --env TEST_APP=https://food-steps-ui.herokuapp.com",
-    "test:cypress-headless": "cypress run"
+    "test:cypress": "env CYPRESS_baseUrl=https://food-steps-ui.herokuapp.com cypress open",
+    "test:cypress-headless": "env CYPRESS_baseUrl=https://food-steps-ui.herokuapp.com cypress run",
+    "cypress:dev": "PORT=3003 REACT_APP_API_HOST=http://localhost:3002 react-scripts start & wait-on http://localhost:3003 & env CYPRESS_baseUrl=http://localhost:3003 cypress run"
   },
   "devDependencies": {
     "cypress": "^3.0.3",
-    "jest-fetch-mock": "^1.6.5"
+    "jest-fetch-mock": "^1.6.5",
+    "wait-on": "^2.1.0"
   }
 }
