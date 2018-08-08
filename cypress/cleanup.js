@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const mongodbUri = "mongodb://localhost/food-steps-cypress";
+const mongodbUri = process.env.MONGODB_URI || "mongodb://localhost/food-steps-cypress";
 mongoose.connect(
   mongodbUri,
   async () => {
