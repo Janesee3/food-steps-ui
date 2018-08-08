@@ -1,55 +1,60 @@
 import React, { Component } from "react";
 import LocationsList from "../LocationsList/LocationsList";
-import { seedData } from "../UserLocationsPage/seedData"
-import GoogleApiWrapper from './Map'
+import { seedData } from "../UserLocationsPage/seedData";
+import GoogleApiWrapper from "./Map";
+import "./MainLocationsPage.css";
 
 class MainLocationsPage extends Component {
   constructor() {
     super();
     this.state = {
-      userLocations: []
-    }
+      userLocations: [],
+      userCurrentPostion: {
+        // hardcoded initial loc
+        lat: 1.2,
+        lng: 103
+      },
+      isCurrentLocationFetched: false,
+      nearbyLocations: []
+    };
   }
-  async componentDidMount() {
+  componentDidMount() {
     this.setState({
       userLocations: seedData
-    })
+    });
+    console.log("component did mount!");
+    navigator.geolocation.getCurrentPosition(this.onCurrentLocationFetched);
   }
 
-  fetchPlaces(mapProps, map) {
-    const { google } = mapProps;
+  // Given an location (containing lat and long), returns an array of
+  // possible geocoded addresses nearby
+  reverseGeocodeLocation = location => {
+    const google = window.google;
     const geocoder = new google.maps.Geocoder();
-    const infowindow = new google.maps.InfoWindow();
-    const latlng = { lat: 1.2834, lng: 103.8607 };
-    geocoder.geocode({ location: latlng }, function(results, status) {
-      if (status === "OK") {
-        if (results[0]) {
-          map.setZoom(11);
-          var marker = new google.maps.Marker({
-            position: latlng,
-            map: map
-          });
-          infowindow.setContent(
-            results[0].formatted_address +
-              "lat: " +
-              results[0].geometry.location.lat()
-          );
-          infowindow.open(map, marker);
-          console.log("locations", results);
-        } else {
-          window.alert("No results found");
-        }
-      } else {
-        window.alert("Geocoder failed due to: " + status);
-      }
+    geocoder.geocode({ location }, function(results, status) {
+      console.log(results);
+      return results;
     });
-  }
-  
+  };
+
+  onCurrentLocationFetched = position => {
+    this.setState({
+      userCurrentPostion: {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      },
+      isCurrentLocationFetched: true
+    });
+    this.reverseGeocodeLocation(this.state.userCurrentPostion);
+  };
+
   render() {
     return (
       <div className="main-locations">
         <div id="map-locations-map">
-          <GoogleApiWrapper fetchPlaces={this.fetchPlaces}/>
+          <GoogleApiWrapper
+            userCurrentPostion={this.state.userCurrentPostion}
+          />
         </div>
         <div id="map-locations-list">
           <LocationsList userLocations={this.state.userLocations} />

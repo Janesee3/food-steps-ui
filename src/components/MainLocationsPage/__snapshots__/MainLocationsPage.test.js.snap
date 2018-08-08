@@ -8,7 +8,12 @@ exports[`should render snapshot correctly 1`] = `
     id="map-locations-map"
   >
     <Wrapper
-      fetchPlaces={[Function]}
+      userCurrentPostion={
+        Object {
+          "lat": 1.2,
+          "lng": 103,
+        }
+      }
     />
   </div>
   <div

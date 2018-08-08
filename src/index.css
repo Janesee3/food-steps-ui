@@ -11,21 +11,3 @@ body {
   height: calc(100vh-64px)
 }
 
-.map {
-    position: relative;
-    height: calc(100vh - 64px);
-}
-
-.main-locations{
-  display:grid;
-  grid-template-columns: 3fr 1fr;
-  grid-gap: 25px
-}
-
-#map-locations-map{
-  grid-column: 1/2
-}
-
-#map-locations-list{
-  grid-column: 2/ 3;
-}
