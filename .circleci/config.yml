@@ -26,6 +26,27 @@ jobs:
       - run:
           name: Deploy Master to Heroku Staging
           command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_STAGING.git master
+  integration-test:
+    docker:
+      - image: cypress/base:8
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+    steps:
+      - checkout
+      - restore_cache: # special step to restore the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Setup Dependencies
+          command: npm ci
+      - save_cache: # special step to save the dependency cache
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ~/.npm
+            - ~/.cache
+      - run: # run tests
+          name: Run Integration Test (headless)
+          command: npm run test:cypress-headless
   deploy-to-production:
     docker:
       - image: buildpack-deps:trusty
@@ -45,10 +66,16 @@ workflows:
               only: master
           requires:
             - build
+      - integration-test:
+          filters:
+            branches:
+              only: master
+          requires:
+            - deploy-to-staging
       - hold:
           type: approval
           requires:
-            - deploy-to-staging
+            - integration-test
       - deploy-to-production:
           filters:
             branches:
