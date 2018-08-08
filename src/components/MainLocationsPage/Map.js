@@ -29,6 +29,7 @@ export class MapContainer extends Component {
             lat: this.props.userCurrentPostion.lat,
             lng: this.props.userCurrentPostion.lng
           }}
+          onReady={this.props.getMap}
         >
           <Marker
             position={{
@@ -58,4 +59,3 @@ export default GoogleApiWrapper({
   apiKey: "AIzaSyB-SJBDlRznL_G2-_nNZ9czAj7zPTGYNZ0",
   v: "3.30"
 })(MapContainer);
-
