@@ -47,6 +47,9 @@ jobs:
       - run: # run tests
           name: Run Integration Test (headless)
           command: npm run test:cypress-headless
+      - run: # cleanup test db
+          name: Cleanup Test DB
+          command: npm run cypress:cleanup
   deploy-to-production:
     docker:
       - image: buildpack-deps:trusty
