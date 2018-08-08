@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, InputNumber, Button, notification } from "antd";
-import { formItemLayout, tailFormItemLayout } from "./layout";
 import FormItemWithInput from "./FormItemWithInput";
 import { createUserLocation } from "../../services/userLocationService/userLocationService";
 
@@ -19,8 +18,11 @@ class LocationForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
 
+    const formItemLayout = null;
+    const tailFormItemLayout = null;
+
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form layout="vertical" onSubmit={this.handleSubmit}>
         <FormItemWithInput
           id="locationName"
           label="Location Name"
@@ -41,7 +43,7 @@ class LocationForm extends React.Component {
                 type: "number",
                 message: "Latitude should be a number."
               },
-              
+
               {
                 required: true,
                 message: "Please input latitude!"

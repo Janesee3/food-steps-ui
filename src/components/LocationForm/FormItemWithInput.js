@@ -1,9 +1,11 @@
 import React from "react";
 import { Form, Input } from "antd";
-import { formItemLayout } from "./layout";
 
 const FormItemWithInput = props => {
   let options = {};
+
+  const formItemLayout = null;
+
   if (props.required) {
     options = {
       rules: [

@@ -3,7 +3,7 @@
 exports[`Snapshot Test for rendering 1`] = `
 <Form
   hideRequiredMark={false}
-  layout="horizontal"
+  layout="vertical"
   onSubmit={[Function]}
   prefixCls="ant-form"
 >
@@ -23,70 +23,18 @@ exports[`Snapshot Test for rendering 1`] = `
     colon={true}
     hasFeedback={false}
     label="Latitude"
-    labelCol={
-      Object {
-        "sm": Object {
-          "span": 8,
-        },
-        "xs": Object {
-          "span": 24,
-        },
-      }
-    }
     prefixCls="ant-form"
-    wrapperCol={
-      Object {
-        "sm": Object {
-          "span": 16,
-        },
-        "xs": Object {
-          "span": 24,
-        },
-      }
-    }
   />
   <FormItem
     colon={true}
     hasFeedback={false}
     label="Longitude"
-    labelCol={
-      Object {
-        "sm": Object {
-          "span": 8,
-        },
-        "xs": Object {
-          "span": 24,
-        },
-      }
-    }
     prefixCls="ant-form"
-    wrapperCol={
-      Object {
-        "sm": Object {
-          "span": 16,
-        },
-        "xs": Object {
-          "span": 24,
-        },
-      }
-    }
   />
   <FormItem
     colon={true}
     hasFeedback={false}
     prefixCls="ant-form"
-    wrapperCol={
-      Object {
-        "sm": Object {
-          "offset": 8,
-          "span": 16,
-        },
-        "xs": Object {
-          "offset": 0,
-          "span": 24,
-        },
-      }
-    }
   >
     <Button
       ghost={false}
