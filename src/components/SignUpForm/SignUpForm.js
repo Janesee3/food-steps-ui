@@ -72,7 +72,7 @@ class RegistrationForm extends Component {
     };
 
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form id="signup-form" onSubmit={this.handleSubmit}>
         <FormItem {...formItemLayout} label="Username">
           {getFieldDecorator("username", {
             rules: [
