@@ -4,8 +4,10 @@ import { seedData } from "../UserLocationsPage/seedData";
 import GoogleApiWrapper from "./Map";
 import "./MainLocationsPage.css";
 
+/* global google */ 
+
 let googleMap;
-let google;
+// let google;
 
 class MainLocationsPage extends Component {
   constructor() {
@@ -18,8 +20,8 @@ class MainLocationsPage extends Component {
         lng: 103
       },
       isCurrentLocationFetched: false,
-      nearbyLocations: []
-
+      nearbyLocations: [],
+      mapReady: false
     };
   }
 
@@ -28,7 +30,7 @@ class MainLocationsPage extends Component {
       userLocations: seedData
     });
     console.log("component did mount!");
-    navigator.geolocation.getCurrentPosition(this.onCurrentLocationFetched);
+      navigator.geolocation.getCurrentPosition(this.onCurrentLocationFetched);
   }
 
   onCurrentLocationFetched = position => {
@@ -50,16 +52,16 @@ class MainLocationsPage extends Component {
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ location }, (results, status) => {
       console.log("Unfiltered results ", results);
-      this.getUsableLocationsFromReverseGeocoder(results);
+      this.getUsableLocations(results, 'formatted_address', ",");
     });
   };
 
-  getUsableLocationsFromReverseGeocoder = locations => {
+  getUsableLocations = (locations, address, character) => {
     const results = locations.filter(location => {
-      const formattedAddress = location.formatted_address;
-      return formattedAddress.includes(","); // Take only the addresses with commas
+      const formattedAddress = location[address];
+      return formattedAddress.includes(character); // Take only the addresses with commas
     });
-    console.log("Filtered results ", results);
+    console.log("Filtered results ",address, results);
     return results;
   };
 
@@ -73,12 +75,12 @@ class MainLocationsPage extends Component {
   // run the searchNearbyLocations on it
   // This will give us a list of nearby places
 
-  getMap(mapProps, map) {
+  getMap = (mapProps, map) => {
     googleMap = map;
   }
 
   searchNearbyLocation = () => {
-    google = window.google;
+    // google = window.google;
 
     const service = new google.maps.places.PlacesService(googleMap);
     var request = {
@@ -90,8 +92,20 @@ class MainLocationsPage extends Component {
   };
 
   onSearchNearbySuccess = (results, status) => {
-    if (status == google.maps.places.PlacesServiceStatus.OK) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
       console.log("results of searchNearby", results);
+      const filteredResults = this.getUsableLocations(results, 'vicinity', " ")
+      const formattedPlace = filteredResults.map((place)=>{
+        return {
+          address: `${place.name}, ${place.vicinity}`,
+          placeId: place.place_id,
+          location: {
+            lat: place.geometry.location.lat(),
+            lng: place.geometry.location.lng()
+          }
+        }
+      })
+      console.log("Hello",formattedPlace)
     }
   };
 
