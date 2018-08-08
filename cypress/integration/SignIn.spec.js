@@ -1,6 +1,6 @@
 context("Access signin/signup", () => {
     beforeEach(() => {
-      cy.visit("http://localhost:3001");
+      cy.visit(Cypress.env('TEST_APP'));
     });
 
     it('signin success', () => {

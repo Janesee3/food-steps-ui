@@ -18,7 +18,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "test:cypress": "cypress open",
+    "test:cypress": "cypress open --env TEST_APP=http://localhost:3001",
+    "test:cypress:heroku": "cypress open --env TEST_APP=https://food-steps-ui.herokuapp.com",
     "test:cypress-headless": "cypress run"
   },
   "devDependencies": {
