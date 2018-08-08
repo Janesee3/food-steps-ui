@@ -44,11 +44,14 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
+      - run: # cleanup test db
+          name: Cleanup before Test
+          command: npm run cypress:cleanup
       - run: # run tests
           name: Run Integration Test (headless)
           command: npm run test:cypress-headless
       - run: # cleanup test db
-          name: Cleanup Test DB
+          name: Cleanup after Test
           command: npm run cypress:cleanup
   deploy-to-production:
     docker:
