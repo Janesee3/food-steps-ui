@@ -4,8 +4,12 @@ const mongodbUri = process.env.MONGODB_URI || "mongodb://localhost/food-steps-cy
 mongoose.connect(
   mongodbUri,
   async () => {
-    await mongoose.connection.db.dropDatabase();
-    console.log('Database dropped successfully.')
+    try {
+      await mongoose.connection.db.dropDatabase();
+      console.log('Database dropped successfully.')
+    } catch (err) {
+      console.log('Oops, database not dropped!', err);
+    }
     mongoose.connection.close();
   }
 );
