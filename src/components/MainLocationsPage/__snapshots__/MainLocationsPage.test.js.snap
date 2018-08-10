@@ -8,6 +8,7 @@ exports[`should render snapshot correctly 1`] = `
     id="map-locations-map"
   >
     <Wrapper
+      clickedLocation={null}
       onMapLoaded={[Function]}
       userCurrentPostion={
         Object {
@@ -24,10 +25,11 @@ exports[`should render snapshot correctly 1`] = `
       ghost={false}
       icon="plus"
       loading={false}
+      onClick={[Function]}
       prefixCls="ant-btn"
       type="primary"
     >
-       Add Location 
+      Add New Food Place
     </Button>
     <LocationsList
       userLocations={Array []}
