@@ -22,13 +22,18 @@ class AddLocationWizard extends Component {
         return (
             <div>
                 <div id="map-locations-list">
-                    <Button type='primary' onClick={this.toggleFormVisibility} >{this.state.isFormVisible ? "Back" : "Choose Location"} </Button>
                     {this.state.isFormVisible ?
-                        <LocationFormContainer isLoggedInUser={this.props.isLoggedInUser} /> :
-                        <LocationSuggestionList
-                            nearbyLocations={this.props.nearbyLocations}
-                            onLocationSelected={this.props.onLocationSelected} />
-
+                        <div>
+                            <Button onClick={this.toggleFormVisibility} >Back</Button>
+                            <LocationFormContainer isLoggedInUser={this.props.isLoggedInUser} />
+                        </div> :
+                        <div>
+                            <Button type='primary' onClick={this.toggleFormVisibility} > Choose Location </Button>
+                            <Button onClick={this.props.toggleForm} >Back</Button>
+                            <LocationSuggestionList
+                                nearbyLocations={this.props.nearbyLocations}
+                                onLocationSelected={this.props.onLocationSelected} />
+                        </div>
                     }
                 </div>
 

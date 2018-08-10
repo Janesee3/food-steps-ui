@@ -32,6 +32,8 @@ class MainLocationsPage extends Component {
     this.setState({
       isFormVisible: !this.state.isFormVisible
     })
+
+    console.log("toggle form called")
   }
 
   componentDidMount() {
@@ -153,7 +155,6 @@ class MainLocationsPage extends Component {
 
   render() {
     console.log("Nearby locations state", this.state.nearbyLocations);
-    console.log("IS USER LOGGED IN", this.props.isLoggedInUser)
     return (
       <div className="main-locations">
         <div id="map-locations-map">
@@ -165,14 +166,17 @@ class MainLocationsPage extends Component {
         </div>
 
         <div id="map-locations-list">
-          <Button type='primary' icon='plus' onClick={this.toggleFormVisibility} >{this.state.isFormVisible ? "Back" : "Add New Food Place"}</Button>
 
           {this.state.isFormVisible ?
             <AddLocationWizard
               nearbyLocations={this.state.nearbyLocations}
               onLocationSelected={this.handleListClick}
-              isLoggedInUser={this.props.isLoggedInUser} /> :
-            <LocationsList userLocations={this.state.userLocations} />}
+              isLoggedInUser={this.props.isLoggedInUser}
+              toggleForm={this.toggleFormVisibility} /> :
+            <div>
+              <Button type='primary' icon='plus' onClick={this.toggleFormVisibility} >{this.state.isFormVisible ? "Back" : "Add New Food Place"}</Button>
+              <LocationsList userLocations={this.state.userLocations} />
+            </div>}
         </div>
 
       </div>

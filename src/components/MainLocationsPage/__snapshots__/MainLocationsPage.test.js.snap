@@ -21,19 +21,21 @@ exports[`should render snapshot correctly 1`] = `
   <div
     id="map-locations-list"
   >
-    <Button
-      ghost={false}
-      icon="plus"
-      loading={false}
-      onClick={[Function]}
-      prefixCls="ant-btn"
-      type="primary"
-    >
-      Add New Food Place
-    </Button>
-    <LocationsList
-      userLocations={Array []}
-    />
+    <div>
+      <Button
+        ghost={false}
+        icon="plus"
+        loading={false}
+        onClick={[Function]}
+        prefixCls="ant-btn"
+        type="primary"
+      >
+        Add New Food Place
+      </Button>
+      <LocationsList
+        userLocations={Array []}
+      />
+    </div>
   </div>
 </div>
 `;
