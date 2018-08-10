@@ -11,12 +11,20 @@ class LocationSuggestionList extends Component {
             data: [],
             loading: false,
             hasMore: true,
+            selectedListIndex: null
         }
 
     }
 
-    render() {
+    getSelected = (location, index) => {
+        this.props.onLocationSelected(location)
+        this.setState({
+            selectedListIndex: index
+        })
+    }
 
+    render() {
+        console.log("HELO", this.state.selectedListIndex)
 
         return (
             <div className="locations-selection">
@@ -29,8 +37,8 @@ class LocationSuggestionList extends Component {
                     <List
                         dataSource={this.props.nearbyLocations}
                         renderItem={(location, index) => (
-                            <div className="list">
-                                <List.Item onClick={() => { this.props.onLocationSelected(location) }}>
+                            <div className={this.state.selectedListIndex === index ? "selected-list" : "list"}>
+                                <List.Item onClick={() => { this.getSelected(location, index) }}>
                                     <div className="list-content">
                                         {location.address}
                                     </div>

@@ -13,7 +13,7 @@
   }
   
   .list:hover {
-    color: #1890ff;
+    color: tomato;
     background: #f7f7f7;
   }
 
@@ -22,5 +22,11 @@
     font-style: italic;
   }
   
-  .list-content:hover{
+  .selected-list{
+    background: #cfcfcf;
+    color: #1890ff;
+  }
+  
+  .selected-list:hover{
+    color: tomato;
   }
