@@ -5,10 +5,6 @@ import SignInForm from "../SignInForm/SignInForm";
 
 const TabPane = Tabs.TabPane;
 
-function callback(key) {
-	// console.log(key);
-}
-
 class SignInSignUpModal extends Component {
 	onSignUpSuccess = username => {
 		this.props.closeModal();
@@ -55,7 +51,7 @@ class SignInSignUpModal extends Component {
 					onCancel={this.props.closeModal}
 					footer={[]}
 				>
-					<Tabs defaultActiveKey="1" onChange={callback}>
+					<Tabs defaultActiveKey="1">
 						<TabPane tab="Sign In" key="1">
 							<SignInForm
 								onSignInSuccess={this.onSignInSuccess}
