@@ -8,126 +8,146 @@ let googleMap;
 let google;
 
 class MainLocationsPage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      userLocations: [],
-      userCurrentPostion: {
-        // hardcoded initial loc
-        lat: 1.2,
-        lng: 103
-      },
-      isCurrentLocationFetched: false,
-      nearbyLocations: [],
-    };
-  }
+	constructor() {
+		super();
+		this.state = {
+			userLocations: [],
+			userCurrentPostion: {
+				// hardcoded initial loc
+				lat: 1.2,
+				lng: 103
+			},
+			isCurrentLocationFetched: false,
+			nearbyLocations: []
+		};
+	}
 
-  componentDidMount() {
-    this.setState({
-      userLocations: seedData
-    });
-    navigator.geolocation.getCurrentPosition(this.onCurrentLocationFetched);
-  }
+	componentDidMount() {
+		this.setState({
+			userLocations: seedData
+		});
+	}
 
-  onCurrentLocationFetched = position => {
-    this.setState({
-      userCurrentPostion: {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      },
-      isCurrentLocationFetched: true
-    });
-    // Set time out is necessary to let window.google load before geocode and nearby functions are called
-      setTimeout(()=>{
-        this.reverseGeocodeLocation(this.state.userCurrentPostion);
-        this.searchNearbyLocation(this.state.userCurrentPostion, 100);  
-      },500)
-  };
+	// Called when Google Maps API scripts are loaded and map is ready
+	onMapLoaded = (mapProps, map) => {
+		googleMap = map;
+		google = window.google;
 
-  // To format the results of google nearbySearch and reverseGeocoder
-  getUsableLocations = (locations, address, seperator) => {
-    const results = locations.filter(location => {
-      const formattedAddress = location[address];
-      return formattedAddress.includes(seperator);
-    });
-    return results;
-  };
+		navigator.geolocation.getCurrentPosition(
+			this.onCurrentLocationFetched,
+			this.onCurrentLocationFetchFail,
+			{
+				timeout: 10000,
+				enableHighAccuracy: true
+			}
+		);
+	};
 
-  formatResults = (results, address, character) => {
-    const filteredResults = this.getUsableLocations(results, address, character);
-    return filteredResults.map((place) => {
-      return {
-        address: place.name ? `${place.name}, ${place[address]}` : place[address],
-        placeId: place.place_id,
-        location: {
-          lat: place.geometry.location.lat(),
-          lng: place.geometry.location.lng()
-        }
-      }
-    })
-  }
-  
-  onSuccessHelper = (results, status, address, seperator) => {
-    let formattedPlace
-    if (String(status) === 'OK') {
-      formattedPlace = this.formatResults(results, address, seperator)
-    }
-    this.setState({
-      nearbyLocations: [...this.state.nearbyLocations, ...formattedPlace]
-    })
-  }
-  
-  // First, we will fetch user's current location
-  // Once that is done, we have the lat long
-  // Using this lat long, we reverse geocode it, and we get an array
-  // of addresses for this lat long
-  
-  // The first result in the array, is probably the closest match
-  // Using this closest address match, we take its lat long, and
-  // run the searchNearbyLocations on it
-  // This will give us a list of nearby places
-  
-  // Given an location (containing lat and long), returns an array of
-  // possible geocoded addresses nearby
-  reverseGeocodeLocation = location => {
-    google = window.google;
-    const geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ location }, (results, status) => {
-      this.onSuccessHelper(results, status, 'formatted_address', ',')
-    });
-  };
+	//** Helper Functions **//
 
-  getMap = (mapProps, map) => {
-    googleMap = map;
-  }
+	onCurrentLocationFetchFail = err => {
+		console.log("Cannot get current location: ", err);
+	};
 
-  searchNearbyLocation = (location, radius) => {
-    google = window.google;
+	onCurrentLocationFetched = position => {
+		console.log("current loc is fetched.");
+		this.setState({
+			userCurrentPostion: {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			},
+			isCurrentLocationFetched: true
+		});
+		this.reverseGeocodeLocation(this.state.userCurrentPostion);
+		this.searchNearbyLocation(this.state.userCurrentPostion, 100);
+	};
 
-    const service = new google.maps.places.PlacesService(googleMap);
-    let request = { location, radius };
+	// Given a location (object with lat and long), returns an array of
+	// possible geocoded addresses
+	reverseGeocodeLocation = location => {
+		const geocoder = new google.maps.Geocoder();
+		geocoder.geocode({ location }, (results, status) => {
+			this.formatAndAddLocations(results, status, "formatted_address", ",");
+		});
+	};
 
-    service.nearbySearch(request, (results, status) => {
-      this.onSuccessHelper(results, status, 'vicinity', ' ')
-    });
-  };
+	// Given a location and radius in metres, returns an array of
+	// google places in the radius vicinity.
+	searchNearbyLocation = (location, radius) => {
+		const service = new google.maps.places.PlacesService(googleMap);
+		let request = { location, radius };
 
-  render() {
-    console.log("Nearby locations state", this.state.nearbyLocations)
-    return (
-      <div className="main-locations">
-        <div id="map-locations-map">
-          <GoogleApiWrapper
-            userCurrentPostion={this.state.userCurrentPostion}
-            getMap={this.getMap}
-          />
-        </div>
-        <div id="map-locations-list">
-          <LocationsList userLocations={this.state.userLocations} />
-        </div>
-      </div>
-    );
-  }
+		service.nearbySearch(request, (results, status) => {
+			this.formatAndAddLocations(results, status, "vicinity", " ");
+		});
+	};
+
+	//** Utility Functions **//
+
+	// Takes in an array of location objects, a key value that points to the address
+	// value of each location object, and returns an array of locations that which
+	// address contains the input separator
+	// Addresses that don't contain the input separator are deemed unhelpful/unusable
+	getUsableLocations = (locations, addressKey, seperator) => {
+		const results = locations.filter(location => {
+			const formattedAddress = location[addressKey];
+			return formattedAddress.includes(seperator);
+		});
+		return results;
+	};
+
+	getFormattedLocations = (unformattedLocations, addressKey) => {
+		return unformattedLocations.map(place => {
+			let address = place[addressKey];
+			if (place.name) {
+				address = `${place.name}, ${place[addressKey]}`;
+			}
+
+			return {
+				address,
+				placeId: place.place_id,
+				location: {
+					lat: place.geometry.location.lat(),
+					lng: place.geometry.location.lng()
+				}
+			};
+		});
+	};
+
+	formatAndAddLocations = (locations, status, addressKey, seperator) => {
+		if (String(status) !== "OK") return;
+
+		const useableLocations = this.getUsableLocations(
+			locations,
+			addressKey,
+			seperator
+		);
+		const formattedLocations = this.getFormattedLocations(
+			useableLocations,
+			addressKey
+		);
+
+		this.setState({
+			nearbyLocations: [...this.state.nearbyLocations, ...formattedLocations]
+		});
+	};
+
+	render() {
+		console.log("Nearby locations state", this.state.nearbyLocations);
+		return (
+			<div className="main-locations">
+				<div id="map-locations-map">
+					<GoogleApiWrapper
+						userCurrentPostion={this.state.userCurrentPostion}
+						onMapLoaded={this.onMapLoaded}
+					/>
+				</div>
+				<div id="map-locations-list">
+					<LocationsList userLocations={this.state.userLocations} />
+				</div>
+			</div>
+		);
+	}
 }
 
 export default MainLocationsPage;
