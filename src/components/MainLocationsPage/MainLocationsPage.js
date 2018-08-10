@@ -22,8 +22,16 @@ class MainLocationsPage extends Component {
       },
       isCurrentLocationFetched: false,
       nearbyLocations: [],
-      isFormVisible: false
+      isFormVisible: false,
+      selectedLocation: null
+
     };
+  }
+
+  toggleFormVisibility = () => {
+    this.setState({
+      isFormVisible: !this.state.isFormVisible
+    })
   }
 
   componentDidMount() {
@@ -138,7 +146,10 @@ class MainLocationsPage extends Component {
 
   handleListClick = (location) => {
     console.log(location);
-}
+    this.setState({
+      selectedLocation: location
+    })
+  }
 
   render() {
     console.log("Nearby locations state", this.state.nearbyLocations);
@@ -148,16 +159,24 @@ class MainLocationsPage extends Component {
           <GoogleApiWrapper
             userCurrentPostion={this.state.userCurrentPostion}
             onMapLoaded={this.onMapLoaded}
+            clickedLocation={this.state.selectedLocation}
           />
         </div>
-        {/* <div id="map-locations-list">
-          <Button type='primary' icon='plus' > Add Location </Button>
-          <LocationsList userLocations={this.state.userLocations} />
-        </div> */}
-        <AddLocationWizard nearbyLocations={this.state.nearbyLocations} 
-        onLocationSelected={this.handleListClick} />
 
-     
+        <div id="map-locations-list">
+          <Button type='primary' icon='plus' onClick={this.toggleFormVisibility} >{this.state.isFormVisible ? "Back" : "Add New Food Place"}</Button>
+
+          {this.state.isFormVisible ?
+            <AddLocationWizard nearbyLocations={this.state.nearbyLocations}
+              onLocationSelected={this.handleListClick} /> :
+            <LocationsList userLocations={this.state.userLocations} />}
+        </div>
+
+
+
+
+
+
       </div>
     );
   }
