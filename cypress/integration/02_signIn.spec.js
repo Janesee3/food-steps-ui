@@ -17,7 +17,7 @@ context("Access signin/signup", () => {
         .contains('button','Sign In')
         .click({force:true}) 
 
-        cy.wait(500)
+        // cy.wait(500)
         cy.contains('div.ant-message-success', 'Successfully signed in! Welcome cyTester1!')
     })  
     
@@ -35,7 +35,7 @@ context("Access signin/signup", () => {
       .contains('button','Sign In')
       .click({force:true}) 
 
-      cy.wait(500)
+    //   cy.wait(500)
       cy.contains('div.ant-message-notice', 'Username or password is incorrect.')
   })  
   });

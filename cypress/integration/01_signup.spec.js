@@ -1,9 +1,4 @@
 context("Access signup", () => {
-//   before(() => {
-//     cy.visit("");
-//     cy.wait(10000);
-//   });
-
   beforeEach(() => {
     cy.visit("");
 
@@ -23,7 +18,7 @@ context("Access signup", () => {
       .contains("button", "Register")
       .click({ force: true });
 
-    cy.wait(1500);
+    // cy.wait(1500);
     cy.contains(
       "div.ant-message-success",
       `Successfully created account! Welcome cyTester1!`
@@ -40,7 +35,7 @@ context("Access signup", () => {
       .contains("button", "Register")
       .click({ force: true });
 
-    cy.wait(1500);
+    // cy.wait(1500);
     cy.contains(
       "div.ant-message-notice",
       `This username is already used! Please choose another username.`
