@@ -8,7 +8,7 @@ exports[`should render snapshot correctly 1`] = `
     id="map-locations-map"
   >
     <Wrapper
-      getMap={[Function]}
+      onMapLoaded={[Function]}
       userCurrentPostion={
         Object {
           "lat": 1.2,
