@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input, Tooltip, Icon, Button } from "antd";
 import { signUpFromServer } from "../../services/userService/userService";
+import { formItemLayout, tailFormItemLayout } from "./formLayout";
 
 const FormItem = Form.Item;
 
