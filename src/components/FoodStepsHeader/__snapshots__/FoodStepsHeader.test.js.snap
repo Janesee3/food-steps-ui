@@ -69,7 +69,7 @@ exports[`renders snapshot correctly when user is logged in 1`] = `
             className="sign-out-button"
             ghost={false}
             loading={false}
-            onClick={undefined}
+            onClick={[Function]}
             prefixCls="ant-btn"
             type="normal"
           >

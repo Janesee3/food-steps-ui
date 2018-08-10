@@ -13,7 +13,7 @@ class RegistrationForm extends Component {
 		e.preventDefault();
 		this.props.form.validateFieldsAndScroll((err, values) => {
 			if (!err) {
-				this.props.handleSignIn();
+				this.props.handleSignIn(values);
 			}
 		});
 	};
