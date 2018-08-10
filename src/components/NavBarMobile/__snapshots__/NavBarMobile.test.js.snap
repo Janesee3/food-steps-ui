@@ -21,25 +21,17 @@ exports[`renders snapshot correctly 1`] = `
       <MenuItem>
         <Link
           replace={false}
+          to="/"
+        >
+          Home
+        </Link>
+      </MenuItem>
+      <MenuItem>
+        <Link
+          replace={false}
           to="/user-locations-page"
         >
-          User Locations Page
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link
-          replace={false}
-          to="/new-location"
-        >
-          New Location
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link
-          replace={false}
-          to="/location"
-        >
-          Main Location Page
+          My Food Places
         </Link>
       </MenuItem>
     </Menu>
