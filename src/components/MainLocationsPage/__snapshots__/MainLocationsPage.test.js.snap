@@ -20,8 +20,16 @@ exports[`should render snapshot correctly 1`] = `
   <div
     id="map-locations-list"
   >
-    <LocationsList
-      userLocations={Array []}
+    <Button
+      ghost={false}
+      loading={false}
+      prefixCls="ant-btn"
+      type="primary"
+    >
+       Add Location 
+    </Button>
+    <LocationSuggestionList
+      nearbyLocations={Array []}
     />
   </div>
 </div>
