@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Form, Input, Button } from "antd";
-import { signInFromServer } from "../../services/userService/userService";
 import { formItemLayout, tailFormItemLayout } from "./formLayout";
 
 const FormItem = Form.Item;
@@ -12,14 +11,9 @@ class RegistrationForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
-		this.props.toggleIsLoading();
 		this.props.form.validateFieldsAndScroll((err, values) => {
 			if (!err) {
-				signInFromServer(
-					values,
-					this.props.onSignInSuccess,
-					this.props.onSignInFail
-				);
+				this.props.handleSignIn();
 			}
 		});
 	};
@@ -52,7 +46,6 @@ class RegistrationForm extends Component {
 
 		return (
 			<Form onSubmit={this.handleSubmit}>
-			
 				<FormItem {...formItemLayout} label="Username" lab>
 					{getFieldDecorator("username", {
 						rules: [

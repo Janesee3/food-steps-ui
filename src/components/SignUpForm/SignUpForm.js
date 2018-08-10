@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Form, Input, Tooltip, Icon, Button } from "antd";
-import { signUpFromServer } from "../../services/userService/userService";
 import { formItemLayout, tailFormItemLayout } from "./formLayout";
 
 const FormItem = Form.Item;
@@ -12,28 +11,11 @@ class RegistrationForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
-		this.props.toggleIsLoading();
-		setTimeout(() => {
-			this.props.form.validateFieldsAndScroll((err, values) => {
-				if (!err) {
-					signUpFromServer(
-						values,
-						this.props.onSignUpSuccess,
-						this.props.onSignUpFail
-					);
-				}
-			});
-		}, 2000);
-
-		// this.props.form.validateFieldsAndScroll((err, values) => {
-		// 	if (!err) {
-		// 		signUpFromServer(
-		// 			values,
-		// 			this.props.onSignUpSuccess,
-		// 			this.props.onSignUpFail
-		// 		);
-		// 	}
-		// });
+		this.props.form.validateFieldsAndScroll((err, values) => {
+			if (!err) {
+				this.props.handleSignUp(values);
+			}
+		});
 	};
 
 	handleConfirmBlur = e => {

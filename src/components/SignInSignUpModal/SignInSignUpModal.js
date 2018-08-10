@@ -2,6 +2,10 @@ import { Modal, Tabs, message } from "antd";
 import React, { Component } from "react";
 import SignUpForm from "../SignUpForm/SignUpForm";
 import SignInForm from "../SignInForm/SignInForm";
+import {
+	signUpFromServer,
+	signInFromServer
+} from "../../services/userService/userService";
 
 const TabPane = Tabs.TabPane;
 
@@ -10,10 +14,14 @@ class SignInSignUpModal extends Component {
 		isLoading: false
 	};
 
-	toggleIsLoading = () => {
-		this.setState({
-			isLoading: !this.state.isLoading
-		});
+	handleSignUp = values => {
+		this.toggleIsLoading();
+		signUpFromServer(values, this.onSignUpSuccess, this.onSignUpFail);
+	};
+
+	handleSignIn = values => {
+		this.toggleIsLoading();
+		signInFromServer(values, this.onSignInSuccess, this.onSignInFail);
 	};
 
 	onSignUpSuccess = username => {
@@ -25,7 +33,6 @@ class SignInSignUpModal extends Component {
 
 	onSignUpFail = errMessage => {
 		this.toggleIsLoading();
-
 		let displayMessage = `Sign up failed due to unexpected error, please contact admin!`;
 
 		if (errMessage && errMessage.includes("unique")) {
@@ -57,6 +64,12 @@ class SignInSignUpModal extends Component {
 		message.error(displayMessage, 3);
 	};
 
+	toggleIsLoading = () => {
+		this.setState({
+			isLoading: !this.state.isLoading
+		});
+	};
+
 	render() {
 		return (
 			<div>
@@ -69,18 +82,14 @@ class SignInSignUpModal extends Component {
 					<Tabs defaultActiveKey="1">
 						<TabPane tab="Sign In" key="1">
 							<SignInForm
-								toggleIsLoading={this.toggleIsLoading}
+								handleSignIn={this.handleSignIn}
 								isLoading={this.state.isLoading}
-								onSignInSuccess={this.onSignInSuccess}
-								onSignInFail={this.onSignInFail}
 							/>
 						</TabPane>
 						<TabPane tab="Sign Up" key="2">
 							<SignUpForm
-								toggleIsLoading={this.toggleIsLoading}
+								handleSignUp={this.handleSignUp}
 								isLoading={this.state.isLoading}
-								onSignUpSuccess={this.onSignUpSuccess}
-								onSignUpFail={this.onSignUpFail}
 							/>
 						</TabPane>
 					</Tabs>

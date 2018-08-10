@@ -26,10 +26,8 @@ exports[`renders snapshot correctly 1`] = `
         tab="Sign In"
       >
         <Form(RegistrationForm)
+          handleSignIn={[Function]}
           isLoading={false}
-          onSignInFail={[Function]}
-          onSignInSuccess={[Function]}
-          toggleIsLoading={[Function]}
         />
       </TabPane>
       <TabPane
@@ -37,10 +35,8 @@ exports[`renders snapshot correctly 1`] = `
         tab="Sign Up"
       >
         <Form(RegistrationForm)
+          handleSignUp={[Function]}
           isLoading={false}
-          onSignUpFail={[Function]}
-          onSignUpSuccess={[Function]}
-          toggleIsLoading={[Function]}
         />
       </TabPane>
     </Tabs>
