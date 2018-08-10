@@ -22,14 +22,15 @@ exports[`should render snapshot correctly 1`] = `
   >
     <Button
       ghost={false}
+      icon="plus"
       loading={false}
       prefixCls="ant-btn"
       type="primary"
     >
        Add Location 
     </Button>
-    <LocationSuggestionList
-      nearbyLocations={Array []}
+    <LocationsList
+      userLocations={Array []}
     />
   </div>
 </div>

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import LocationsList from "../LocationsList/LocationsList";
-import LocationSuggestionList from "../LocationSuggestionList/LocationSuggestionList"
+
 import { seedData } from "../UserLocationsPage/seedData";
 import { Button } from 'antd';
 import GoogleApiWrapper from "./Map";
 import "./MainLocationsPage.css";
+import AddLocationWizard from "../AddLocationWizard/AddLocationWizard";
 
 let googleMap;
 let google;
@@ -20,7 +21,8 @@ class MainLocationsPage extends Component {
         lng: 103
       },
       isCurrentLocationFetched: false,
-      nearbyLocations: []
+      nearbyLocations: [],
+      isFormVisible: false
     };
   }
 
@@ -134,6 +136,10 @@ class MainLocationsPage extends Component {
     });
   };
 
+  handleListClick = (location) => {
+    console.log(location);
+}
+
   render() {
     console.log("Nearby locations state", this.state.nearbyLocations);
     return (
@@ -144,15 +150,13 @@ class MainLocationsPage extends Component {
             onMapLoaded={this.onMapLoaded}
           />
         </div>
-        <div id="map-locations-list">
+        {/* <div id="map-locations-list">
           <Button type='primary' icon='plus' > Add Location </Button>
           <LocationsList userLocations={this.state.userLocations} />
-        </div>
-        
-        {/* <div id="map-locations-list">
-          <Button type='primary'> Add Location </Button>
-          <LocationSuggestionList nearbyLocations={this.state.nearbyLocations}/>
         </div> */}
+        <AddLocationWizard nearbyLocations={this.state.nearbyLocations} 
+        onLocationSelected={this.handleListClick} />
+
      
       </div>
     );
