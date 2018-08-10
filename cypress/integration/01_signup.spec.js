@@ -1,5 +1,5 @@
 context("Access signup", () => {
-	beforeAll(() => {
+	before(() => {
 		cy.visit("");
 		cy.wait(10000);
 	});
@@ -14,7 +14,7 @@ context("Access signup", () => {
 	});
 
 	it("signup success", () => {
-		cy.get("#signup-form input#username.ant-input").type("user11");
+		cy.get("#signup-form input#username.ant-input").type("cyTester1");
 		cy.get("#signup-form input#password.ant-input").type("12345678");
 		cy.get("#signup-form input#confirm.ant-input").type("12345678");
 		cy.get("#signup-form input#email.ant-input").type("abc@abc.com");
@@ -26,12 +26,12 @@ context("Access signup", () => {
 		cy.wait(500);
 		cy.contains(
 			"div.ant-message-success",
-			`Successfully created account! Welcome user11!`
+			`Successfully created account! Welcome cyTester1!`
 		);
 	});
 
 	it("signup user name existed", () => {
-		cy.get("#signup-form input#username.ant-input").type("user11");
+		cy.get("#signup-form input#username.ant-input").type("cyTester1");
 		cy.get("#signup-form input#password.ant-input").type("12345678");
 		cy.get("#signup-form input#confirm.ant-input").type("12345678");
 		cy.get("#signup-form input#email.ant-input").type("abc@abc.com");
