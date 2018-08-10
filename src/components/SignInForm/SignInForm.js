@@ -12,6 +12,7 @@ class RegistrationForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault();
+		this.props.toggleIsLoading();
 		this.props.form.validateFieldsAndScroll((err, values) => {
 			if (!err) {
 				signInFromServer(
@@ -49,32 +50,10 @@ class RegistrationForm extends Component {
 	render() {
 		const { getFieldDecorator } = this.props.form;
 
-		const formItemLayout = {
-			labelCol: {
-				xs: { span: 24 },
-				sm: { span: 8 }
-			},
-			wrapperCol: {
-				xs: { span: 24 },
-				sm: { span: 16 }
-			}
-		};
-		const tailFormItemLayout = {
-			wrapperCol: {
-				xs: {
-					span: 24,
-					offset: 0
-				},
-				sm: {
-					span: 16,
-					offset: 8
-				}
-			}
-		};
-
 		return (
 			<Form onSubmit={this.handleSubmit}>
-				<FormItem {...formItemLayout} label="Username">
+			
+				<FormItem {...formItemLayout} label="Username" lab>
 					{getFieldDecorator("username", {
 						rules: [
 							{
@@ -98,7 +77,11 @@ class RegistrationForm extends Component {
 				</FormItem>
 
 				<FormItem {...tailFormItemLayout}>
-					<Button type="primary" htmlType="submit">
+					<Button
+						type="primary"
+						htmlType="submit"
+						loading={this.props.isLoading}
+					>
 						Sign In
 					</Button>
 				</FormItem>

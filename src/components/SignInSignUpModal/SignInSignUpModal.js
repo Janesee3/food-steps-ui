@@ -6,13 +6,26 @@ import SignInForm from "../SignInForm/SignInForm";
 const TabPane = Tabs.TabPane;
 
 class SignInSignUpModal extends Component {
+	state = {
+		isLoading: false
+	};
+
+	toggleIsLoading = () => {
+		this.setState({
+			isLoading: !this.state.isLoading
+		});
+	};
+
 	onSignUpSuccess = username => {
-		this.props.closeModal();
+		this.toggleIsLoading();
 		this.props.onUserLogin({ username });
+		this.props.closeModal();
 		message.success(`Successfully created account! Welcome ${username}!`, 3);
 	};
 
 	onSignUpFail = errMessage => {
+		this.toggleIsLoading();
+
 		let displayMessage = `Sign up failed due to unexpected error, please contact admin!`;
 
 		if (errMessage && errMessage.includes("unique")) {
@@ -24,12 +37,14 @@ class SignInSignUpModal extends Component {
 	};
 
 	onSignInSuccess = username => {
-		this.props.closeModal();
+		this.toggleIsLoading();
 		this.props.onUserLogin({ username });
+		this.props.closeModal();
 		message.success(`Successfully signed in! Welcome ${username}!`, 3);
 	};
 
 	onSignInFail = errMessage => {
+		this.toggleIsLoading();
 		let displayMessage = `Sign in failed due to unexpected error, please contact admin!`;
 
 		if (
@@ -54,12 +69,16 @@ class SignInSignUpModal extends Component {
 					<Tabs defaultActiveKey="1">
 						<TabPane tab="Sign In" key="1">
 							<SignInForm
+								toggleIsLoading={this.toggleIsLoading}
+								isLoading={this.state.isLoading}
 								onSignInSuccess={this.onSignInSuccess}
 								onSignInFail={this.onSignInFail}
 							/>
 						</TabPane>
 						<TabPane tab="Sign Up" key="2">
 							<SignUpForm
+								toggleIsLoading={this.toggleIsLoading}
+								isLoading={this.state.isLoading}
 								onSignUpSuccess={this.onSignUpSuccess}
 								onSignUpFail={this.onSignUpFail}
 							/>
