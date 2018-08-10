@@ -19,7 +19,7 @@ class LocationSuggestionList extends Component {
 
 
         return (
-            <div className="demo-infinite-container">
+            <div className="locations-selection">
                 <InfiniteScroll
                     initialLoad={false}
                     pageStart={0}
@@ -29,8 +29,12 @@ class LocationSuggestionList extends Component {
                     <List
                         dataSource={this.props.nearbyLocations}
                         renderItem={(location, index) => (
-                            <div>
-                                <List.Item onClick={() => { this.props.onLocationSelected(location) }}>{location.address}</List.Item>
+                            <div className="list">
+                                <List.Item onClick={() => { this.props.onLocationSelected(location) }}>
+                                    <div className="list-content">
+                                        {location.address}
+                                    </div>
+                                </List.Item>
                             </div>
                         )}
                     >

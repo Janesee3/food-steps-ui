@@ -32,8 +32,6 @@ class MainLocationsPage extends Component {
     this.setState({
       isFormVisible: !this.state.isFormVisible
     })
-
-    console.log("toggle form called")
   }
 
   componentDidMount() {
