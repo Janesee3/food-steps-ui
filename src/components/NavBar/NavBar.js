@@ -3,26 +3,23 @@ import { Link } from "react-router-dom";
 import { Menu } from "antd";
 
 export const menu = (
-  <Menu
-    theme="dark"
-    defaultSelectedKeys={[]}
-    mode="horizontal"
-    style={{ lineHeight: "64px" }}
-  >
-    <Menu.Item key="1">
-      <Link to="/user-locations-page">User Locations Page</Link>
-    </Menu.Item>
-    <Menu.Item key="2">
-      <Link to="/new-location">New Location</Link>
-    </Menu.Item>
-    <Menu.Item key="3">
-      <Link to="/location">Main Location Page</Link>
-    </Menu.Item>
-  </Menu>
+	<Menu
+		theme="dark"
+		defaultSelectedKeys={[]}
+		mode="horizontal"
+		style={{ lineHeight: "64px" }}
+	>
+		<Menu.Item key="1">
+			<Link to="/">Home</Link>
+		</Menu.Item>
+		<Menu.Item key="2">
+			<Link to="/user-locations-page">My Food Places</Link>
+		</Menu.Item>
+	</Menu>
 );
 
 const NavBar = () => {
-  return menu;
+	return menu;
 };
 
 export default NavBar;
