@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import './LocationSuggestionList.css'
-import { List, message } from 'antd';
+import { List } from 'antd';
 
 
 class LocationSuggestionList extends Component {
@@ -30,7 +30,7 @@ class LocationSuggestionList extends Component {
                         dataSource={this.props.nearbyLocations}
                         renderItem={(location, index) => (
                             <div>
-                                <List.Item onClick={() => {this.props.onLocationSelected(location)}}>{location.address}</List.Item>
+                                <List.Item onClick={() => { this.props.onLocationSelected(location) }}>{location.address}</List.Item>
                             </div>
                         )}
                     >
