@@ -174,7 +174,7 @@ class MainLocationsPage extends Component {
               isLoggedInUser={this.props.isLoggedInUser}
               toggleForm={this.toggleFormVisibility} /> :
             <div>
-              <Button type='primary' icon='plus' onClick={this.toggleFormVisibility} >{this.state.isFormVisible ? "Back" : "Add New Food Place"}</Button>
+              <Button type='primary' icon='plus' onClick={this.toggleFormVisibility} >Add New Food Place</Button>
               <LocationsList userLocations={this.state.userLocations} />
             </div>}
         </div>
