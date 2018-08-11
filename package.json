@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "cypress": "^3.0.3",
+    "dotenv": "^6.0.0",
     "jest-fetch-mock": "^1.6.5",
     "mongoose": "^5.2.7",
     "wait-on": "^2.1.0"

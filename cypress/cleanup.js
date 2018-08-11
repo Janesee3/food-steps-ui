@@ -1,6 +1,8 @@
+require('dotenv').config();
 const mongoose = require("mongoose");
 
-const mongodbUri = process.env.MONGODB_URI || "mongodb://localhost/food-steps-cypress";
+const mongodbUri = process.env.MONGODB_URI;
+if (!mongodbUri) console.log('process.env.MONGODB_URI is not defined for cleanup script.');
 mongoose.connect(
   mongodbUri,
   async () => {

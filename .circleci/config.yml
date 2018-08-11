@@ -26,7 +26,7 @@ jobs:
       - run:
           name: Deploy Master to Heroku Staging
           command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_STAGING.git master
-  integration-test:
+  e2e-test:
     docker:
       - image: cypress/base:8
         environment:
@@ -48,7 +48,7 @@ jobs:
           name: Cleanup before Test
           command: npm run cypress:cleanup
       - run: # run tests
-          name: Run Integration Test (headless)
+          name: Run Cypress Test (headless)
           command: npm run test:cypress-headless
       - run: # cleanup test db
           name: Cleanup after Test
