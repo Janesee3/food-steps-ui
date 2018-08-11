@@ -21,7 +21,8 @@
     "test:cypress": "env CYPRESS_baseUrl=https://food-steps-ui.herokuapp.com cypress open",
     "test:cypress-headless": "env CYPRESS_baseUrl=https://food-steps-ui.herokuapp.com cypress run",
     "cypress:cleanup": "node cypress/cleanup.js",
-    "cypress:dev": "PORT=3003 REACT_APP_API_HOST=http://localhost:3002 react-scripts start & wait-on http://localhost:3003 & env CYPRESS_baseUrl=http://localhost:3003 cypress run"
+    "cypress:dev": "PORT=3003 REACT_APP_API_HOST=http://localhost:3002 react-scripts start & wait-on http://localhost:3003 & env CYPRESS_baseUrl=http://localhost:3003 cypress run",
+    "cypress:staging": "node cypress/cleanup.js && env CYPRESS_baseUrl=https://food-steps-ui.herokuapp.com cypress run && node cypress/cleanup.js"
   },
   "devDependencies": {
     "cypress": "^3.0.3",

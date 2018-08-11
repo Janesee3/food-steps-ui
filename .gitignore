@@ -11,6 +11,8 @@
 /cypress/screenshots
 /cypress/support
 /cypress/videos
+# to define MONGODB_URI for cleanup script
+.env
 
 # production
 /build
