@@ -1,6 +1,5 @@
 import React from "react";
-import { Form, InputNumber, Button, notification } from "antd";
-import FormItemWithInput from "./FormItemWithInput";
+import { Form, Button, notification, Input } from "antd";
 import { createUserLocation } from "../../services/userLocationService/userLocationService";
 
 const CREATE_BUTTON_DISPLAY_TEXT = "Create";
@@ -10,143 +9,129 @@ const ERROR_MESSAGE = "An error occurred while creating the location";
 const isDevelopment = process.env.NODE_ENV === "development";
 
 class LocationForm extends React.Component {
-  constructor() {
-    super();
-    this._isMounted = false;
-  }
+	constructor() {
+		super();
+		this._isMounted = false;
+	}
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
+	render() {
+		const { getFieldDecorator } = this.props.form;
+		const tailFormItemLayout = null;
 
-    const formItemLayout = null;
-    const tailFormItemLayout = null;
+		return (
+			<Form layout="vertical" onSubmit={this.handleSubmit}>
+				<Form.Item label="Food Place Name" lab>
+					{getFieldDecorator("locationName", {
+						rules: [
+							{
+								required: true,
+								message: "Please give this food place a name!",
+								whitespace: true
+							}
+						]
+					})(<Input />)}
+				</Form.Item>
 
-    return (
-      <Form layout="vertical" onSubmit={this.handleSubmit}>
-        <FormItemWithInput
-          id="locationName"
-          label="Location Name"
-          required={true}
-          getFieldDecorator={getFieldDecorator}
-        />
-        <FormItemWithInput
-          id="geocodedLocationName"
-          label="Geocoded Location Name"
-          required={true}
-          getFieldDecorator={getFieldDecorator}
-        />
+				<Form.Item
+					id="address"
+					label="Address"
+					required={true}
+					getFieldDecorator={getFieldDecorator}
+				>
+					<div>{this.props.selectedLocation.address}</div>
+				</Form.Item>
 
-        <Form.Item {...formItemLayout} label="Latitude">
-          {getFieldDecorator("lat", {
-            rules: [
-              {
-                type: "number",
-                message: "Latitude should be a number."
-              },
+				<Form.Item {...tailFormItemLayout}>
+					<Button type="primary" htmlType="submit">
+						{CREATE_BUTTON_DISPLAY_TEXT}
+					</Button>
+				</Form.Item>
+			</Form>
+		);
+	}
 
-              {
-                required: true,
-                message: "Please input latitude!"
-              }
-            ]
-          })(<InputNumber disabled={!isDevelopment} />)}
-        </Form.Item>
+	componentDidMount() {
+		this._isMounted = true;
+		navigator.geolocation.getCurrentPosition(
+			this.handlePositioning,
+			this.handlePositioningError,
+			{ enableHighAccuracy: true }
+		);
+	}
 
-        <Form.Item {...formItemLayout} label="Longitude">
-          {getFieldDecorator("lng", {
-            rules: [
-              {
-                type: "number",
-                message: "Longitude should be a number."
-              },
-              {
-                required: true,
-                message: "Please input longitude!"
-              }
-            ]
-          })(<InputNumber disabled={!isDevelopment} />)}
-        </Form.Item>
+	componentWillUnmount() {
+		this._isMounted = false;
+	}
 
-        <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            {CREATE_BUTTON_DISPLAY_TEXT}
-          </Button>
-        </Form.Item>
-      </Form>
-    );
-  }
+	// When switching page too fast, this warning is shown
+	// Console Error: You cannot set field before registering it.
+	// Intermittent console: Warning: Can't call setState (or forceUpdate) on an unmounted component.
+	// REF FOR FIX: https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html
+	// To look into optimal solution, if necessary
 
-  componentDidMount() {
-    this._isMounted = true;
-    navigator.geolocation.getCurrentPosition(
-      this.handlePositioning,
-      this.handlePositioningError,
-      { enableHighAccuracy: true }
-    );
-  }
+	handlePositioning = position => {
+		this._isMounted &&
+			this.props.form.setFieldsValue({
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			});
+	};
 
-  componentWillUnmount() {
-    this._isMounted = false;
-  }
+	handlePositioningError = positionError => {
+		isDevelopment && console.error(positionError);
 
-  // When switching page too fast, this warning is shown
-  // Console Error: You cannot set field before registering it.
-  // Intermittent console: Warning: Can't call setState (or forceUpdate) on an unmounted component.
-  // REF FOR FIX: https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html
-  // To look into optimal solution, if necessary
+		if (!this._isMounted) return;
 
-  handlePositioning = position => {
-    this._isMounted &&
-      this.props.form.setFieldsValue({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      });
-  };
+		let errorMessage = positionError.message;
+		if (positionError.code === 1) {
+			errorMessage = "Please enable browser positioning";
+		}
+		this.notifyError(errorMessage);
+	};
 
-  handlePositioningError = positionError => {
-    isDevelopment && console.error(positionError);
+	notifyError = errorMessage => {
+		notification.error({
+			message: "Error",
+			description: errorMessage
+		});
+	};
 
-    if (!this._isMounted) return;
+	createNewLocation = async (err, values) => {
+		if (err) return isDevelopment && console.error(err);
 
-    let errorMessage = positionError.message;
-    if (positionError.code === 1) {
-      errorMessage = "Please enable browser positioning";
-    }
-    this.notifyError(errorMessage);
-  };
+		console.log("Form Values: ", values);
+		console.log("selectedLocation: ", this.props.selectedLocation);
 
-  notifyError = errorMessage => {
-    notification.error({
-      message: "Error",
-      description: errorMessage
-    });
-  };
+		// Package req body
+		const requestBody = {
+			locationName: values.locationName,
+			geocodedLocationName: this.props.selectedLocation.address,
+			lat: this.props.selectedLocation.location.lat,
+			lng: this.props.selectedLocation.location.lng
+		};
 
-  onFieldValidationResponse = async (err, values) => {
-    if (err) return isDevelopment && console.error(err);
+		const result = await createUserLocation(requestBody);
+		if (!result.ok) {
+			this.notifyError(result.message || ERROR_MESSAGE);
+			return;
+		}
+		this.props.form.resetFields();
+		notification.success({
+			message: "Success",
+			description: SUCCESS_MESSAGE
+		});
+	};
 
-    const result = await createUserLocation(values);
-    if (!result.ok) {
-      this.notifyError(result.message || ERROR_MESSAGE);
-      return;
-    }
-    this.props.form.resetFields();
-    notification.success({
-      message: "Success",
-      description: SUCCESS_MESSAGE
-    });
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-    this.props.form.validateFieldsAndScroll(this.onFieldValidationResponse);
-  };
+	handleSubmit = event => {
+		event.preventDefault();
+		this.props.form.validateFieldsAndScroll(this.createNewLocation);
+	};
 }
 
 export const testExports = {
-  LocationForm,
-  SUCCESS_MESSAGE,
-  ERROR_MESSAGE
+	LocationForm,
+	SUCCESS_MESSAGE,
+	ERROR_MESSAGE
 };
 
 export default Form.create()(LocationForm);

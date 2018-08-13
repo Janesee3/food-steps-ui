@@ -59,6 +59,10 @@ class MainLocationsPage extends Component {
 
 	onCurrentLocationFetchFail = err => {
 		console.log("Cannot get current location: ", err);
+		this.setState({
+			isCurrentLocationFetched: true
+		this.reverseGeocodeLocation(this.state.userCurrentPostion);
+		this.searchNearbyLocation(this.state.userCurrentPostion, 100);
 	};
 
 	onCurrentLocationFetched = position => {
@@ -144,7 +148,7 @@ class MainLocationsPage extends Component {
 		});
 	};
 
-	handleListClick = location => {
+	handleUserSelectedLocation = location => {
 		console.log(location);
 		this.setState({
 			selectedLocation: location
@@ -169,7 +173,7 @@ class MainLocationsPage extends Component {
 							isUserLoggedIn={this.props.isUserLoggedIn}
 							selectedLocation={this.state.selectedLocation}
 							nearbyLocations={this.state.nearbyLocations}
-							onLocationSelected={this.handleListClick}
+							onLocationSelected={this.handleUserSelectedLocation}
 							isLoggedInUser={this.props.isLoggedInUser}
 							cancelWizard={this.toggleWizardVisibility}
 						/>

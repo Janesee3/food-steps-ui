@@ -47,7 +47,7 @@ class AddLocationWizard extends Component {
 						<Button onClick={() => this.changeWizardStep(WIZARD_STEP_LOCATION)}>
 							Back
 						</Button>
-						<LocationForm />
+						<LocationForm selectedLocation={this.props.selectedLocation} />
 					</div>
 				)}
 			</div>
