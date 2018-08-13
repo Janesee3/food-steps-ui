@@ -1,47 +1,34 @@
-import React from 'react';
-import LocationsList from './LocationsList'
-import { detailedListItem, simpleListItem } from './listHelper';
-import ShallowRenderer from 'react-test-renderer/shallow'
-// const detailedListItem = jest.fn()
+import React from "react";
+import LocationsList from "./LocationsList";
+import ShallowRenderer from "react-test-renderer/shallow";
+import { testExports } from "./LocationsList";
+import DetailedUserLocation from "../DetailedUserLocation/DetailedUserLocation";
+import SimpleUserLocation from "../SimpleUserLocation/SimpleUserLocation";
 
-jest.mock('./listHelper', () => {
-    return {
-        detailedListItem: jest.fn(),
-        simpleListItem: jest.fn()
-    }
-})
-
-
-test('detailedListItem() should be called when props.detailed is true ', () => {
+describe("props.detailed is false", () => {
+  it("snapshot test", () => {
     const renderer = new ShallowRenderer();
-    renderer.render(<LocationsList detailed={true} />)
-    const result = renderer.getRenderOutput()
+    renderer.render(<LocationsList detailed={false} />);
+    const result = renderer.getRenderOutput();
+    expect(result).toMatchSnapshot();
+  });
 
-    result.props.children.props.renderItem()
-
-    expect(detailedListItem).toBeCalled()
+  it("should render SimpleUserLocation", () => {
+    const locationItem = testExports.renderDetailedOrSimple(false, {});
+    expect(locationItem.type).toBe(SimpleUserLocation);
+  });
 });
 
-test('simpleListItem() should be called when props.detailed is false ', () => {
+describe("props.detailed is true", () => {
+  it("props.detailed true snapshot test", () => {
     const renderer = new ShallowRenderer();
-    renderer.render(<LocationsList detailed={false} />)
-    const result = renderer.getRenderOutput()
+    renderer.render(<LocationsList detailed={true} />);
+    const result = renderer.getRenderOutput();
+    expect(result).toMatchSnapshot();
+  });
 
-    result.props.children.props.renderItem()
-
-    expect(simpleListItem).toBeCalled()
+  it("should render DetailedUserLocation if props.detailed is true", () => {
+    const locationItem = testExports.renderDetailedOrSimple(true, {});
+    expect(locationItem.type).toBe(DetailedUserLocation);
+  });
 });
-
-test('props.detailed false snapshot test', () => {
-    const renderer = new ShallowRenderer();
-    renderer.render(<LocationsList detailed={false} />)
-    const result = renderer.getRenderOutput()
-    expect(result).toMatchSnapshot()
-})
-
-test('props.detailed true snapshot test', () => {
-    const renderer = new ShallowRenderer();
-    renderer.render(<LocationsList detailed={true} />)
-    const result = renderer.getRenderOutput()
-    expect(result).toMatchSnapshot()
-}); 

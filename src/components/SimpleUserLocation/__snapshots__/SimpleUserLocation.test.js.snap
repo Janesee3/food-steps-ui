@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test 1`] = `
+<Item>
+  <Meta
+    avatar={
+      <Avatar
+        prefixCls="ant-avatar"
+        shape="circle"
+        size="default"
+        src={undefined}
+      />
+    }
+    description="original soy chicken rice"
+    title={
+      <a
+        href={undefined}
+      >
+        soy chicken rice
+         
+         | 
+        <IconText
+          text={undefined}
+          type="star"
+        />
+      </a>
+    }
+  />
+  description
+</Item>
+`;

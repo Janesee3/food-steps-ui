@@ -1,19 +1,32 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import '../../index.css';
-import { List } from 'antd';
-import { detailedListItem, simpleListItem } from './listHelper'
+import React from "react";
+import "antd/dist/antd.css";
+import "../../index.css";
+import { List } from "antd";
+import DetailedUserLocation from "../DetailedUserLocation/DetailedUserLocation";
+import SimpleUserLocation from "../SimpleUserLocation/SimpleUserLocation";
 
-const LocationsList = (props) => {
+const renderDetailedOrSimple = (isDetailed, userLocation) => {
+  return isDetailed ? (
+    <DetailedUserLocation location={userLocation} />
+  ) : (
+    <SimpleUserLocation location={userLocation} />
+  );
+};
+
+const LocationsList = props => {
   const paginationProps = {
-    onChange: (page) => {
+    onChange: page => {
       console.log(page);
     },
-    pageSize: 2,
-  }
+    pageSize: 2
+  };
 
   return (
-    <div className={props.detailed ? "detailed-locations-list": "simple-locations-list"}>
+    <div
+      className={
+        props.detailed ? "detailed-locations-list" : "simple-locations-list"
+      }
+    >
       <List
         itemLayout="vertical"
         size="small"
@@ -21,20 +34,16 @@ const LocationsList = (props) => {
         // DataSource takes in an array that renderItem will map through
         dataSource={props.userLocations}
         // footer={<div><b>ant design</b> footer part</div>}
-        renderItem={eachItemInDataSourceArray => props.detailed ? detailedListItem(eachItemInDataSourceArray) : simpleListItem(eachItemInDataSourceArray)}
+        renderItem={userLocation =>
+          renderDetailedOrSimple(props.detailed, userLocation)
+        }
       />
     </div>
   );
-}
+};
+
+export const testExports = {
+  renderDetailedOrSimple
+};
 
 export default LocationsList;
-
-
-
-
-
-
-
-
-
-

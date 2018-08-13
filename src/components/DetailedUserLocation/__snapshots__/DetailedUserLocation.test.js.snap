@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot test 1`] = `
+<Item
+  actions={
+    Array [
+      <a>
+        edit
+    </a>,
+      <a>
+        more
+    </a>,
+    ]
+  }
+  extra={
+    <img
+      alt="logo"
+      src="https://orig00.deviantart.net/a39f/f/2013/084/5/1/cat_drawing_by_blacktailedwolf-d5zak6l.png"
+      width={200}
+    />
+  }
+>
+  <Meta
+    avatar={
+      <Avatar
+        prefixCls="ant-avatar"
+        shape="circle"
+        size="default"
+        src={undefined}
+      />
+    }
+    description="original soy chicken rice"
+    title={
+      <a
+        href={undefined}
+      >
+        soy chicken rice
+      </a>
+    }
+  />
+  <div>
+    <div>
+      Created on: 2018-08-02T07:16:18.021Z
+    </div>
+    <div>
+      Updated on: 2018-08-02T07:16:18.021Z
+    </div>
+  </div>
+  <div>
+    <Rate
+      allowHalf={true}
+      character={
+        <Icon
+          type="star"
+        />
+      }
+      defaultValue={2.5}
+      prefixCls="ant-rate"
+    />
+  </div>
+</Item>
+`;
