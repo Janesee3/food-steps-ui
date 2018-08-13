@@ -12,8 +12,8 @@ exports[`should render snapshot correctly 1`] = `
       onMapLoaded={[Function]}
       userCurrentPostion={
         Object {
-          "lat": 1.2,
-          "lng": 103,
+          "lat": 1.304,
+          "lng": 103.8318,
         }
       }
     />

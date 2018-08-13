@@ -2,13 +2,17 @@ import React, { Component } from "react";
 import LocationsList from "../LocationsList/LocationsList";
 
 import { seedData } from "../UserLocationsPage/seedData";
-import { Button } from "antd";
+import { Button, notification } from "antd";
 import GoogleApiWrapper from "./Map";
 import "./MainLocationsPage.css";
 import AddLocationWizard from "../AddLocationWizard/AddLocationWizard";
 
 let googleMap;
 let google;
+const ERR_MSG_ENABLE_LOCATION_SERVICES =
+	"Please enable location services on your browser!";
+const ERR_MSG_TIMEOUT =
+	"Cannot fetch current location. Please refresh page to try again!";
 
 class MainLocationsPage extends Component {
 	constructor() {
@@ -16,11 +20,10 @@ class MainLocationsPage extends Component {
 		this.state = {
 			userLocations: [],
 			userCurrentPostion: {
-				// hardcoded initial loc
-				lat: 1.2,
-				lng: 103
+				// default lat lng is Orchard MRT
+				lat: 1.304,
+				lng: 103.8318
 			},
-			isCurrentLocationFetched: false,
 			nearbyLocations: [],
 			isWizardVisible: false,
 			selectedLocation: null
@@ -49,7 +52,7 @@ class MainLocationsPage extends Component {
 			this.onCurrentLocationFetched,
 			this.onCurrentLocationFetchFail,
 			{
-				timeout: 10000,
+				timeout: 15000,
 				enableHighAccuracy: true
 			}
 		);
@@ -58,22 +61,38 @@ class MainLocationsPage extends Component {
 	//** Helper Functions **//
 
 	onCurrentLocationFetchFail = err => {
-		console.log("Cannot get current location: ", err);
-		this.setState({
-			isCurrentLocationFetched: true
-		this.reverseGeocodeLocation(this.state.userCurrentPostion);
-		this.searchNearbyLocation(this.state.userCurrentPostion, 100);
+		let errorMessage = err.message;
+
+		if (err.code === 1) {
+			errorMessage = ERR_MSG_ENABLE_LOCATION_SERVICES;
+		}
+
+		if (err.code === 3) {
+			errorMessage = ERR_MSG_TIMEOUT;
+		}
+
+		this.notifyError(errorMessage);
+		this.fetchSuggestedLocations();
 	};
 
 	onCurrentLocationFetched = position => {
-		console.log("current loc is fetched.");
 		this.setState({
 			userCurrentPostion: {
 				lat: position.coords.latitude,
 				lng: position.coords.longitude
-			},
-			isCurrentLocationFetched: true
+			}
 		});
+		this.fetchSuggestedLocations();
+	};
+
+	notifyError = errorMessage => {
+		notification.error({
+			message: "Error",
+			description: errorMessage
+		});
+	};
+
+	fetchSuggestedLocations = () => {
 		this.reverseGeocodeLocation(this.state.userCurrentPostion);
 		this.searchNearbyLocation(this.state.userCurrentPostion, 100);
 	};
