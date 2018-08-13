@@ -1,46 +1,60 @@
 import React, { Component } from "react";
 import { Button } from "antd";
 import LocationSuggestionList from "../LocationSuggestionList/LocationSuggestionList";
-import LocationFormContainer from "../LocationFormContainer/LocationFormContainer";
+import LocationForm from "../LocationForm/LocationForm";
 import SignInRequired from "../SignInRequired/SignInRequired";
 
+export const WIZARD_STEP_FORM = "form";
+export const WIZARD_STEP_LOCATION = "locations";
+
 class AddLocationWizard extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isLocationSelectorVisible: true // TODO: Change to false later when onclick is linked
-    };
-  }
+	constructor() {
+		super();
+		this.state = {
+			currentWizardStep: WIZARD_STEP_LOCATION // TODO: Change to FORM
+		};
+	}
 
-  toggleFormVisibility = () => {
-    this.setState({
-      isLocationSelectorVisible: !this.state.isLocationSelectorVisible
-    });
-  };
+	changeWizardStep = step => {
+		this.setState({
+			currentWizardStep: step
+		});
+	};
 
-  render() {
-    return this.props.isLoggedInUser ? (
-      this.state.isLocationSelectorVisible ? (
-        <div>
-          <Button type="primary" onClick={this.toggleFormVisibility}>
-            Choose Location
-          </Button>
-          <Button onClick={this.props.toggleForm}>Back</Button>
-          <LocationSuggestionList
-            nearbyLocations={this.props.nearbyLocations}
-            onLocationSelected={this.props.onLocationSelected}
-          />
-        </div>
-      ) : (
-        <div>
-          <Button onClick={this.toggleFormVisibility}>Back</Button>
-          <LocationFormContainer isLoggedInUser={this.props.isLoggedInUser} />
-        </div>
-      )
-    ) : (
-      <SignInRequired />
-    );
-  }
+	render() {
+		return this.props.isUserLoggedIn ? (
+			<div>
+				{this.state.currentWizardStep === WIZARD_STEP_LOCATION && (
+					// LOCATION SELECTOR PAGE
+					<div>
+						<Button
+							type="primary"
+							onClick={() => this.changeWizardStep(WIZARD_STEP_FORM)}
+						>
+							Choose Location
+						</Button>
+						<Button onClick={this.props.cancelWizard}>Cancel</Button>
+						<LocationSuggestionList
+							nearbyLocations={this.props.nearbyLocations}
+							onLocationSelected={this.props.onLocationSelected}
+						/>
+					</div>
+				)}
+
+				{this.state.currentWizardStep === WIZARD_STEP_FORM && (
+					// ADD NEW LOCATION FORM PAGE
+					<div>
+						<Button onClick={() => this.changeWizardStep(WIZARD_STEP_LOCATION)}>
+							Back
+						</Button>
+						<LocationForm />
+					</div>
+				)}
+			</div>
+		) : (
+			<SignInRequired />
+		);
+	}
 }
 
 export default AddLocationWizard;

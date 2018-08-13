@@ -10,7 +10,7 @@ const { Content } = Layout;
 const NavRoutes = props => {
 	return (
 		<Content className="content-container">
-			<Route path="/" exact render={() => <MainLocationsPage isLoggedInUser={props.isUserLoggedIn}/>}/>
+			<Route path="/" exact render={() => <MainLocationsPage isUserLoggedIn={props.isUserLoggedIn}/>}/>
 			<Route path="/user-locations-page" component={UserLocationsPage} />
 			{/* <Route path="/location-list" component={LocationsList} /> */}
 			{/* <Route path="/new-location" render={() => <LocationFormContainer isLoggedInUser={props.isLoggedInUser} />} /> */}
