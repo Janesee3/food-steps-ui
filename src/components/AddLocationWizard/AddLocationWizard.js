@@ -3,6 +3,7 @@ import { Button } from "antd";
 import LocationSuggestionList from "../LocationSuggestionList/LocationSuggestionList";
 import LocationForm from "../LocationForm/LocationForm";
 import SignInRequired from "../SignInRequired/SignInRequired";
+import "./AddLocationWizard.css";
 
 export const WIZARD_STEP_FORM = "form";
 export const WIZARD_STEP_LOCATION = "locations";
@@ -26,14 +27,20 @@ class AddLocationWizard extends Component {
 			<div>
 				{this.state.currentWizardStep === WIZARD_STEP_LOCATION && (
 					// LOCATION SELECTOR PAGE
+
 					<div>
-						<Button
-							type="primary"
-							onClick={() => this.changeWizardStep(WIZARD_STEP_FORM)}
-						>
-							Choose Location
-						</Button>
-						<Button onClick={this.props.cancelWizard}>Cancel</Button>
+						<div className="button-container">
+							<Button
+								id="choose-loc-btn"
+								type="primary"
+								disabled={!this.props.selectedLocation}
+								onClick={() => this.changeWizardStep(WIZARD_STEP_FORM)}
+							>
+								Choose Location
+							</Button>
+							<Button onClick={this.props.cancelWizard}>Cancel</Button>
+						</div>
+
 						<LocationSuggestionList
 							nearbyLocations={this.props.nearbyLocations}
 							onLocationSelected={this.props.onLocationSelected}

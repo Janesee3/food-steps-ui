@@ -9,10 +9,12 @@
     grid-gap: 25px
 }
 
-#map-locations-map {
-    grid-column: 1/2
+#map-container {
+    grid-column: 1 / 2
 }
 
-#map-locations-list {
-    grid-column: 2/ 3;
+#right-panel-container {
+    grid-column: 2 / 3;
+    margin-right: 1em;
+    margin-top: 1em;
 }

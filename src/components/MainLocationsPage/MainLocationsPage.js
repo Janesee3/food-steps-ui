@@ -178,7 +178,7 @@ class MainLocationsPage extends Component {
 		console.log("Nearby locations state", this.state.nearbyLocations);
 		return (
 			<div className="main-locations">
-				<div id="map-locations-map">
+				<div id="map-container">
 					<GoogleApiWrapper
 						userCurrentPostion={this.state.userCurrentPostion}
 						onMapLoaded={this.onMapLoaded}
@@ -186,7 +186,7 @@ class MainLocationsPage extends Component {
 					/>
 				</div>
 
-				<div id="map-locations-list">
+				<div id="right-panel-container">
 					{this.state.isWizardVisible ? (
 						<AddLocationWizard
 							isUserLoggedIn={this.props.isUserLoggedIn}
