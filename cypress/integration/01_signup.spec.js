@@ -2,7 +2,7 @@ context("Access signup", () => {
   // wake up heroku app for automated testing
   before(() => {
     cy.visit("");
-    cy.wait(15000);
+    cy.wait(60000);
   });
 
   beforeEach(() => {
