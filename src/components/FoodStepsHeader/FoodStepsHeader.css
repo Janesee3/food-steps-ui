@@ -11,7 +11,7 @@
   width: 48px;
   height: 48px;
   margin: 8px 0;
-  background-image: url('../../Logo/FoodStepsLogo.png');
+  background-image: url('../../assets/FoodStepsLogo.png');
   background-size: cover;
 }
 
@@ -25,10 +25,10 @@
 }
 
 .avatar {
-    float: right;
-    color: white
+  float: right;
+  color: white
 }
 
 .avatar .avatar-username {
-   margin-left: .75em;
+  margin-left: .75em;
 }
