@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import LocationsList from "../LocationsList/LocationsList";
 
 import { seedData } from "../UserLocationsPage/seedData";
-import { Button } from 'antd';
+import { Button } from "antd";
 import GoogleApiWrapper from "./Map";
 import "./MainLocationsPage.css";
 import AddLocationWizard from "../AddLocationWizard/AddLocationWizard";
@@ -24,15 +24,14 @@ class MainLocationsPage extends Component {
       nearbyLocations: [],
       isFormVisible: false,
       selectedLocation: null
-
     };
   }
 
   toggleFormVisibility = () => {
     this.setState({
       isFormVisible: !this.state.isFormVisible
-    })
-  }
+    });
+  };
 
   componentDidMount() {
     this.setState({
@@ -144,12 +143,12 @@ class MainLocationsPage extends Component {
     });
   };
 
-  handleListClick = (location) => {
+  handleListClick = location => {
     console.log(location);
     this.setState({
       selectedLocation: location
-    })
-  }
+    });
+  };
 
   render() {
     console.log("Nearby locations state", this.state.nearbyLocations);
@@ -164,19 +163,27 @@ class MainLocationsPage extends Component {
         </div>
 
         <div id="map-locations-list">
-
-          {this.state.isFormVisible ?
+          {this.state.isFormVisible ? (
             <AddLocationWizard
+              selectedLocation={this.state.selectedLocation}
               nearbyLocations={this.state.nearbyLocations}
               onLocationSelected={this.handleListClick}
               isLoggedInUser={this.props.isLoggedInUser}
-              toggleForm={this.toggleFormVisibility} /> :
+              toggleForm={this.toggleFormVisibility}
+            />
+          ) : (
             <div>
-              <Button type='primary' icon='plus' onClick={this.toggleFormVisibility} >Add New Food Place</Button>
+              <Button
+                type="primary"
+                icon="plus"
+                onClick={this.toggleFormVisibility}
+              >
+                Add New Food Place
+              </Button>
               <LocationsList userLocations={this.state.userLocations} />
-            </div>}
+            </div>
+          )}
         </div>
-
       </div>
     );
   }

@@ -22,10 +22,9 @@ class LocationSuggestionList extends Component {
             selectedListIndex: index
         })
     }
+      
 
     render() {
-        console.log("HELO", this.state.selectedListIndex)
-
         return (
             <div className="locations-selection">
                 <InfiniteScroll
