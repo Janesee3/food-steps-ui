@@ -5,8 +5,8 @@ import LocationForm from "../LocationForm/LocationForm";
 import SignInRequired from "../SignInRequired/SignInRequired";
 import "./AddLocationWizard.css";
 
-export const WIZARD_STEP_FORM = "form";
-export const WIZARD_STEP_LOCATION = "locations";
+const WIZARD_STEP_FORM = "form";
+const WIZARD_STEP_LOCATION = "locations";
 
 class AddLocationWizard extends Component {
 	constructor() {
