@@ -74,9 +74,7 @@ class LocationForm extends React.Component {
     });
   };
 
-  createNewLocation = async (err, values) => {
-    if (err) return isDevelopment && console.error(err);
-
+  createNewLocation = async (values) => {
     // Package req body
     const requestBody = {
       locationName: values.locationName,
@@ -85,21 +83,33 @@ class LocationForm extends React.Component {
       lng: this.props.selectedLocation.location.lng
     };
 
-    const result = await createUserLocation(requestBody);
-    if (!result.ok) {
-      this.notifyError(result.message || ERROR_MESSAGE);
+    return await createUserLocation(requestBody);
+  };
+
+  resetForm = () => {
+    this.props.form.resetFields();
+    this.props.resetSelectedLocation();
+  };
+
+  onValidationResponded = async (err, values) => {
+    if (err) return isDevelopment && console.error(err);
+
+    const creationResult = await this.createNewLocation(values);
+    if (!creationResult.ok) {
+      this.notifyError(creationResult.message || ERROR_MESSAGE);
       return;
     }
-    this.props.form.resetFields();
+    
     notification.success({
       message: "Success",
       description: SUCCESS_MESSAGE
     });
-  };
+    this.resetForm();
+  }
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.form.validateFieldsAndScroll(this.createNewLocation);
+    this.props.form.validateFieldsAndScroll(this.onValidationResponded);
   };
 }
 

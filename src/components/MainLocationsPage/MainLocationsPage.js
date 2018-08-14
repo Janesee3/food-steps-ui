@@ -188,8 +188,7 @@ class MainLocationsPage extends Component {
       });
   };
 
-  handleUserSelectedLocation = location => {
-    console.log(location);
+  setSelectedLocation = location => {
     this.setState({
       selectedLocation: location
     });
@@ -213,7 +212,7 @@ class MainLocationsPage extends Component {
               isUserLoggedIn={this.props.isUserLoggedIn}
               selectedLocation={this.state.selectedLocation}
               nearbyLocations={this.state.nearbyLocations}
-              onLocationSelected={this.handleUserSelectedLocation}
+              setSelectedLocation={this.setSelectedLocation}
               cancelWizard={this.toggleWizardVisibility}
             />
           ) : (

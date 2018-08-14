@@ -44,7 +44,7 @@ class AddLocationWizard extends Component {
 
 						<LocationSuggestionList
 							nearbyLocations={this.props.nearbyLocations}
-							onLocationSelected={this.props.onLocationSelected}
+							onLocationSelected={this.props.setSelectedLocation}
 						/>
 					</div>
 				)}
@@ -55,6 +55,7 @@ class AddLocationWizard extends Component {
 						<Button onClick={this.props.cancelWizard}>Cancel</Button>
 						<LocationForm
 							selectedLocation={this.props.selectedLocation}
+							resetSelectedLocation={() => this.props.setSelectedLocation(null)}
 							goToLocationSelector={() =>
 								this.changeWizardStep(WIZARD_STEP_LOCATION)
 							}
