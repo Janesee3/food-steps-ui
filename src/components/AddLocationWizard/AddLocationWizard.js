@@ -12,8 +12,13 @@ class AddLocationWizard extends Component {
 	constructor() {
 		super();
 		this.state = {
-			currentWizardStep: WIZARD_STEP_FORM
+			currentWizardStep: WIZARD_STEP_FORM,
+			locationNameInput: ''
 		};
+	}
+
+	handleChange = event => {
+		this.setState({locationNameInput: event.target.value})
 	}
 
 	changeWizardStep = step => {
@@ -59,6 +64,8 @@ class AddLocationWizard extends Component {
 							goToLocationSelector={() =>
 								this.changeWizardStep(WIZARD_STEP_LOCATION)
 							}
+							handleChange={this.handleChange}
+							locationNameInput={this.state.locationNameInput}
 						/>
 					</div>
 				)}

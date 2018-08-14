@@ -13,7 +13,6 @@ class LocationForm extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const tailFormItemLayout = null;
-
     return (
       <Form layout="vertical" onSubmit={this.handleSubmit}>
         <Form.Item label="Food Place Name">
@@ -22,10 +21,13 @@ class LocationForm extends React.Component {
               {
                 required: true,
                 message: "Please give this food place a name!",
-                whitespace: true
+                whitespace: true,
               }
-            ]
-          })(<Input />)}
+            ],
+            initialValue: this.props.locationNameInput
+          })(<Input 
+          onChange={(event)=> this.props.handleChange(event)}
+          />)}
         </Form.Item>
 
         <Form.Item id="address" label="Address">
