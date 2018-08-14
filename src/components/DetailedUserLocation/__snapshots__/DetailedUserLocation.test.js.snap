@@ -7,8 +7,10 @@ exports[`snapshot test 1`] = `
       <a>
         edit
     </a>,
-      <a>
-        more
+      <a
+        onClick={[Function]}
+    >
+        delete
     </a>,
     ]
   }

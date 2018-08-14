@@ -5,9 +5,9 @@ import { List } from "antd";
 import DetailedUserLocation from "../DetailedUserLocation/DetailedUserLocation";
 import SimpleUserLocation from "../SimpleUserLocation/SimpleUserLocation";
 
-const renderDetailedOrSimple = (isDetailed, userLocation) => {
+const renderDetailedOrSimple = (isDetailed, userLocation, props, foodPlacesListIndex) => {
   return isDetailed ? (
-    <DetailedUserLocation location={userLocation} />
+    <DetailedUserLocation location={userLocation} showDeleteModal={props.showDeleteModal} foodPlacesListIndex = {foodPlacesListIndex} />
   ) : (
     <SimpleUserLocation location={userLocation} />
   );
@@ -34,8 +34,8 @@ const LocationsList = props => {
         // DataSource takes in an array that renderItem will map through
         dataSource={props.userLocations}
         // footer={<div><b>ant design</b> footer part</div>}
-        renderItem={userLocation =>
-          renderDetailedOrSimple(props.detailed, userLocation)
+        renderItem={(userLocation, foodPlacesListIndex) =>
+          renderDetailedOrSimple(props.detailed, userLocation, props, foodPlacesListIndex)
         }
       />
     </div>
