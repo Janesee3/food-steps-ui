@@ -5,7 +5,7 @@ exports[`should render snapshot correctly 1`] = `
   className="main-locations"
 >
   <div
-    id="map-locations-map"
+    id="map-container"
   >
     <Wrapper
       clickedLocation={null}
@@ -19,7 +19,7 @@ exports[`should render snapshot correctly 1`] = `
     />
   </div>
   <div
-    id="map-locations-list"
+    id="right-panel-container"
   >
     <div>
       <Button

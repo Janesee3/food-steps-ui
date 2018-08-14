@@ -1,0 +1,22 @@
+.address-card {
+    border-bottom: 1px solid #cecece;
+    margin: 0 1em 0 0;
+    transition-property: all;
+    transition-duration: .15s;
+    transition-timing-function: linear;
+    cursor: pointer;
+  }
+
+  .address-card div.ant-card-body {
+      padding: 1em;
+  }
+  
+  .address-card:hover {
+    background-color: rgba(166, 255, 249, 0.36);  
+  }
+
+  .address-placeholder {
+    color: darkgray;
+    font-size: 0.688em;
+    margin: 0;
+  }

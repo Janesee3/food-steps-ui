@@ -12,7 +12,7 @@ class AddLocationWizard extends Component {
 	constructor() {
 		super();
 		this.state = {
-			currentWizardStep: WIZARD_STEP_LOCATION // TODO: Change to FORM
+			currentWizardStep: WIZARD_STEP_FORM
 		};
 	}
 
@@ -25,9 +25,8 @@ class AddLocationWizard extends Component {
 	render() {
 		return this.props.isUserLoggedIn ? (
 			<div>
+				{/* LOCATION SELECTOR PAGE */}
 				{this.state.currentWizardStep === WIZARD_STEP_LOCATION && (
-					// LOCATION SELECTOR PAGE
-
 					<div>
 						<div className="button-container">
 							<Button
@@ -38,7 +37,9 @@ class AddLocationWizard extends Component {
 							>
 								Choose Location
 							</Button>
-							<Button onClick={this.props.cancelWizard}>Cancel</Button>
+							<Button onClick={() => this.changeWizardStep(WIZARD_STEP_FORM)}>
+								Back
+							</Button>
 						</div>
 
 						<LocationSuggestionList
@@ -48,13 +49,16 @@ class AddLocationWizard extends Component {
 					</div>
 				)}
 
+				{/* ADD NEW LOCATION FORM PAGE */}
 				{this.state.currentWizardStep === WIZARD_STEP_FORM && (
-					// ADD NEW LOCATION FORM PAGE
 					<div>
-						<Button onClick={() => this.changeWizardStep(WIZARD_STEP_LOCATION)}>
-							Back
-						</Button>
-						<LocationForm selectedLocation={this.props.selectedLocation} />
+						<Button onClick={this.props.cancelWizard}>Cancel</Button>
+						<LocationForm
+							selectedLocation={this.props.selectedLocation}
+							goToLocationSelector={() =>
+								this.changeWizardStep(WIZARD_STEP_LOCATION)
+							}
+						/>
 					</div>
 				)}
 			</div>

@@ -1,6 +1,7 @@
 import React from "react";
-import { Form, Button, notification, Input } from "antd";
+import { Form, Button, notification, Input, Card } from "antd";
 import { createUserLocation } from "../../services/userLocationService/userLocationService";
+import "./LocationForm.css";
 
 const CREATE_BUTTON_DISPLAY_TEXT = "Create";
 const SUCCESS_MESSAGE = "Location created successfully";
@@ -32,13 +33,25 @@ class LocationForm extends React.Component {
 					})(<Input />)}
 				</Form.Item>
 
-				<Form.Item
-					id="address"
-					label="Address"
-					required={true}
-					getFieldDecorator={getFieldDecorator}
-				>
-					<div>{this.props.selectedLocation.address}</div>
+				<Form.Item id="address" label="Address" required={true}>
+					{/* {getFieldDecorator("address", {})(
+						<Input
+							onClick={this.props.goToLocationSelector}
+							value={
+								this.props.selectedLocation
+									? this.props.selectedLocation.address
+									: ""
+							}
+						/>
+					)} */}
+					<Card
+						className="address-card"
+						onClick={this.props.goToLocationSelector}
+					>
+						{this.props.selectedLocation
+							? <p>{this.props.selectedLocation.address}</p>
+							: <p className="address-placeholder">Select address</p>}
+					</Card>
 				</Form.Item>
 
 				<Form.Item {...tailFormItemLayout}>
@@ -98,9 +111,6 @@ class LocationForm extends React.Component {
 
 	createNewLocation = async (err, values) => {
 		if (err) return isDevelopment && console.error(err);
-
-		console.log("Form Values: ", values);
-		console.log("selectedLocation: ", this.props.selectedLocation);
 
 		// Package req body
 		const requestBody = {
