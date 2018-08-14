@@ -7,8 +7,6 @@ import GoogleApiWrapper from "./Map";
 import "./MainLocationsPage.css";
 import AddLocationWizard from "../AddLocationWizard/AddLocationWizard";
 
-let googleMap;
-
 const ERR_MSG_ENABLE_LOCATION_SERVICES =
   "Please enable location services on your browser!";
 const ERR_MSG_TIMEOUT =
@@ -27,7 +25,8 @@ class MainLocationsPage extends Component {
       nearbyLocations: [],
       isWizardVisible: false,
       selectedLocation: null,
-      google: undefined
+      google: undefined,
+      googleMap: undefined
     };
   }
 
@@ -46,9 +45,9 @@ class MainLocationsPage extends Component {
 
   // Called when Google Maps API scripts are loaded and map is ready
   onMapLoaded = (mapProps, map) => {
-    googleMap = map;
     this.setState({
-      google: window.google
+      google: window.google,
+      googleMap: map
     });
 
     navigator.geolocation.getCurrentPosition(
@@ -97,7 +96,7 @@ class MainLocationsPage extends Component {
 
   fetchSuggestedLocations = () => {
     this.reverseGeocodeLocation(this.state.userCurrentPostion);
-    this.searchNearbyLocation(this.state.userCurrentPostion, 100);
+    this.searchNearbyLocation(this.state.googleMap, this.state.userCurrentPostion, 100);
   };
 
   // Given a location (object with lat and long), returns an array of
@@ -111,7 +110,7 @@ class MainLocationsPage extends Component {
 
   // Given a location and radius in metres, returns an array of
   // google places in the radius vicinity.
-  searchNearbyLocation = (location, radius) => {
+  searchNearbyLocation = (googleMap, location, radius) => {
     const service = new this.state.google.maps.places.PlacesService(googleMap);
     let request = { location, radius };
 
