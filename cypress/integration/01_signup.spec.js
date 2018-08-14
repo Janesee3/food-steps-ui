@@ -2,7 +2,7 @@ context("Access signup", () => {
   // wake up heroku app for automated testing
   before(() => {
     cy.visit("");
-    cy.wait(60000);
+    // cy.wait(10000);
   });
 
   beforeEach(() => {
@@ -26,7 +26,8 @@ context("Access signup", () => {
 
     cy.contains(
       "div.ant-message-success",
-      `Successfully created account! Welcome cyTester1!`
+      `Successfully created account! Welcome cyTester1!`,
+      {timeout: 15000}
     );
   });
 
