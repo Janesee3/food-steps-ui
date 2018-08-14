@@ -15,6 +15,7 @@ const ERR_MSG_TIMEOUT =
 class MainLocationsPage extends Component {
   constructor() {
     super();
+    this._isMounted = false;
     this.state = {
       userLocations: [],
       userCurrentPostion: {
@@ -30,18 +31,30 @@ class MainLocationsPage extends Component {
     };
   }
 
+  // Notes: this._isMounted
+  // When switching page too fast, this warning is shown
+  // Console Error: You cannot set field before registering it.
+  // Intermittent console: Warning: Can't call setState (or forceUpdate) on an unmounted component.
+  // REF FOR FIX: https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html
+  // To look into optimal solution, if necessary
+
+  componentDidMount() {
+    this._isMounted = true;
+    this.setState({
+      userLocations: seedData
+    });
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   // Show list of nearby food locations, or show the add new location wizard
   toggleWizardVisibility = () => {
     this.setState({
       isWizardVisible: !this.state.isWizardVisible
     });
   };
-
-  componentDidMount() {
-    this.setState({
-      userLocations: seedData
-    });
-  }
 
   // Called when Google Maps API scripts are loaded and map is ready
   onMapLoaded = (mapProps, map) => {
@@ -78,12 +91,13 @@ class MainLocationsPage extends Component {
   };
 
   onCurrentLocationFetched = position => {
-    this.setState({
-      userCurrentPostion: {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      }
-    });
+    this._isMounted &&
+      this.setState({
+        userCurrentPostion: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+      });
     this.fetchSuggestedLocations();
   };
 
@@ -96,7 +110,11 @@ class MainLocationsPage extends Component {
 
   fetchSuggestedLocations = () => {
     this.reverseGeocodeLocation(this.state.userCurrentPostion);
-    this.searchNearbyLocation(this.state.googleMap, this.state.userCurrentPostion, 100);
+    this.searchNearbyLocation(
+      this.state.googleMap,
+      this.state.userCurrentPostion,
+      100
+    );
   };
 
   // Given a location (object with lat and long), returns an array of
@@ -164,9 +182,10 @@ class MainLocationsPage extends Component {
       addressKey
     );
 
-    this.setState({
-      nearbyLocations: [...this.state.nearbyLocations, ...formattedLocations]
-    });
+    this._isMounted &&
+      this.setState({
+        nearbyLocations: [...this.state.nearbyLocations, ...formattedLocations]
+      });
   };
 
   handleUserSelectedLocation = location => {
@@ -195,7 +214,6 @@ class MainLocationsPage extends Component {
               selectedLocation={this.state.selectedLocation}
               nearbyLocations={this.state.nearbyLocations}
               onLocationSelected={this.handleUserSelectedLocation}
-              isLoggedInUser={this.props.isLoggedInUser}
               cancelWizard={this.toggleWizardVisibility}
             />
           ) : (
