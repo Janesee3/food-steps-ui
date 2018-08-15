@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import LocationsLists from "../LocationsList/LocationsList";
 import { API_HOST } from "../../utils/networkUtils";
-import { notifyDeleteSuccess, deleteErrorModal } from "../UserLocationsPage/UserLocationsHelper";
+import { notifyDeleteSuccess, deleteErrorModal, Modal, notification,Form, Input  } from "../UserLocationsPage/UserLocationsHelper";
 // import { seedData } from './seedData'
+const confirm = Modal.confirm;
+const FormItem = Form.Item;
 
 const URL = `${API_HOST}/locations/user/`;
 
@@ -13,8 +15,8 @@ class UserLocationsPage extends Component {
       userLocations: []
     };
   }
-
-  onUserConfirmDelete = async (foodPlacesListIndex) => {
+  
+  async onUserConfirmDelete(foodPlacesListIndex) {
     const locationId = this.state.userLocations[foodPlacesListIndex]._id;
     try {
       const res = await fetch(URL.concat(locationId), {
