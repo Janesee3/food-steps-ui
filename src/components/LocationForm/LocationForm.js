@@ -4,12 +4,75 @@ import { createUserLocation } from "../../services/userLocationService/userLocat
 import "./LocationForm.css";
 
 const CREATE_BUTTON_DISPLAY_TEXT = "Create";
-const SUCCESS_MESSAGE = "Location created successfully";
-const ERROR_MESSAGE = "An error occurred while creating the location";
-
 const isDevelopment = process.env.NODE_ENV === "development";
 
+const NOTIFCATION_TITLE_ERROR = "Error";
+const NOTIFCATION_TITLE_SUCCESS = "Success";
+
 class LocationForm extends React.Component {
+  // ** LIFECYCLE METHODS ** //
+
+  // Added to validate when user tries to create without selecting address
+  componentDidMount() {
+    this.props.selectedLocation &&
+      this.props.form.setFieldsValue({
+        address: this.props.selectedLocation.address
+      });
+  }
+
+  // ** UTILITY METHODS ** //
+
+  notifyError = errorMessage => {
+    notification.error({
+      message: NOTIFCATION_TITLE_ERROR,
+      description: errorMessage
+    });
+  };
+
+  notifySuccess = msg => {
+    notification.success({
+      message: NOTIFCATION_TITLE_SUCCESS,
+      description: msg
+    });
+  };
+
+  createNewLocation = async values => {
+    // Package req body
+    const requestBody = {
+      locationName: values.locationName,
+      geocodedLocationName: this.props.selectedLocation.address,
+      lat: this.props.selectedLocation.location.lat,
+      lng: this.props.selectedLocation.location.lng
+    };
+
+    return await createUserLocation(requestBody);
+  };
+
+  resetForm = () => {
+    this.props.form.resetFields();
+    this.props.resetSelectedLocation();
+  };
+
+  onValidationCompletion = async (err, values) => {
+    if (err) return isDevelopment && console.error(err);
+
+    const creationResult = await this.createNewLocation(values);
+
+    if (!creationResult.ok) {
+      this.notifyError(creationResult.message);
+      return;
+    }
+
+    this.notifySuccess(creationResult.message);
+
+    this.resetForm();
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.form.validateFieldsAndScroll(this.onValidationCompletion);
+  };
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const tailFormItemLayout = null;
@@ -21,13 +84,11 @@ class LocationForm extends React.Component {
               {
                 required: true,
                 message: "Please give this food place a name!",
-                whitespace: true,
+                whitespace: true
               }
             ],
             initialValue: this.props.locationNameInput
-          })(<Input 
-          onChange={(event)=> this.props.handleChange(event)}
-          />)}
+          })(<Input onChange={event => this.props.handleChange(event)} />)}
         </Form.Item>
 
         <Form.Item id="address" label="Address">
@@ -60,65 +121,12 @@ class LocationForm extends React.Component {
       </Form>
     );
   }
-
-  // Added to validate when user tries to create without selecting address
-  componentDidMount() {
-	this.props.selectedLocation &&
-      this.props.form.setFieldsValue({
-        address: this.props.selectedLocation.address
-      });
-  }
-
-  notifyError = errorMessage => {
-    notification.error({
-      message: "Error",
-      description: errorMessage
-    });
-  };
-
-  createNewLocation = async (values) => {
-    // Package req body
-    const requestBody = {
-      locationName: values.locationName,
-      geocodedLocationName: this.props.selectedLocation.address,
-      lat: this.props.selectedLocation.location.lat,
-      lng: this.props.selectedLocation.location.lng
-    };
-
-    return await createUserLocation(requestBody);
-  };
-
-  resetForm = () => {
-    this.props.form.resetFields();
-    this.props.resetSelectedLocation();
-  };
-
-  onValidationResponded = async (err, values) => {
-    if (err) return isDevelopment && console.error(err);
-
-    const creationResult = await this.createNewLocation(values);
-    if (!creationResult.ok) {
-      this.notifyError(creationResult.message || ERROR_MESSAGE);
-      return;
-    }
-    
-    notification.success({
-      message: "Success",
-      description: SUCCESS_MESSAGE
-    });
-    this.resetForm();
-  }
-
-  handleSubmit = event => {
-    event.preventDefault();
-    this.props.form.validateFieldsAndScroll(this.onValidationResponded);
-  };
 }
 
 export const testExports = {
   LocationForm,
-  SUCCESS_MESSAGE,
-  ERROR_MESSAGE
+  NOTIFCATION_TITLE_ERROR,
+  NOTIFCATION_TITLE_SUCCESS
 };
 
 export default Form.create()(LocationForm);

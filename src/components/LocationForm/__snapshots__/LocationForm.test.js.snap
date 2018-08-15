@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test for rendering 1`] = `
+<Form
+  hideRequiredMark={false}
+  layout="vertical"
+  onSubmit={[Function]}
+  prefixCls="ant-form"
+>
+  <FormItem
+    colon={true}
+    hasFeedback={false}
+    label="Food Place Name"
+    prefixCls="ant-form"
+  />
+  <FormItem
+    colon={true}
+    hasFeedback={false}
+    id="address"
+    label="Address"
+    prefixCls="ant-form"
+  />
+  <FormItem
+    colon={true}
+    hasFeedback={false}
+    prefixCls="ant-form"
+  >
+    <Button
+      ghost={false}
+      htmlType="submit"
+      loading={false}
+      prefixCls="ant-btn"
+      type="primary"
+    >
+      Create
+    </Button>
+  </FormItem>
+</Form>
+`;
