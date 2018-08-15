@@ -44,16 +44,18 @@ exports[`renders snapshot correctly 1`] = `
     ]
   }
 >
-  <Button
-    ghost={false}
-    loading={false}
-    prefixCls="ant-btn"
-    type="primary"
-  >
-    Menu 
-    <Icon
-      type="down"
-    />
-  </Button>
+  <div>
+    <Button
+      ghost={false}
+      loading={false}
+      prefixCls="ant-btn"
+      type="primary"
+    >
+      Menu 
+      <Icon
+        type="down"
+      />
+    </Button>
+  </div>
 </Dropdown>
 `;

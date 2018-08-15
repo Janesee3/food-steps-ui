@@ -3,6 +3,10 @@
   overflow-y: overlay;
 }
 
+.header div.ant-layout-header {
+  padding: 0;
+}
+
 .header-mobile {
   background: #001529;
 }
@@ -26,7 +30,13 @@
 
 .avatar {
   float: right;
-  color: white
+  color: white;
+  padding: 0 1em;
+  cursor: pointer;
+}
+
+.avatar:hover {
+  background-color: #3e4a56;
 }
 
 .avatar .avatar-username {
