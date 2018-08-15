@@ -1,16 +1,20 @@
 global.fetch = require("jest-fetch-mock");
-import { createUserLocation } from "./userLocationService";
+import {
+  createUserLocation,
+  SUCCESS_MESSAGE,
+  ERROR_MESSAGE
+} from "./userLocationService";
 
-describe("createUserLocation", () => {
-  it("should return object with result.ok when response", async () => {
-    fetch.mockResponseOnce();
+describe("Test for createUserLocation", () => {
+  it("when call to server is successful, 'ok' should be true and message should be SUCCESS_MESSAGE.", async () => {
+    fetch.mockResponseOnce(); // default response will be status = 200
 
     const result = await createUserLocation({});
     expect(result.ok).toBe(true);
-    expect(result.message).toBeUndefined();
+    expect(result.message).toBe(SUCCESS_MESSAGE);
   });
 
-  it("should return object with result.ok and message when response.status is 400", async () => {
+  it("when call to server returns with status 400, 'ok' should be false and message should be the returned error message.", async () => {
     const mockMessage = "some error occur";
     const mockResponseBody = JSON.stringify({ message: mockMessage });
     const mockResponseInit = { status: 400 };
@@ -21,21 +25,20 @@ describe("createUserLocation", () => {
     expect(result.message).toEqual(mockMessage);
   });
 
-  it("should return object with result.ok FALSE but not message when response is not OK and response.status is not 400", async () => {
-    const mockResponseBody = JSON.stringify({ message: "some error occur" });
+  it("when call to server fails with status != 400, 'ok' should be false and message should be ERROR_MESSAGE.", async () => {
     const mockResponseInit = { status: 500 };
-    fetch.mockResponseOnce(mockResponseBody, mockResponseInit);
+    fetch.mockResponseOnce("", mockResponseInit);
 
     const result = await createUserLocation({});
     expect(result.ok).toBe(false);
-    expect(result.message).toBeUndefined();
+    expect(result.message).toBe(ERROR_MESSAGE);
   });
 
-  it("should return object with result.ok FALSE but not message when fetch throw an error", async () => {
-    fetch.mockReject(new Error('simulating error thrown from API'));
+  it("when an error occurs during call to server, 'ok' should be false and message should be ERROR_MESSAGE.", async () => {
+    fetch.mockReject(new Error(""));
 
     const result = await createUserLocation({});
     expect(result.ok).toBe(false);
-    expect(result.message).toBeUndefined();
+    expect(result.message).toBe(ERROR_MESSAGE);
   });
 });
