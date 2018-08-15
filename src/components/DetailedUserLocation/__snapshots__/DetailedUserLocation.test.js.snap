@@ -4,7 +4,9 @@ exports[`snapshot test 1`] = `
 <Item
   actions={
     Array [
-      <a>
+      <a
+        onClick={[Function]}
+    >
         edit
     </a>,
       <a
