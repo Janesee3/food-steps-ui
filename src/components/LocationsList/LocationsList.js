@@ -7,7 +7,7 @@ import SimpleUserLocation from "../SimpleUserLocation/SimpleUserLocation";
 
 const renderDetailedOrSimple = (isDetailed, userLocation, props, foodPlacesListIndex) => {
   return isDetailed ? (
-    <DetailedUserLocation location={userLocation} showDeleteModal={props.showDeleteModal} foodPlacesListIndex = {foodPlacesListIndex} />
+    <DetailedUserLocation location={userLocation} onUserConfirmDelete={props.onUserConfirmDelete} foodPlacesListIndex = {foodPlacesListIndex} />
   ) : (
     <SimpleUserLocation location={userLocation} />
   );

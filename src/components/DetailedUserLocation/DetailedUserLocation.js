@@ -1,11 +1,24 @@
 import React from "react";
 import { List, Avatar, Rate } from "antd";
+import { showDeleteModal } from "../UserLocationsPage/userLocationHelper";
 
 const DetailedUserLocation = props => {
   const location = props.location;
   return (
     <List.Item
-      actions={[<a>edit</a>, <a onClick={() => props.showDeleteModal(props.foodPlacesListIndex)}>delete</a>]}
+      actions={[
+        <a>edit</a>,
+        <a
+          onClick={() =>
+            showDeleteModal(
+              props.foodPlacesListIndex,
+              props.onUserConfirmDelete
+            )
+          }
+        >
+          delete
+        </a>
+      ]}
       extra={
         <img
           width={200}
