@@ -66,6 +66,7 @@ class LocationForm extends React.Component {
     this.notifySuccess(creationResult.message);
 
     this.resetForm();
+    this.props.goBackToFirstWizardStep()
   };
 
   handleSubmit = event => {
