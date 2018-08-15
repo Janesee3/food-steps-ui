@@ -20,7 +20,7 @@ class UserLocationsPage extends Component {
     };
   }
 
-  async onUserConfirmDelete(foodPlacesListIndex) {
+  onUserConfirmDelete = async (foodPlacesListIndex) => {
     const locationId = this.state.userLocations[foodPlacesListIndex]._id;
     try {
       const res = await fetch(URL.concat(locationId), {
