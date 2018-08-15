@@ -1,6 +1,6 @@
 import React from "react";
 import { List, Avatar, Rate } from "antd";
-import { showDeleteModal } from "../UserLocationsPage/userLocationHelper";
+import { showDeleteModal } from "../UserLocationsPage/UserLocationsHelper";
 
 const DetailedUserLocation = props => {
   const location = props.location;
@@ -10,10 +10,7 @@ const DetailedUserLocation = props => {
         <a>edit</a>,
         <a
           onClick={() =>
-            showDeleteModal(
-              props.foodPlacesListIndex,
-              props.onUserConfirmDelete
-            )
+            showDeleteModal(props.foodPlacesListIndex, props.onUserConfirmDelete)
           }
         >
           delete

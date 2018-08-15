@@ -4,7 +4,8 @@ exports[`Snapshot fetch should match mocked data 1`] = `
 <div>
   <LocationsList
     detailed={true}
-    showDeleteModal={[Function]}
+    onUserConfirmDelete={[Function]}
+    showDeleteModal={undefined}
     userLocations={
       Array [
         "data1",
