@@ -51,6 +51,7 @@ class LocationForm extends React.Component {
   resetForm = () => {
     this.props.form.resetFields();
     this.props.resetSelectedLocation();
+    // this.props.goBackToFirstWizardStep();
   };
 
   onValidationCompletion = async (err, values) => {
@@ -66,7 +67,6 @@ class LocationForm extends React.Component {
     this.notifySuccess(creationResult.message);
 
     this.resetForm();
-    this.props.goBackToFirstWizardStep()
   };
 
   handleSubmit = event => {
