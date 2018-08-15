@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import LocationsLists from "../LocationsList/LocationsList";
 import { API_HOST } from "../../utils/networkUtils";
-import { notifyDeleteSuccess, deleteErrorModal, Modal, notification,Form, Input  } from "../UserLocationsPage/UserLocationsHelper";
+import { Modal, notification, Form, Input } from "antd";
+import {
+  notifyDeleteSuccess,
+  deleteErrorModal
+} from "../UserLocationsPage/UserLocationsHelper";
 // import { seedData } from './seedData'
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
@@ -15,7 +19,7 @@ class UserLocationsPage extends Component {
       userLocations: []
     };
   }
-  
+
   async onUserConfirmDelete(foodPlacesListIndex) {
     const locationId = this.state.userLocations[foodPlacesListIndex]._id;
     try {
@@ -36,7 +40,6 @@ class UserLocationsPage extends Component {
       deleteErrorModal();
     }
   }
-
 
   async componentDidMount() {
     if (this.isLoggedIn) {
