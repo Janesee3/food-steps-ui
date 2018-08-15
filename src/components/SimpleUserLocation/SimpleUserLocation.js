@@ -9,9 +9,9 @@ const IconText = ({ type, text }) => (
 );
 
 const SimpleUserLocation = props => {
-  const { location } = props;
+  const location = props.location;
   return (
-    <List.Item>
+    <List.Item onClick={()=>console.log('List clicked')}>
       <List.Item.Meta
         avatar={<Avatar src={location.avatar} />}
         title={
@@ -25,8 +25,7 @@ const SimpleUserLocation = props => {
         }
       />
 
-      {/* Content */}
-      {'description'}
+      {/* Insert Content here */}
     </List.Item>
   );
 };

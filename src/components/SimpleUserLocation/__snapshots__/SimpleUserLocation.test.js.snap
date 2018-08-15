@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`snapshot test 1`] = `
-<Item>
+<Item
+  onClick={[Function]}
+>
   <Meta
     avatar={
       <Avatar
@@ -26,6 +28,5 @@ exports[`snapshot test 1`] = `
       </a>
     }
   />
-  description
 </Item>
 `;

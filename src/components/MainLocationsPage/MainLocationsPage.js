@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import LocationsList from "../LocationsList/LocationsList";
 
-import { seedData } from "../UserLocationsPage/seedData";
+import { API_HOST } from "../../utils/networkUtils";
+// import { seedData } from "../UserLocationsPage/seedData";
 import { Button, notification } from "antd";
 import GoogleApiWrapper from "./Map";
 import "./MainLocationsPage.css";
@@ -11,6 +12,8 @@ const ERR_MSG_ENABLE_LOCATION_SERVICES =
   "Please enable location services on your browser!";
 const ERR_MSG_TIMEOUT =
   "Cannot fetch current location. Please refresh page to try again!";
+
+const URL = `${API_HOST}/locations/user/`;;
 
 class MainLocationsPage extends Component {
   constructor() {
@@ -38,11 +41,21 @@ class MainLocationsPage extends Component {
   // REF FOR FIX: https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html
   // To look into optimal solution, if necessary
 
-  componentDidMount() {
+  async componentDidMount() {
     this._isMounted = true;
-    this.setState({
-      userLocations: seedData
+    const response = await fetch(URL, {
+      credentials: "include"
     });
+    if (response.status === 401) {
+      // NEED TO FIX THIS PAGE WHEN USER IS NOT LOGGED IN
+      console.log("You need to log in");
+    } else {
+      const userLocationData = await response.json();
+      // console.log("UserLocations Data", userLocationData);
+      this.setState({
+        userLocations: userLocationData
+      });
+    }
   }
 
   componentWillUnmount() {
@@ -203,6 +216,7 @@ class MainLocationsPage extends Component {
             userCurrentPostion={this.state.userCurrentPostion}
             onMapLoaded={this.onMapLoaded}
             clickedLocation={this.state.selectedLocation}
+            userLocations={this.state.userLocations}
           />
         </div>
 
@@ -216,17 +230,17 @@ class MainLocationsPage extends Component {
               cancelWizard={this.toggleWizardVisibility}
             />
           ) : (
-            <div>
-              <Button
-                type="primary"
-                icon="plus"
-                onClick={this.toggleWizardVisibility}
-              >
-                Add New Food Place
+              <div>
+                <Button
+                  type="primary"
+                  icon="plus"
+                  onClick={this.toggleWizardVisibility}
+                >
+                  Add New Food Place
               </Button>
-              <LocationsList userLocations={this.state.userLocations} />
-            </div>
-          )}
+                <LocationsList userLocations={this.state.userLocations} />
+              </div>
+            )}
         </div>
       </div>
     );

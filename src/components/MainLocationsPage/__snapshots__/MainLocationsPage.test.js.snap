@@ -16,6 +16,7 @@ exports[`should render snapshot correctly 1`] = `
           "lng": 103.8318,
         }
       }
+      userLocations={Array []}
     />
   </div>
   <div
