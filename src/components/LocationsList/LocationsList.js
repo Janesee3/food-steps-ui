@@ -1,5 +1,4 @@
-import React from "react";
-import "antd/dist/antd.css";
+import React, { Component } from "react";
 import "../../index.css";
 import { List } from "antd";
 import DetailedUserLocation from "../DetailedUserLocation/DetailedUserLocation";
@@ -8,17 +7,16 @@ import SimpleUserLocation from "../SimpleUserLocation/SimpleUserLocation";
 const PAGE_SIZE = 3;
 
 const renderDetailedOrSimple = (
-  isDetailed,
-  userLocation,
   props,
+  userLocation,
   foodPlacesListIndex
 ) => {
-  console.log(`IN renderDetailedOrSimple: ${foodPlacesListIndex}, location: ${userLocation.locationName}`);
-  return isDetailed ? (
+  // console.log(`IN renderDetailedOrSimple: ${foodPlacesListIndex}, location: ${userLocation.locationName}`);
+  return props.detailed ? (
     <DetailedUserLocation
       location={userLocation}
-      onUserConfirmDelete={props.onUserConfirmDelete}
       foodPlacesListIndex={foodPlacesListIndex}
+      onUserConfirmDelete={props.onUserConfirmDelete}
       showEditModal={props.showEditModal}
     />
   ) : (
@@ -26,45 +24,51 @@ const renderDetailedOrSimple = (
   );
 };
 
-const LocationsList = props => {
-  let currentPage = 1;
-	const paginationProps = {
-    onChange: (page) => {
-      console.log('PAGE', page);
-      currentPage = page;
-    },
-		pageSize: PAGE_SIZE
-	};
+class LocationsList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPage: 1
+    };
+    this.paginationProps = {
+      onChange: page => {
+        this.setState({
+          currentPage: page
+        });
+      },
+      pageSize: PAGE_SIZE
+    };
+  }
 
-  return (
-    <div
-      className={
-        props.detailed ? "detailed-locations-list" : "simple-locations-list"
-      }
-    >
-      <List
-        itemLayout="vertical"
-        size="small"
-        pagination={props.detailed ? paginationProps : false}
-        // DataSource takes in an array that renderItem will map through
-        dataSource={props.userLocations}
-        // footer={<div><b>ant design</b> footer part</div>}
-        renderItem={(userLocation, foodPlacesListIndex) =>
-          renderDetailedOrSimple(
-            props.detailed,
-            userLocation,
-            props,
-            foodPlacesListIndex
-            // (currentPage - 1) * PAGE_SIZE + foodPlacesListIndex
-          )
+  render() {
+    return (
+      <div
+        className={
+          this.props.detailed ? "detailed-locations-list" : "simple-locations-list"
         }
-      />
-    </div>
-  );
-};
+      >
+        <List
+          itemLayout="vertical"
+          size="small"
+          pagination={this.props.detailed ? this.paginationProps : false}
+          // DataSource takes in an array that renderItem will map through
+          dataSource={this.props.userLocations}
+          // footer={<div><b>ant design</b> footer part</div>}
+          renderItem={(userLocation, foodPlacesListIndex) =>
+            renderDetailedOrSimple(
+              this.props,
+              userLocation,
+              (this.state.currentPage - 1) * PAGE_SIZE + foodPlacesListIndex
+            )
+          }
+        />
+      </div>
+    );
+  }
+}
 
 export const testExports = {
-	renderDetailedOrSimple
+  renderDetailedOrSimple
 };
 
 export default LocationsList;

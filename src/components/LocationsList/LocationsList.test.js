@@ -14,7 +14,7 @@ describe("props.detailed is false", () => {
   });
 
   it("should render SimpleUserLocation", () => {
-    const locationItem = testExports.renderDetailedOrSimple(false, {});
+    const locationItem = testExports.renderDetailedOrSimple({ detailed: false }, {});
     expect(locationItem.type).toBe(SimpleUserLocation);
   });
 });
@@ -28,7 +28,7 @@ describe("props.detailed is true", () => {
   });
 
   it("should render DetailedUserLocation if props.detailed is true", () => {
-    const locationItem = testExports.renderDetailedOrSimple(true, {}, ()=>{},1);
+    const locationItem = testExports.renderDetailedOrSimple({ detailed: true }, {}, 1);
     expect(locationItem.type).toBe(DetailedUserLocation);
   });
 });

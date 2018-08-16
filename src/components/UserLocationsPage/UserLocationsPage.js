@@ -15,7 +15,7 @@ class UserLocationsPage extends Component {
     super();
     this.state = {
       userLocations: [],
-      isEditModalOpen: false, //to render modal
+      isEditModalOpen: false,
       editIndex: undefined
     };
   }
@@ -25,7 +25,7 @@ class UserLocationsPage extends Component {
   }
 
   showEditModal = editIndex => {
-    console.log("EDIT INDEX in PAGE", editIndex);
+    // console.log("EDIT INDEX in PAGE", editIndex);
     this.setState({
       isEditModalOpen: true,
       editIndex: editIndex
@@ -49,8 +49,7 @@ class UserLocationsPage extends Component {
   };
 
   onUserConfirmDelete = async foodPlacesListIndex => {
-    console.log("DELETE INDEX in PAGE", foodPlacesListIndex);
-    return;
+    // console.log("DELETE INDEX in PAGE", foodPlacesListIndex);
     const locationId = this.state.userLocations[foodPlacesListIndex]._id;
     try {
       const res = await fetch(URL.concat(locationId), {
