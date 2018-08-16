@@ -16,11 +16,22 @@ class UserLocationsPage extends Component {
   constructor() {
     super();
     this.state = {
-      userLocations: []
+      userLocations: [],
+      editLocationModal: false //to render modal
     };
   }
 
-  onUserConfirmDelete = async (foodPlacesListIndex) => {
+  showEditModal = () => {
+    this.setState({
+      editLocationModal: true
+    });
+  };
+
+  closeModal = () => {
+		this.setState({ editLocationModal: false });
+  };
+  
+  onUserConfirmDelete = async foodPlacesListIndex => {
     const locationId = this.state.userLocations[foodPlacesListIndex]._id;
     try {
       const res = await fetch(URL.concat(locationId), {
@@ -39,7 +50,7 @@ class UserLocationsPage extends Component {
     } catch (error) {
       deleteErrorModal();
     }
-  }
+  };
 
   async componentDidMount() {
     if (this.isLoggedIn) {
@@ -72,7 +83,9 @@ class UserLocationsPage extends Component {
           detailed={true}
           showDeleteModal={this.showDeleteModal}
           onUserConfirmDelete={this.onUserConfirmDelete}
+          showEditModal={this.showEditModal}
         />
+
       </div>
     );
   }

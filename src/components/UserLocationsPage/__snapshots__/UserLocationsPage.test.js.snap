@@ -6,6 +6,7 @@ exports[`Snapshot fetch should match mocked data 1`] = `
     detailed={true}
     onUserConfirmDelete={[Function]}
     showDeleteModal={undefined}
+    showEditModal={[Function]}
     userLocations={
       Array [
         "data1",
