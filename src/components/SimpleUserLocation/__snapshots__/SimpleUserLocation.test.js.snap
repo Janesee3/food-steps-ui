@@ -13,17 +13,14 @@ exports[`snapshot test 1`] = `
     }
     description="original soy chicken rice"
     title={
-      <a
-        href={undefined}
-      >
+      <span>
         soy chicken rice
-         
          | 
         <IconText
-          text={undefined}
+          text={3}
           type="star"
         />
-      </a>
+      </span>
     }
   />
 </Item>
