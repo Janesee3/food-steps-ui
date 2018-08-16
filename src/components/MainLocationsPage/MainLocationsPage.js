@@ -215,7 +215,7 @@ class MainLocationsPage extends Component {
 					<GoogleApiWrapper
 						userCurrentPostion={this.state.userCurrentPostion}
 						onMapLoaded={this.onMapLoaded}
-						clickedLocation={this.state.selectedLocation}
+						userSelectedLocation={this.state.selectedLocation}
 						userLocations={this.state.userLocations}
 					/>
 				</div>
