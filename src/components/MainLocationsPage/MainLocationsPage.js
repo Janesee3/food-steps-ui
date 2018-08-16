@@ -151,6 +151,12 @@ class MainLocationsPage extends Component {
 		});
 	};
 
+	setSelectedLocation = location => {
+		this.setState({
+			selectedLocation: location
+		});
+	};
+
 	//** Utility Functions **//
 
 	// Takes in an array of location objects, a key value that points to the address
@@ -202,11 +208,7 @@ class MainLocationsPage extends Component {
 			});
 	};
 
-	setSelectedLocation = location => {
-		this.setState({
-			selectedLocation: location
-		});
-	};
+	
 
 	render() {
 		return (

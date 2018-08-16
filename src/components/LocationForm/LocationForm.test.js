@@ -2,11 +2,7 @@ import React from "react";
 import ShallowRenderer from "react-test-renderer/shallow";
 import { testExports } from "./LocationForm";
 
-const {
-	LocationForm,
-	NOTIFCATION_TITLE_ERROR,
-	NOTIFCATION_TITLE_SUCCESS
-} = testExports;
+const { LocationForm } = testExports;
 
 import {
 	createUserLocation,
@@ -77,32 +73,46 @@ describe("Functional Test beyond render()", () => {
 			spyForNotifSuccess.mockRestore();
 		});
 
-		it("notifyError should called notification.error with custom error message", () => {
-			const errorMessage = "Some error occurs";
-			formInstance.notifyError(errorMessage);
+		// it("notifyError should called notification.error with custom error message", () => {
+		// 	const errorMessage = "Some error occurs";
+		// 	formInstance.notifyError(errorMessage);
 
-			expect(spyForNotifError).toBeCalledWith({
-				message: NOTIFCATION_TITLE_ERROR,
-				description: errorMessage
-			});
-		});
+		// 	expect(spyForNotifError).toBeCalledWith({
+		// 		message: NOTIFCATION_TITLE_ERROR,
+		// 		description: errorMessage
+		// 	});
+		// });
 
-		it("notifySuccess should called notification.success with custom message", () => {
-			const msg = "Some success msg";
-			formInstance.notifySuccess(msg);
+		// it("notifySuccess should called notification.success with custom message", () => {
+		// 	const msg = "Some success msg";
+		// 	formInstance.notifySuccess(msg);
 
-			expect(spyForNotifSuccess).toBeCalledWith({
-				message: NOTIFCATION_TITLE_SUCCESS,
-				description: msg
-			});
-		});
+		// 	expect(spyForNotifSuccess).toBeCalledWith({
+		// 		message: NOTIFCATION_TITLE_SUCCESS,
+		// 		description: msg
+		// 	});
+		// });
 	});
 
 	describe("Test for onValidationComplete", () => {
 		let spyForCreateNewLocation;
 
+		const notificationManager = require("../../utils/notificationManager");
+
+		let mockNotifySuccess;
+		let mockNotifyError;
+
+		beforeAll(() => {
+			mockNotifyError = jest.fn();
+			mockNotifySuccess = jest.fn();
+			notificationManager.notifyError = mockNotifyError;
+			notificationManager.notifySuccess = mockNotifySuccess;
+		});
+
 		beforeEach(() => {
 			spyForCreateNewLocation = jest.spyOn(formInstance, "createNewLocation");
+			mockNotifyError.mockClear();
+			mockNotifySuccess.mockClear();
 		});
 
 		afterEach(() => {
@@ -115,20 +125,14 @@ describe("Functional Test beyond render()", () => {
 		});
 
 		describe("If validation succeeds", () => {
-			let spyForNotifySuccess;
-			let spyForNotifyError;
 			let spyForResetForm;
 
 			beforeEach(() => {
-				spyForNotifySuccess = jest.spyOn(formInstance, "notifySuccess");
-				spyForNotifyError = jest.spyOn(formInstance, "notifyError");
 				spyForResetForm = jest.spyOn(formInstance, "resetForm");
 			});
 
 			afterEach(() => {
 				spyForCreateNewLocation.mockRestore();
-				spyForNotifySuccess.mockRestore();
-				spyForNotifyError.mockRestore();
 				spyForResetForm.mockRestore();
 			});
 
@@ -143,7 +147,7 @@ describe("Functional Test beyond render()", () => {
 				await formInstance.onValidationCompletion(null, formValues);
 
 				expect(spyForCreateNewLocation).toBeCalledWith(formValues);
-				expect(spyForNotifySuccess).toBeCalledWith(mockServerResponse.message);
+				expect(mockNotifySuccess).toBeCalledWith(mockServerResponse.message);
 				expect(spyForResetForm).toBeCalled();
 				expect(mockCancelWizard).toBeCalled();
 				expect(mockRefreshUserLocationsList).toBeCalled();
@@ -160,7 +164,7 @@ describe("Functional Test beyond render()", () => {
 				await formInstance.onValidationCompletion(null, formValues);
 
 				expect(spyForCreateNewLocation).toBeCalledWith(formValues);
-				expect(spyForNotifyError).toBeCalledWith(mockServerResponse.message);
+				expect(mockNotifyError).toBeCalledWith(mockServerResponse.message);
 			});
 		});
 	});
