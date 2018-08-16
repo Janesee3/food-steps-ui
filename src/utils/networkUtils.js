@@ -16,3 +16,20 @@ export const postToServer = async (url, body, includeCredentials) => {
 };
 
 
+export const putToServer = async (url, body, includeCredentials) => {
+  const credentials = includeCredentials ? "include" : "omit";
+
+  const res = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    body: JSON.stringify(body),
+    credentials: credentials
+  });
+
+  return res;
+};
+
+
+

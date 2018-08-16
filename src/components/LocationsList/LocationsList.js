@@ -5,12 +5,15 @@ import { List } from "antd";
 import DetailedUserLocation from "../DetailedUserLocation/DetailedUserLocation";
 import SimpleUserLocation from "../SimpleUserLocation/SimpleUserLocation";
 
+const PAGE_SIZE = 3;
+
 const renderDetailedOrSimple = (
   isDetailed,
   userLocation,
   props,
   foodPlacesListIndex
 ) => {
+  console.log('INDEX IN renderDetailedOrSimple', foodPlacesListIndex);
   return isDetailed ? (
     <DetailedUserLocation
       location={userLocation}
@@ -24,8 +27,13 @@ const renderDetailedOrSimple = (
 };
 
 const LocationsList = props => {
+  let currentPage = 1;
 	const paginationProps = {
-		pageSize: 3
+    onChange: (page) => {
+      console.log('PAGE', page);
+      currentPage = page;
+    },
+		pageSize: PAGE_SIZE
 	};
 
   return (
@@ -46,7 +54,7 @@ const LocationsList = props => {
             props.detailed,
             userLocation,
             props,
-            foodPlacesListIndex
+            (currentPage - 1) * PAGE_SIZE + foodPlacesListIndex
           )
         }
       />

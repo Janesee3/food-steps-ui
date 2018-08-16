@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LocationsLists from "../LocationsList/LocationsList";
-import { API_HOST } from "../../utils/networkUtils";
+import { API_HOST, putToServer } from "../../utils/networkUtils";
 import { Modal, notification, Form, Input } from "antd";
 import {
 	notifyDeleteSuccess,
@@ -8,8 +8,6 @@ import {
 } from "../UserLocationsPage/UserLocationsHelper";
 import EditLocationModal from "../EditLocationModel/EditLocationModal";
 // import { seedData } from './seedData'
-const confirm = Modal.confirm;
-const FormItem = Form.Item;
 
 class UserLocationsPage extends Component {
   constructor() {
@@ -26,6 +24,7 @@ class UserLocationsPage extends Component {
 	}
 
   showEditModal = editIndex => {
+    console.log('EDIT INDEX in PAGE', editIndex);
     this.setState({
       isEditModalOpen: true,
       editIndex: editIndex
@@ -36,9 +35,18 @@ class UserLocationsPage extends Component {
     this.setState({ isEditModalOpen: false });
   };
 
-  onUserUpdate = (updatedLocation) => {
-
-    console.log("updatedLocation",updatedLocation);
+  onUserUpdate = async updatedLocationName => {
+    try {
+      const locationIdToUpdate = this.state.userLocations[this.state.editIndex]._id;
+      const body = {locationName: updatedLocationName}
+      const res = await putToServer(
+      URL.concat(locationIdToUpdate), body, true 
+      );
+      console.log(res.status)
+    }
+    catch(error) {
+      console.log(error)
+    }
   };
 
   onUserConfirmDelete = async foodPlacesListIndex => {
@@ -109,12 +117,12 @@ class UserLocationsPage extends Component {
           closeModal={this.closeModal}
         />
         {/* {this.state.editIndex && ( */}
-          <EditLocationModal
-            visible={this.state.isEditModalOpen}
-            closeModal={this.closeModal}
-            onUpdate={this.onUserUpdate}
-            location={this.state.userLocations[this.state.editIndex]}
-          />
+        <EditLocationModal
+          visible={this.state.isEditModalOpen}
+          closeModal={this.closeModal}
+          onUpdate={this.onUserUpdate}
+          location={this.state.userLocations[this.state.editIndex]}
+        />
         {/* )} */}
       </div>
     );
