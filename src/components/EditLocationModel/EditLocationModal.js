@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Form, Input, Card } from "antd";
+import { Modal } from "antd";
 import LocationForm from "../LocationForm/LocationForm";
 
 const isDevelopment = process.env.NODE_ENV === "development";
@@ -19,7 +19,7 @@ class EditLocationModal extends React.Component {
     });
   };
 
-  saveFormRef = (formRef) => {
+  saveFormRef = formRef => {
     this.formRef = formRef;
   }
 

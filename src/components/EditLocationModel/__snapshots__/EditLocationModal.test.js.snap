@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Test 1`] = `
+<Modal
+  cancelButtonDisabled={false}
+  confirmLoading={false}
+  maskTransitionName="fade"
+  okButtonDisabled={false}
+  okText="Update"
+  okType="primary"
+  onCancel={[Function]}
+  onOk={[Function]}
+  prefixCls="ant-modal"
+  title="Edit Food Location"
+  transitionName="zoom"
+  visible={true}
+  width={520}
+>
+  <Form(LocationForm)
+    editMode={true}
+    locationNameInput="Location Name To Be Updated"
+    onLocationNameInputChange={[Function]}
+    selectedLocation={
+      Object {
+        "locationName": "Location Name To Be Updated",
+      }
+    }
+    wrappedComponentRef={[Function]}
+  />
+</Modal>
+`;
