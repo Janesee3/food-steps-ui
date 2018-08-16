@@ -8,7 +8,6 @@ exports[`should render snapshot correctly 1`] = `
     id="map-container"
   >
     <Wrapper
-      clickedLocation={null}
       onMapLoaded={[Function]}
       userCurrentPostion={
         Object {
@@ -17,6 +16,7 @@ exports[`should render snapshot correctly 1`] = `
         }
       }
       userLocations={Array []}
+      userSelectedLocation={null}
     />
   </div>
   <div
