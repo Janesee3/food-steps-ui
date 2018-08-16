@@ -13,7 +13,7 @@ const renderDetailedOrSimple = (
   props,
   foodPlacesListIndex
 ) => {
-  console.log('INDEX IN renderDetailedOrSimple', foodPlacesListIndex);
+  console.log(`IN renderDetailedOrSimple: ${foodPlacesListIndex}, location: ${userLocation.locationName}`);
   return isDetailed ? (
     <DetailedUserLocation
       location={userLocation}
@@ -54,7 +54,8 @@ const LocationsList = props => {
             props.detailed,
             userLocation,
             props,
-            (currentPage - 1) * PAGE_SIZE + foodPlacesListIndex
+            foodPlacesListIndex
+            // (currentPage - 1) * PAGE_SIZE + foodPlacesListIndex
           )
         }
       />
