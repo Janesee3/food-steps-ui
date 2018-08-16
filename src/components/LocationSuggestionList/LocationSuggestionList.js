@@ -4,8 +4,6 @@ import ReactDOM from 'react-dom';
 import "./LocationSuggestionList.css";
 import { List, Input } from "antd";
 
-const Search = Input.Search
-
 class LocationSuggestionList extends Component {
 	constructor() {
 		super();
@@ -18,7 +16,7 @@ class LocationSuggestionList extends Component {
 	}
 
 	componentDidMount = () => {
-		var input = ReactDOM.findDOMNode(this.refs.input); //There is a better way to write this without findDOMnode
+		const input = ReactDOM.findDOMNode(this.refs.input); //There is a better way to write this without findDOMnode
         this.searchBox = new this.props.google.maps.places.Autocomplete(input,
             { componentRestrictions: { country: 'sg' } });
         this.searchBox.addListener('place_changed', this.inputChangeHandler);
@@ -29,15 +27,19 @@ class LocationSuggestionList extends Component {
 	}
 	
 	inputChangeHandler = () => {
-        const userLat = this.searchBox.getPlace().geometry.location.lat()
-        const userLng = this.searchBox.getPlace().geometry.location.lng()
-		const userAddress = this.searchBox.getPlace().formatted_address
-		
-		console.log(this.searchBox.getPlace(), userLat, userLng,userAddress)
+		const searchResult = this.searchBox.getPlace()
+		const address = `${searchResult.name}, ${searchResult.formatted_address}`
 
-        // Set User Selected Address
-        // this.setState({
-        //     userLocation: { ...this.state.userLocation, lat: userLat, lng: userLng, userAddress: userAddress }
+        const location = {
+			address,
+			placeId: searchResult.place_id,
+			location:{
+				lat: searchResult.geometry.location.lat(),
+				lng: searchResult.geometry.location.lng()
+			}
+		}
+
+		this.getSelected(location)
         }
 
 	getSelected = (location, index) => {
@@ -50,8 +52,9 @@ class LocationSuggestionList extends Component {
 	render() {
 		return (
 			<div className="locations-selection">
-				<Input placeholder="Search for a location" ref="input" />
-				<div className="subtitle">SUGGESTED LOCATIONS</div>
+				<div className="subtitle">SEARCH LOCATION</div>
+				<Input placeholder="Search..." ref="input" />
+				<div className="subtitle">SUGGESTED LOCATIONS NEAR ME</div>
 				<div className="list-container">
 					<InfiniteScroll
 						initialLoad={false}
