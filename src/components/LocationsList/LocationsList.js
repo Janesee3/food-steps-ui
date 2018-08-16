@@ -15,10 +15,7 @@ const renderDetailedOrSimple = (isDetailed, userLocation, props, foodPlacesListI
 
 const LocationsList = props => {
   const paginationProps = {
-    onChange: page => {
-      console.log(page);
-    },
-    pageSize: 2
+    pageSize: 3
   };
 
   return (
