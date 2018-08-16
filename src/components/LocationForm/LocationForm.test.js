@@ -40,6 +40,7 @@ describe("Functional Test beyond render()", () => {
 	};
 	let mockResetSelectedLocation = jest.fn();
 	let mockCancelWizard = jest.fn();
+	let mockRefreshUserLocationsList = jest.fn();
 
 	beforeEach(() => {
 		mockGetFieldDecorator.mockClear();
@@ -47,6 +48,7 @@ describe("Functional Test beyond render()", () => {
 		mockSetFieldsValue.mockClear();
 		mockCancelWizard.mockClear();
 		mockResetSelectedLocation.mockClear();
+		mockRefreshUserLocationsList.mockClear();
 
 		const renderer = new ShallowRenderer();
 		renderer.render(
@@ -55,6 +57,7 @@ describe("Functional Test beyond render()", () => {
 				selectedLocation={mockSelectedLocation}
 				resetSelectedLocation={mockResetSelectedLocation}
 				cancelWizard={mockCancelWizard}
+				refreshUserLocationsList={mockRefreshUserLocationsList}
 			/>
 		);
 		formInstance = renderer.getMountedInstance();
@@ -143,6 +146,7 @@ describe("Functional Test beyond render()", () => {
 				expect(spyForNotifySuccess).toBeCalledWith(mockServerResponse.message);
 				expect(spyForResetForm).toBeCalled();
 				expect(mockCancelWizard).toBeCalled();
+				expect(mockRefreshUserLocationsList).toBeCalled();
 			});
 
 			it("should call createNewLocation, and notify error when server response is NOT ok", async () => {
