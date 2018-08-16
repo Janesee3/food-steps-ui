@@ -27,6 +27,11 @@ class AddLocationWizard extends Component {
 		});
 	};
 
+	cancelWizard = () => {
+		this.props.setSelectedLocation(null);
+		this.props.cancelWizard();
+	};
+
 	render() {
 		return this.props.isUserLoggedIn ? (
 			<div>
@@ -57,7 +62,7 @@ class AddLocationWizard extends Component {
 				{/* ADD NEW LOCATION FORM PAGE */}
 				{this.state.currentWizardStep === WIZARD_STEP_FORM && (
 					<div>
-						<Button onClick={this.props.cancelWizard}>Cancel</Button>
+						<Button onClick={this.cancelWizard}>Cancel</Button>
 						<LocationForm
 							selectedLocation={this.props.selectedLocation}
 							resetSelectedLocation={() => this.props.setSelectedLocation(null)}
