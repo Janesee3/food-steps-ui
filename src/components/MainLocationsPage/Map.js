@@ -96,35 +96,6 @@ export class MapContainer extends Component {
               </div>
             </InfoWindow>
             : null}
-
-
-          {/* {this.props.clickedLocation &&
-
-            <div>
-              <Marker
-                position={{
-                  lat: this.props.clickedLocation.location.lat,
-                  lng: this.props.clickedLocation.location.lng
-                }}
-                onClick={this.onMarkerClick}
-                name={this.props.clickedLocation.address}
-              />
-
-              <InfoWindow
-                onClose={this.onInfoWindowClose}
-                marker={this.state.activeMarker}
-                visible={this.state.showingInfoWindow}
-              >
-                <div>
-                  <h1>{this.props.clickedLocation.address}</h1>
-                </div>
-              </InfoWindow>
-            </div>
-
-          } */}
-
-
-
         </Map>
       </div>
     );
