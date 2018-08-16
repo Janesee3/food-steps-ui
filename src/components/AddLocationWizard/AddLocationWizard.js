@@ -5,21 +5,21 @@ import LocationForm from "../LocationForm/LocationForm";
 import SignInRequired from "../SignInRequired/SignInRequired";
 import "./AddLocationWizard.css";
 
-const WIZARD_STEP_FORM = "form";
-const WIZARD_STEP_LOCATION = "locations";
+export const WIZARD_STEP_FORM = "form";
+export const WIZARD_STEP_LOCATION = "locations";
 
 class AddLocationWizard extends Component {
 	constructor() {
 		super();
 		this.state = {
 			currentWizardStep: WIZARD_STEP_FORM,
-			locationNameInput: ''
+			locationNameInput: ""
 		};
 	}
 
-	handleChange = event => {
-		this.setState({locationNameInput: event.target.value})
-	}
+	onLocationNameInputChange = event => {
+		this.setState({ locationNameInput: event.target.value });
+	};
 
 	changeWizardStep = step => {
 		this.setState({
@@ -64,7 +64,7 @@ class AddLocationWizard extends Component {
 							goToLocationSelector={() =>
 								this.changeWizardStep(WIZARD_STEP_LOCATION)
 							}
-							handleChange={this.handleChange}
+							onLocationNameInputChange={this.onLocationNameInputChange}
 							locationNameInput={this.state.locationNameInput}
 							cancelWizard={this.props.cancelWizard}
 						/>
