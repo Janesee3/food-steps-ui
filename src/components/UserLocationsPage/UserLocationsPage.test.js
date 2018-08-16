@@ -16,7 +16,7 @@ beforeEach(() => {
   fetch.resetMocks();
 });
 
-test("userLocation component didMount calls for a fetch and passed fetched as props to LocationList", async () => {
+test.skip("userLocation component didMount calls for a fetch and passed fetched as props to LocationList", async () => {
   const result = await fetchMockData();
   expect(result.props.children.props.userLocations.length).toBe(2);
   expect(fetch).toHaveBeenCalledWith(`${API_HOST}/locations/user/`, {

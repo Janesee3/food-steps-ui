@@ -6,6 +6,7 @@ import {
   notifyDeleteSuccess,
   deleteErrorModal
 } from "../UserLocationsPage/UserLocationsHelper";
+import EditLocationModal from "../EditLocationModel/EditLocationModal"
 // import { seedData } from './seedData'
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
@@ -17,20 +18,20 @@ class UserLocationsPage extends Component {
     super();
     this.state = {
       userLocations: [],
-      editLocationModal: false //to render modal
+      isEditModalOpen: false //to render modal
     };
   }
 
   showEditModal = () => {
     this.setState({
-      editLocationModal: true
+      isEditModalOpen: true
     });
   };
 
   closeModal = () => {
-		this.setState({ editLocationModal: false });
+    this.setState({ isEditModalOpen: false });
   };
-  
+
   onUserConfirmDelete = async foodPlacesListIndex => {
     const locationId = this.state.userLocations[foodPlacesListIndex]._id;
     try {
@@ -84,8 +85,9 @@ class UserLocationsPage extends Component {
           showDeleteModal={this.showDeleteModal}
           onUserConfirmDelete={this.onUserConfirmDelete}
           showEditModal={this.showEditModal}
+          closeModal={this.closeModal}
         />
-
+        <EditLocationModal visible={this.state.isEditModalOpen}   closeModal={this.closeModal} onUpdate={this.showEditModal}/>
       </div>
     );
   }

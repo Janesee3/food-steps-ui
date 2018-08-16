@@ -1,17 +1,18 @@
-import { Modal, Form, Input } from "antd";
+import React from 'react';
+import { Modal, Form, Input,Card } from "antd";
 
 const EditLocationModal = Form.create()(
   class extends React.Component {
     render() {
-      const { visible, onCancel, onCreate, form } = this.props;
+      const { visible, closeModal, onUpdate, form } = this.props;
       const { getFieldDecorator } = form;
       return (
         <Modal
           visible={visible}
-          title="Create a new collection"
-          okText="Create"
-          onCancel={onCancel}
-          onOk={onCreate}
+          title="Update Food Location"
+          okText="Update"
+          onCancel={closeModal}
+          onOk={onUpdate}
         >
           <Form layout="vertical" onSubmit={this.handleSubmit}>
             <Form.Item label="Food Place Name">

@@ -3,6 +3,7 @@
 exports[`Snapshot fetch should match mocked data 1`] = `
 <div>
   <LocationsList
+    closeModal={[Function]}
     detailed={true}
     onUserConfirmDelete={[Function]}
     showDeleteModal={undefined}
@@ -13,6 +14,11 @@ exports[`Snapshot fetch should match mocked data 1`] = `
         "data2",
       ]
     }
+  />
+  <Form(Component)
+    closeModal={[Function]}
+    onUpdate={[Function]}
+    visible={false}
   />
 </div>
 `;
