@@ -66,7 +66,7 @@ class AddLocationWizard extends Component {
 							}
 							handleChange={this.handleChange}
 							locationNameInput={this.state.locationNameInput}
-							goBackToFirstWizardStep={this.props.cancelWizard}
+							cancelWizard={this.props.cancelWizard}
 						/>
 					</div>
 				)}
