@@ -224,6 +224,7 @@ class MainLocationsPage extends Component {
 							setSelectedLocation={this.setSelectedLocation}
 							cancelWizard={this.toggleWizardVisibility}
 							refreshUserLocationsList={this.getUserLocations}
+							google={this.state.google}
 						/>
 					) : (
 						<div>

@@ -55,6 +55,7 @@ class AddLocationWizard extends Component {
 						<LocationSuggestionList
 							nearbyLocations={this.props.nearbyLocations}
 							onLocationSelected={this.props.setSelectedLocation}
+							google={this.props.google}
 						/>
 					</div>
 				)}
@@ -78,8 +79,8 @@ class AddLocationWizard extends Component {
 				)}
 			</div>
 		) : (
-			<SignInRequired />
-		);
+				<SignInRequired />
+			);
 	}
 }
 
