@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button, notification, Input, Card } from "antd";
+import { Form, Button, Input, Card } from "antd";
 import { createUserLocation } from "../../services/userLocationService/userLocationService";
 import { notifyError, notifySuccess } from "../../utils/notificationManager";
 import "./LocationForm.css";

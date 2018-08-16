@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import LocationsList from "../LocationsList/LocationsList";
 
 import { API_HOST } from "../../utils/networkUtils";
-// import { seedData } from "../UserLocationsPage/seedData";
-import { Button, notification } from "antd";
+import { Button } from "antd";
 import GoogleApiWrapper from "./Map";
 import "./MainLocationsPage.css";
 import AddLocationWizard from "../AddLocationWizard/AddLocationWizard";
 import InfiniteScroll from "react-infinite-scroller";
+import { notifyError } from "../../utils/notificationManager";
 
 const ERR_MSG_ENABLE_LOCATION_SERVICES =
 	"Please enable location services on your browser!";
@@ -100,7 +100,7 @@ class MainLocationsPage extends Component {
 			errorMessage = ERR_MSG_TIMEOUT;
 		}
 
-		this.notifyError(errorMessage);
+		notifyError(errorMessage);
 		this.fetchSuggestedLocations();
 	};
 
@@ -113,13 +113,6 @@ class MainLocationsPage extends Component {
 				}
 			});
 		this.fetchSuggestedLocations();
-	};
-
-	notifyError = errorMessage => {
-		notification.error({
-			message: "Error",
-			description: errorMessage
-		});
 	};
 
 	fetchSuggestedLocations = () => {
