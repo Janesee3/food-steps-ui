@@ -30,7 +30,7 @@ class EditLocationModal extends React.Component {
           <LocationForm
             editMode={true}
             selectedLocation={location}
-            handleChange={this.handleFormChange}
+            onLocationNameInputChange={this.handleFormChange}
             locationNameInput={location.locationName}
           />
         )}

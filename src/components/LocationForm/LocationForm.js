@@ -91,7 +91,7 @@ class LocationForm extends React.Component {
               }
             ],
             initialValue: this.props.locationNameInput
-          })(<Input onChange={event => this.props.handleChange(event)} />)}
+          })(<Input onChange={event => this.props.onLocationNameInputChange(event)} />)}
         </Form.Item>
 
         {editMode ? (
