@@ -33,7 +33,7 @@ exports[`Snapshot should contain the closeModal 1`] = `
     showEditModal={[Function]}
     userLocations={Array []}
   />
-  <Form(Component)
+  <EditLocationModal
     closeModal={[Function]}
     location={undefined}
     onUpdate={[Function]}
@@ -52,7 +52,7 @@ exports[`Snapshot should contain the showEditModal 1`] = `
     showEditModal={[Function]}
     userLocations={Array []}
   />
-  <Form(Component)
+  <EditLocationModal
     closeModal={[Function]}
     location={undefined}
     onUpdate={[Function]}

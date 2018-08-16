@@ -34,8 +34,9 @@ class UserLocationsPage extends Component {
     this.setState({ isEditModalOpen: false });
   };
 
-  onUserUpdate = () => {
-    console.log("Hello");
+  onUserUpdate = (updatedLocation) => {
+
+    console.log("updatedLocation",updatedLocation);
   };
 
   onUserConfirmDelete = async foodPlacesListIndex => {
