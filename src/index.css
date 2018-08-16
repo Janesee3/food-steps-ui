@@ -11,3 +11,19 @@ body {
   height: calc(100vh-64px)
 }
 
+.ant-drawer {
+  top: 9vh;
+}
+
+.ant-drawer-header {
+  display: none;
+}
+
+.ant-drawer-content {
+  background-color: #021529;
+}
+
+.ant-drawer-body {
+  padding: 0
+}
+

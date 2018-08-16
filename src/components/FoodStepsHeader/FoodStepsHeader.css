@@ -1,9 +1,9 @@
-.header {
+.header-wrapper {
   /* css 'visible will distort the page', but 'overlay' might not be supported in firefox */
   overflow-y: overlay;
 }
 
-.header div.ant-layout-header {
+.header-wrapper div.ant-layout-header {
   padding: 0;
 }
 
@@ -14,22 +14,16 @@
 .logo {
   width: 48px;
   height: 48px;
-  margin: 8px 0;
-  background-image: url('../../assets/FoodStepsLogo.png');
-  background-size: cover;
+  margin: .5em 1em;
+  /* margin-left: auto; */
 }
 
 .sign-up-button {
-  float: right;
-  margin: 1.1em;
-}
-
-.navbar-mobile-btn {
-  margin: 1.1em;
+  margin: 1em 1em 0 auto;
 }
 
 .avatar {
-  float: right;
+  margin-left: auto;
   color: white;
   padding: 0 1em;
   cursor: pointer;
@@ -41,4 +35,31 @@
 
 .avatar .avatar-username {
   margin-left: .75em;
+}
+
+.header {
+  display: inline-flex;
+  width: 100%;
+}
+
+.nav-bar-desktop {
+  display: block;
+}
+
+.menu-btn-wrapper {
+  display: none;
+}
+
+@media screen and (max-width:800px) {
+  .nav-bar-desktop {
+    display: none;
+  }
+
+  .menu-btn-wrapper{
+    display: block;
+  }
+
+  .logo {
+    margin-left: auto;
+  }
 }
