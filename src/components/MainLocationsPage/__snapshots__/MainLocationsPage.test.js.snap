@@ -33,9 +33,27 @@ exports[`should render snapshot correctly 1`] = `
       >
         Add New Food Place
       </Button>
-      <LocationsList
-        userLocations={Array []}
-      />
+      <div
+        className="list-container"
+      >
+        <InfiniteScroll
+          element="div"
+          hasMore={false}
+          initialLoad={false}
+          isReverse={false}
+          loadMore={[Function]}
+          loader={null}
+          pageStart={0}
+          ref={null}
+          threshold={250}
+          useCapture={false}
+          useWindow={false}
+        >
+          <LocationsList
+            userLocations={Array []}
+          />
+        </InfiniteScroll>
+      </div>
     </div>
   </div>
 </div>
