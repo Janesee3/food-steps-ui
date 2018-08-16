@@ -8,6 +8,8 @@ import {
 import { API_HOST, putToServer } from "../../utils/networkUtils";
 // import { seedData } from './seedData'
 
+const URL = `${API_HOST}/locations/user/`;
+
 class UserLocationsPage extends Component {
   constructor() {
     super();
