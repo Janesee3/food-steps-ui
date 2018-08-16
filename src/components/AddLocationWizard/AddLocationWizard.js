@@ -72,6 +72,7 @@ class AddLocationWizard extends Component {
 							onLocationNameInputChange={this.onLocationNameInputChange}
 							locationNameInput={this.state.locationNameInput}
 							cancelWizard={this.props.cancelWizard}
+							refreshUserLocationsList={this.props.refreshUserLocationsList}
 						/>
 					</div>
 				)}

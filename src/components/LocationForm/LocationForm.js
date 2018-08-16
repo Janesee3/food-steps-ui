@@ -63,6 +63,8 @@ class LocationForm extends React.Component {
       return;
     }
 
+    this.props.refreshUserLocationsList();
+
     this.notifySuccess(creationResult.message);
 
     this.resetForm();

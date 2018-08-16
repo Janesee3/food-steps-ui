@@ -228,6 +228,7 @@ class MainLocationsPage extends Component {
 							nearbyLocations={this.state.nearbyLocations}
 							setSelectedLocation={this.setSelectedLocation}
 							cancelWizard={this.toggleWizardVisibility}
+							refreshUserLocationsList={this.getUserLocations}
 						/>
 					) : (
 						<div>
