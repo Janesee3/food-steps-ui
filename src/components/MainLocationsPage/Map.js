@@ -25,7 +25,7 @@ export class MapContainer extends Component {
       <div className="map">
         <Map
           google={this.props.google}
-          zoom={14}
+          zoom={17}
           center={{
             lat: this.props.userCurrentPostion.lat,
             lng: this.props.userCurrentPostion.lng
