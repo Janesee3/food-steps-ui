@@ -20,3 +20,12 @@
     font-size: 0.688em;
     margin: 0;
   }
+
+  .address-card-display {
+    border-bottom: 1px solid #cecece;
+    margin: 0 1em 0 0;
+  }
+  
+  .address-card-display div.ant-card-body {
+    padding: 1em;
+  }

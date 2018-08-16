@@ -1,55 +1,36 @@
-import React from 'react';
-import { Modal, Form, Input,Card } from "antd";
+import React from "react";
+import { Modal, Form, Input, Card } from "antd";
+import LocationForm from '../LocationForm/LocationForm';
 
 const EditLocationModal = Form.create()(
   class extends React.Component {
+    handleFormChange = (event) => {
+      console.log(event.target.value)
+    }
+
     render() {
-      const { visible, closeModal, onUpdate, form } = this.props;
+      const { visible, closeModal, onUpdate, form, location } = this.props;
       const { getFieldDecorator } = form;
       return (
         <Modal
           visible={visible}
-          title="Update Food Location"
+          title="Edit Food Location"
           okText="Update"
           onCancel={closeModal}
           onOk={onUpdate}
         >
-          <Form layout="vertical" onSubmit={this.handleSubmit}>
-            <Form.Item label="Food Place Name">
-              {getFieldDecorator("locationName", {
-                rules: [
-                  {
-                    required: true,
-                    message: "Please give this food place a name!",
-                    whitespace: true
-                  }
-                ],
-                initialValue: this.props.locationNameInput
-              })(<Input onChange={event => this.props.handleChange(event)} />)}
-            </Form.Item>
-
-            <Form.Item id="address" label="Address">
-              {getFieldDecorator("address", {
-                rules: [
-                  {
-                    required: true,
-                    message: "Please select an address!"
-                  }
-                ]
-              })(
-                <Card
-                  className="address-card"
-                  onClick={this.props.goToLocationSelector}
-                >
-                  {this.props.selectedLocation ? (
-                    <p>{this.props.selectedLocation.address}</p>
-                  ) : (
-                    <p className="address-placeholder">Select address</p>
-                  )}
-                </Card>
-              )}
-            </Form.Item>
-          </Form>
+        {location && 
+          <LocationForm
+          editMode={true}
+          selectedLocation={location}
+          // resetSelectedLocation={() => this.props.setSelectedLocation(null)}
+          // goToLocationSelector={() =>
+          //   this.changeWizardStep(WIZARD_STEP_LOCATION)
+          // }
+          handleChange={this.handleFormChange}
+          locationNameInput={location.locationName}
+          // goBackToFirstWizardStep={this.props.cancelWizard}
+        />}
         </Modal>
       );
     }

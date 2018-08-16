@@ -28,3 +28,24 @@ test("Snapshot fetch should match mocked data", async () => {
   const result = await fetchMockData();
   expect(result).toMatchSnapshot();
 });
+
+test.only('Snapshot should contain the showEditModal', () => {
+  const renderer = new ShallowRenderer();
+  renderer.render(<UserLocationsPage />);
+  const instance = renderer.getMountedInstance();
+  instance.showEditModal() 
+  const result = renderer.getRenderOutput()
+
+  expect(result).toMatchSnapshot(); 
+});
+
+test.only('Snapshot should contain the closeModal', () => {
+  const renderer = new ShallowRenderer();
+  renderer.render(<UserLocationsPage />);
+  const instance = renderer.getMountedInstance();
+  instance.closeModal() 
+  const result = renderer.getRenderOutput()
+
+  expect(result).toMatchSnapshot(); 
+});
+

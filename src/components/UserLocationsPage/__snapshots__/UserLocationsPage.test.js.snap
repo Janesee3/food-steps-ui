@@ -22,3 +22,41 @@ exports[`Snapshot fetch should match mocked data 1`] = `
   />
 </div>
 `;
+
+exports[`Snapshot should contain the closeModal 1`] = `
+<div>
+  <LocationsList
+    closeModal={[Function]}
+    detailed={true}
+    onUserConfirmDelete={[Function]}
+    showDeleteModal={undefined}
+    showEditModal={[Function]}
+    userLocations={Array []}
+  />
+  <Form(Component)
+    closeModal={[Function]}
+    location={undefined}
+    onUpdate={[Function]}
+    visible={false}
+  />
+</div>
+`;
+
+exports[`Snapshot should contain the showEditModal 1`] = `
+<div>
+  <LocationsList
+    closeModal={[Function]}
+    detailed={true}
+    onUserConfirmDelete={[Function]}
+    showDeleteModal={undefined}
+    showEditModal={[Function]}
+    userLocations={Array []}
+  />
+  <Form(Component)
+    closeModal={[Function]}
+    location={undefined}
+    onUpdate={[Function]}
+    visible={true}
+  />
+</div>
+`;

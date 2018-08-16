@@ -6,7 +6,7 @@ import {
   notifyDeleteSuccess,
   deleteErrorModal
 } from "../UserLocationsPage/UserLocationsHelper";
-import EditLocationModal from "../EditLocationModel/EditLocationModal"
+import EditLocationModal from "../EditLocationModel/EditLocationModal";
 // import { seedData } from './seedData'
 const confirm = Modal.confirm;
 const FormItem = Form.Item;
@@ -18,18 +18,24 @@ class UserLocationsPage extends Component {
     super();
     this.state = {
       userLocations: [],
-      isEditModalOpen: false //to render modal
+      isEditModalOpen: false, //to render modal
+      editIndex: undefined
     };
   }
 
-  showEditModal = () => {
+  showEditModal = editIndex => {
     this.setState({
-      isEditModalOpen: true
+      isEditModalOpen: true,
+      editIndex: editIndex
     });
   };
 
   closeModal = () => {
     this.setState({ isEditModalOpen: false });
+  };
+
+  onUserUpdate = () => {
+    console.log("Hello");
   };
 
   onUserConfirmDelete = async foodPlacesListIndex => {
@@ -87,7 +93,14 @@ class UserLocationsPage extends Component {
           showEditModal={this.showEditModal}
           closeModal={this.closeModal}
         />
-        <EditLocationModal visible={this.state.isEditModalOpen}   closeModal={this.closeModal} onUpdate={this.showEditModal}/>
+        {/* {this.state.editIndex && ( */}
+          <EditLocationModal
+            visible={this.state.isEditModalOpen}
+            closeModal={this.closeModal}
+            onUpdate={this.onUserUpdate}
+            location={this.state.userLocations[this.state.editIndex]}
+          />
+        {/* )} */}
       </div>
     );
   }
