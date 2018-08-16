@@ -29,8 +29,7 @@ exports[`props.detailed is true props.detailed true snapshot test 1`] = `
     loading={false}
     pagination={
       Object {
-        "onChange": [Function],
-        "pageSize": 2,
+        "pageSize": 3,
       }
     }
     prefixCls="ant-list"
