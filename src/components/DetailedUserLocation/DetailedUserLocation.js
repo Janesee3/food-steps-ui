@@ -41,7 +41,7 @@ const DetailedUserLocation = props => {
         <div>{`Updated on: ${location.updatedAt}`}</div>
       </div>
       <div>
-        <Rate allowHalf defaultValue={2.5} />
+        <Rate allowHalf disabled defaultValue={2.5} />
       </div>
     </List.Item>
   );

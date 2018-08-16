@@ -59,6 +59,7 @@ exports[`snapshot test 1`] = `
         />
       }
       defaultValue={2.5}
+      disabled={true}
       prefixCls="ant-rate"
     />
   </div>
