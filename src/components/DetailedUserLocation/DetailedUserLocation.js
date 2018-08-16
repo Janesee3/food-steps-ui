@@ -31,7 +31,7 @@ const DetailedUserLocation = props => {
     >
       <List.Item.Meta
         avatar={<Avatar src={location.avatar} />}
-        title={<a href={location.href}>{location.locationName}</a>}
+        title={<p>{location.locationName}</p>}
         description={location.globalLocation.geocodedLocationName}
       />
 

@@ -35,11 +35,9 @@ exports[`snapshot test 1`] = `
     }
     description="original soy chicken rice"
     title={
-      <a
-        href={undefined}
-      >
+      <p>
         soy chicken rice
-      </a>
+      </p>
     }
   />
   <div>
