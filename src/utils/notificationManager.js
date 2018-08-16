@@ -1,7 +1,7 @@
 import { notification } from "antd";
 
-const NOTIFCATION_TITLE_ERROR = "Error";
-const NOTIFCATION_TITLE_SUCCESS = "Success";
+export const NOTIFCATION_TITLE_ERROR = "Error";
+export const NOTIFCATION_TITLE_SUCCESS = "Success";
 
 export const notifyError = errorMessage => {
 	notification.error({
