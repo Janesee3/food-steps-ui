@@ -7,6 +7,7 @@ import { Button, notification } from "antd";
 import GoogleApiWrapper from "./Map";
 import "./MainLocationsPage.css";
 import AddLocationWizard from "../AddLocationWizard/AddLocationWizard";
+import InfiniteScroll from "react-infinite-scroller";
 
 const ERR_MSG_ENABLE_LOCATION_SERVICES =
 	"Please enable location services on your browser!";
@@ -237,7 +238,16 @@ class MainLocationsPage extends Component {
 							>
 								Add New Food Place
 							</Button>
-							<LocationsList userLocations={this.state.userLocations} />
+							<div className="list-container">
+								<InfiniteScroll
+									initialLoad={false}
+									pageStart={0}
+									useWindow={false}
+									loadMore={() => {}}
+								>
+									<LocationsList userLocations={this.state.userLocations} />
+								</InfiniteScroll>
+							</div>
 						</div>
 					)}
 				</div>
