@@ -62,7 +62,7 @@ class AddLocationWizard extends Component {
 
 				{/* ADD NEW LOCATION FORM PAGE */}
 				{this.state.currentWizardStep === WIZARD_STEP_FORM && (
-					<div>
+					<div className="add-location-form-wrapper">
 						<Button onClick={this.cancelWizard}>Cancel</Button>
 						<LocationForm
 							selectedLocation={this.props.selectedLocation}

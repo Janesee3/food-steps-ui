@@ -201,8 +201,6 @@ class MainLocationsPage extends Component {
 			});
 	};
 
-	
-
 	render() {
 		return (
 			<div className="main-locations">
@@ -228,13 +226,16 @@ class MainLocationsPage extends Component {
 						/>
 					) : (
 						<div>
-							<Button
-								type="primary"
-								icon="plus"
-								onClick={this.toggleWizardVisibility}
-							>
-								Add New Food Place
-							</Button>
+							<div className="add-new-loc-btn-wrapper">
+								<Button
+									type="primary"
+									icon="plus"
+									onClick={this.toggleWizardVisibility}
+								>
+									Add New Food Place
+								</Button>
+							</div>
+
 							<div className="list-container">
 								<InfiniteScroll
 									initialLoad={false}

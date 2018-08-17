@@ -6,7 +6,6 @@
 .main-locations {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-gap: 25px
 }
 
 #map-container {
@@ -14,12 +13,30 @@
 }
 
 #right-panel-container {
+    border-left: 1px solid #d3d3d352;
     grid-column: 2 / 3;
-    margin-right: 1em;
-    margin-top: 1em;
+    margin: 0;
+    padding: 0;
 }
 
 .list-container {
     overflow: auto;
     height: calc(100vh - 64px - 32px);
+    padding: 1em;
+}
+
+.add-new-loc-btn-wrapper {
+    text-align: center;
+    padding: 1em;
+    -webkit-box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.144);
+    -moz-box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.144);
+    box-shadow: 0 6px 4px -4px rgba(0, 0, 0, 0.144);
+}
+
+@media screen and (max-width:800px) {
+    .main-locations {
+        display: block;
+    }
+
+    
   }
