@@ -51,6 +51,7 @@ class LocationSuggestionList extends Component {
 
 	getSelected = (location, index) => {
 		this.props.onLocationSelected(location);
+		this.props.setMapCenter(location);
 		this.setState({
 			selectedListIndex: index
 		});

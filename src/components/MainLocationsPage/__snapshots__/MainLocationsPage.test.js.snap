@@ -8,6 +8,12 @@ exports[`should render snapshot correctly 1`] = `
     id="map-container"
   >
     <Wrapper
+      mapCenter={
+        Object {
+          "lat": 1.304,
+          "lng": 103.8318,
+        }
+      }
       onMapLoaded={[Function]}
       userCurrentPostion={
         Object {

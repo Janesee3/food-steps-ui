@@ -28,6 +28,7 @@ class AddLocationWizard extends Component {
 	};
 
 	cancelWizard = () => {
+		this.props.resetMapCenter();
 		this.props.setSelectedLocation(null);
 		this.props.cancelWizard();
 	};
@@ -59,6 +60,7 @@ class AddLocationWizard extends Component {
 							nearbyLocations={this.props.nearbyLocations}
 							onLocationSelected={this.props.setSelectedLocation}
 							google={this.props.google}
+							setMapCenter={this.props.setMapCenter}
 						/>
 					</div>
 				)}

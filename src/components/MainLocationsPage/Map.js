@@ -25,8 +25,8 @@ export class MapContainer extends Component {
 					google={this.props.google}
 					zoom={17}
 					center={{
-						lat: this.props.userCurrentPostion.lat,
-						lng: this.props.userCurrentPostion.lng
+						lat: this.props.mapCenter.lat,
+						lng: this.props.mapCenter.lng
 					}}
 					onReady={this.props.onMapLoaded}
 				>
