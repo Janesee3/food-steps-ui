@@ -39,15 +39,35 @@ class UserLocationsPage extends Component {
     try {
       // const locationIdToUpdate = this.state.userLocations[this.state.editIndex]._id;
       const locationIdToUpdate = idOfLocationToUpdate;
-      const body = {locationName: updatedLocationName}
-      const res = await putToServer(
-        URL.concat(locationIdToUpdate), body, true 
-      );
-      
-      console.log(res.status)
-    }
-    catch(error) {
-      console.log(error)
+      const body = { locationName: updatedLocationName };
+      const res = await putToServer(URL.concat(locationIdToUpdate), body, true);
+      const oldLocationList=this.state.userLocations;
+
+      if (res.ok) {
+
+        const updatedLocation = {
+          ...this.state.locationCurrentlyEdited,
+          locationName: updatedLocationName
+        };
+  
+        const indexOfEditedLocation = oldLocationList.indexOf(
+          this.state.locationCurrentlyEdited
+        );
+  
+        const newUserLocations = [
+          ...oldLocationList.slice(0, indexOfEditedLocation),
+          updatedLocation,
+          ...oldLocationList.slice(indexOfEditedLocation+1)
+        ];
+
+        this.setState({
+          userLocations: newUserLocations
+        });
+      }
+
+      console.log(res.status);
+    } catch (error) {
+      console.log(error);
     }
   };
 
