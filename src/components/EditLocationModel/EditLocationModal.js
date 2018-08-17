@@ -21,16 +21,22 @@ class EditLocationModal extends React.Component {
 
   saveFormRef = formRef => {
     this.formRef = formRef;
-  }
+  };
 
   onUpdateClicked = () => {
-    this.formRef.props.form.validateFieldsAndScroll(this.onValidationCompletion);
-  }
+    this.formRef.props.form.validateFieldsAndScroll(
+      this.onValidationCompletion
+    );
+  };
 
   onValidationCompletion = async (err, values) => {
     if (err) return isDevelopment && console.error(err);
 
-    this.props.onUpdate(this.props.location._id, this.state.updatedLocationName);
+    this.props.onUpdate(
+      this.props.location._id,
+      this.state.updatedLocationName
+    );
+    this.formRef.props.form.resetFields();
   };
 
   render() {
@@ -42,7 +48,7 @@ class EditLocationModal extends React.Component {
         title="Edit Food Location"
         okText="Update"
         onCancel={this.props.closeModal}
-        onOk={this.onUpdateClicked} 
+        onOk={this.onUpdateClicked}
       >
         {location && (
           <LocationForm
