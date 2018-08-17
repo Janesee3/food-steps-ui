@@ -29,7 +29,6 @@ exports[`props.detailed is true props.detailed true snapshot test 1`] = `
     loading={false}
     pagination={
       Object {
-        "onChange": [Function],
         "pageSize": 3,
       }
     }
