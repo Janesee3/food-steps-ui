@@ -6,7 +6,7 @@
 }
 
 .add-loc-wizard-wrapper {
-    padding: 1em;
+    padding: 1em 1em 0 1em;
 }
 
 @media screen and (max-width:800px) {

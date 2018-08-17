@@ -4,7 +4,7 @@
 
 .list-container {
     overflow: auto;
-    height: calc(100vh - 64px - 32px - 32px - 6.5em);
+    height: calc(100vh - 64px - 32px - 32px - 7.5em);
   }
 
 .list-item {
@@ -38,3 +38,9 @@
     color: rgb(110, 110, 110)
 
   }
+
+  @media screen and (max-width:800px) {
+    .list-item {
+      margin: 0
+    }
+}
