@@ -16,7 +16,7 @@ class UserLocationsPage extends Component {
     this.state = {
       userLocations: [],
       isEditModalOpen: false,
-      editIndex: undefined
+      locationCurrentlyEdited: {}
     };
   }
 
@@ -24,11 +24,10 @@ class UserLocationsPage extends Component {
     await this.getUserLocations();
   }
 
-  showEditModal = editIndex => {
-    // console.log("EDIT INDEX in PAGE", editIndex);
+  showEditModal = locationCurrentlyEdited => {
     this.setState({
       isEditModalOpen: true,
-      editIndex: editIndex
+      locationCurrentlyEdited: locationCurrentlyEdited
     });
   };
 
@@ -36,15 +35,19 @@ class UserLocationsPage extends Component {
     this.setState({ isEditModalOpen: false });
   };
 
-  onUserUpdate = async updatedLocationName => {
+  onUserUpdate = async (idOfLocationToUpdate, updatedLocationName) => {
     try {
-      const locationIdToUpdate = this.state.userLocations[this.state.editIndex]
-        ._id;
-      const body = { locationName: updatedLocationName };
-      const res = await putToServer(URL.concat(locationIdToUpdate), body, true);
-      console.log(res.status);
-    } catch (error) {
-      console.log(error);
+      // const locationIdToUpdate = this.state.userLocations[this.state.editIndex]._id;
+      const locationIdToUpdate = idOfLocationToUpdate;
+      const body = {locationName: updatedLocationName}
+      const res = await putToServer(
+        URL.concat(locationIdToUpdate), body, true 
+      );
+      
+      console.log(res.status)
+    }
+    catch(error) {
+      console.log(error)
     }
   };
 
@@ -98,7 +101,7 @@ class UserLocationsPage extends Component {
           visible={this.state.isEditModalOpen}
           closeModal={this.closeModal}
           onUpdate={this.onUserUpdate}
-          location={this.state.userLocations[this.state.editIndex]}
+          location={this.state.locationCurrentlyEdited}
         />
       </div>
     );

@@ -30,7 +30,7 @@ class EditLocationModal extends React.Component {
   onValidationCompletion = async (err, values) => {
     if (err) return isDevelopment && console.error(err);
 
-    this.props.onUpdate(this.state.updatedLocationName);
+    this.props.onUpdate(this.props.location._id, this.state.updatedLocationName);
   };
 
   render() {

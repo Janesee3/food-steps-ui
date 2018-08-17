@@ -35,7 +35,7 @@ exports[`Snapshot should contain the closeModal 1`] = `
   />
   <EditLocationModal
     closeModal={[Function]}
-    location={undefined}
+    location={Object {}}
     onUpdate={[Function]}
     visible={false}
   />

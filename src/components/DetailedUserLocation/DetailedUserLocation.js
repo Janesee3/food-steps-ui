@@ -7,7 +7,7 @@ const DetailedUserLocation = props => {
   return (
     <List.Item
       actions={[
-        <a onClick={() => props.showEditModal(props.foodPlacesListIndex)}>
+        <a onClick={() => props.showEditModal(props.location)}>
           edit
         </a>,
         <a
