@@ -64,7 +64,7 @@ class FoodStepsHeader extends Component {
 		);
 
 		const avatarMenu = (
-			<Menu theme="dark" style={{ lineHeight: "64px" }} mode="inline">
+			<Menu theme="dark">
 				<Menu.Item onClick={this.handleLogout}>Sign Out</Menu.Item>
 			</Menu>
 		);

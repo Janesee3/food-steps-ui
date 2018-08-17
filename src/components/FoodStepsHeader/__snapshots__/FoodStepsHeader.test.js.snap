@@ -30,13 +30,7 @@ exports[`renders snapshot correctly when user is logged in 1`] = `
         <Menu
           className=""
           focusable={false}
-          mode="inline"
           prefixCls="ant-menu"
-          style={
-            Object {
-              "lineHeight": "64px",
-            }
-          }
           theme="dark"
         >
           <MenuItem
