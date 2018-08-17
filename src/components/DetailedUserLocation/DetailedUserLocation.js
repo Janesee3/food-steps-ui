@@ -25,7 +25,7 @@ const DetailedUserLocation = props => {
         <img
           width={200}
           alt="logo"
-          src="https://orig00.deviantart.net/a39f/f/2013/084/5/1/cat_drawing_by_blacktailedwolf-d5zak6l.png"
+          src="https://source.unsplash.com/featured/?dishes,food,fish"
         />
       }
     >
