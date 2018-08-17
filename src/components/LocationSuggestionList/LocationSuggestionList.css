@@ -9,7 +9,6 @@
 
 .list-item {
     border-bottom: 1px solid #cecece;
-    margin: 0 -1em;
     transition-property: all;
     transition-duration: .15s;
     transition-timing-function: linear;
@@ -27,7 +26,6 @@
 .selected-list-item {
     background-color: #e1eef9;
     font-weight: 500;
-    margin: 0 -1em;
   }
 
 
@@ -39,8 +37,3 @@
 
   }
 
-  @media screen and (max-width:800px) {
-    .list-item {
-      margin: 0
-    }
-}

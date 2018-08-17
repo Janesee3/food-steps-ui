@@ -8,130 +8,152 @@ const CREATE_BUTTON_DISPLAY_TEXT = "Create";
 const isDevelopment = process.env.NODE_ENV === "development";
 
 class LocationForm extends React.Component {
-  // ** LIFECYCLE METHODS ** //
+	state = {
+		isLoading: false
+	};
 
-  // Added to validate when user tries to create without selecting address
-  componentDidMount() {
-    this.props.selectedLocation &&
-      this.props.form.setFieldsValue({
-        address: this.props.selectedLocation.address
-      });
-  }
+	// ** LIFECYCLE METHODS ** //
 
-  // ** UTILITY METHODS ** //
-  createNewLocation = async values => {
-    // Package req body
-    const requestBody = {
-      locationName: values.locationName,
-      geocodedLocationName: this.props.selectedLocation.address,
-      lat: this.props.selectedLocation.location.lat,
-      lng: this.props.selectedLocation.location.lng
-    };
+	// Added to validate when user tries to create without selecting address
+	componentDidMount() {
+		this.props.selectedLocation &&
+			this.props.form.setFieldsValue({
+				address: this.props.selectedLocation.address
+			});
+	}
 
-    return await createUserLocation(requestBody);
-  };
+	// ** UTILITY METHODS ** //
 
-  resetForm = () => {
-    this.props.form.resetFields();
-    this.props.resetSelectedLocation();
-  };
+	toggleIsLoading = () => {
+		this.setState({
+			isLoading: !this.state.isLoading
+		});
+	};
 
-  onValidationCompletion = async (err, values) => {
-    if (err) return isDevelopment && console.error(err);
+	createNewLocation = async values => {
+		// Package req body
+		const requestBody = {
+			locationName: values.locationName,
+			geocodedLocationName: this.props.selectedLocation.address,
+			lat: this.props.selectedLocation.location.lat,
+			lng: this.props.selectedLocation.location.lng
+		};
 
-    const creationResult = await this.createNewLocation(values);
+		return await createUserLocation(requestBody);
+	};
 
-    if (!creationResult.ok) {
-      notifyError(creationResult.message);
-      return;
-    }
+	resetForm = () => {
+		this.props.form.resetFields();
+		this.props.resetSelectedLocation();
+	};
 
-    this.props.refreshUserLocationsList();
+	onValidationCompletion = async (err, values) => {
+		if (err) {
+			this.toggleIsLoading();
+			return isDevelopment && console.error(err);
+		}
 
-    notifySuccess(creationResult.message);
+		const creationResult = await this.createNewLocation(values);
 
-    this.resetForm();
+		if (!creationResult.ok) {
+			this.toggleIsLoading();
+			notifyError(creationResult.message);
+			return;
+		}
 
-    this.props.cancelWizard();
-  };
+		this.props.refreshUserLocationsList();
 
-  handleSubmit = event => {
-    event.preventDefault();
-    this.props.form.validateFieldsAndScroll(this.onValidationCompletion);
-  };
+		notifySuccess(creationResult.message);
 
-  render() {
-    const editMode = this.props.editMode || false;
-    const { getFieldDecorator } = this.props.form;
-    const tailFormItemLayout = null;
-    return (
-      <Form layout="vertical" onSubmit={this.handleSubmit}>
-        <Form.Item label="Food Place Name">
-          {getFieldDecorator("locationName", {
-            rules: [
-              {
-                required: true,
-                message: "Please give this food place a name!",
-                whitespace: true
-              }
-            ],
-            initialValue: this.props.locationNameInput
-          })(
-            <Input
-              onChange={event => this.props.onLocationNameInputChange(event)}
-            />
-          )}
-        </Form.Item>
+		this.resetForm();
 
-        {editMode ? (
-          <Form.Item id="address" label="Address">
-            <Card className="address-card-display">
-              <p>
-                {
-                  this.props.selectedLocation.globalLocation
-                    .geocodedLocationName
-                }
-              </p>
-            </Card>
-          </Form.Item>
-        ) : (
-          <Form.Item id="address" label="Address">
-            {getFieldDecorator("address", {
-              rules: [
-                {
-                  required: true,
-                  message: "Please select an address!"
-                }
-              ]
-            })(
-              <Card
-                className="address-card"
-                onClick={this.props.goToLocationSelector}
-              >
-                {this.props.selectedLocation ? (
-                  <p>{this.props.selectedLocation.address}</p>
-                ) : (
-                  <p className="address-placeholder">Select address</p>
-                )}
-              </Card>
-            )}
-          </Form.Item>
-        )}
+		this.toggleIsLoading();
 
-        {!editMode && (
-          <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
-              {CREATE_BUTTON_DISPLAY_TEXT}
-            </Button>
-          </Form.Item>
-        )}
-      </Form>
-    );
-  }
+		this.props.cancelWizard();
+	};
+
+	handleSubmit = event => {
+		event.preventDefault();
+		this.props.form.validateFieldsAndScroll(this.onValidationCompletion);
+		this.toggleIsLoading();
+	};
+
+	render() {
+		const editMode = this.props.editMode || false;
+		const { getFieldDecorator } = this.props.form;
+		const tailFormItemLayout = null;
+		return (
+			<Form layout="vertical" onSubmit={this.handleSubmit}>
+				<Form.Item label="Food Place Name">
+					{getFieldDecorator("locationName", {
+						rules: [
+							{
+								required: true,
+								message: "Please give this food place a name!",
+								whitespace: true
+							}
+						],
+						initialValue: this.props.locationNameInput
+					})(
+						<Input
+							onChange={event => this.props.onLocationNameInputChange(event)}
+						/>
+					)}
+				</Form.Item>
+
+				{editMode ? (
+					<Form.Item id="address" label="Address">
+						<Card className="address-card-display">
+							<p>
+								{
+									this.props.selectedLocation.globalLocation
+										.geocodedLocationName
+								}
+							</p>
+						</Card>
+					</Form.Item>
+				) : (
+					<Form.Item id="address" label="Address">
+						{getFieldDecorator("address", {
+							rules: [
+								{
+									required: true,
+									message: "Please select an address!"
+								}
+							]
+						})(
+							<Card
+								className="address-card"
+								onClick={this.props.goToLocationSelector}
+							>
+								{this.props.selectedLocation ? (
+									<p>{this.props.selectedLocation.address}</p>
+								) : (
+									<p className="address-placeholder">Select address</p>
+								)}
+							</Card>
+						)}
+					</Form.Item>
+				)}
+
+				{!editMode && (
+					<Form.Item {...tailFormItemLayout}>
+						<Button
+							type="primary"
+							htmlType="submit"
+							loading={this.state.isLoading}
+						>
+							{CREATE_BUTTON_DISPLAY_TEXT}
+						</Button>
+					</Form.Item>
+				)}
+			</Form>
+		);
+	}
 }
 
 export const testExports = {
-  LocationForm
+	LocationForm
 };
 
 export default Form.create()(LocationForm);
