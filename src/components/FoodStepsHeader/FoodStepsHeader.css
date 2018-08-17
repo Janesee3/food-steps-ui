@@ -30,7 +30,7 @@
 }
 
 .avatar:hover {
-  background-color: #3e4a56;
+  background-color: rgba(255, 255, 255, 0.342);
 }
 
 .avatar .avatar-username {
@@ -48,6 +48,10 @@
 
 .menu-btn-wrapper {
   display: none;
+}
+
+.ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected{
+  background-color: rgba(255, 255, 255, 0.342);
 }
 
 @media screen and (max-width:800px) {
