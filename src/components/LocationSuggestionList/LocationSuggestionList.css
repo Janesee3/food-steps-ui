@@ -2,31 +2,32 @@
     border-radius: 4px;
   }
 
-  .add-loc-wizard-wrapper > .list-container {
+.list-container {
     overflow: auto;
     height: calc(100vh - 64px - 32px - 32px - 6.5em);
   }
 
-  .add-loc-wizard-wrapper > .list-item {
+.list-item {
     border-bottom: 1px solid #cecece;
-    margin: 0 1em 0 0;
+    margin: 0 -1em;
     transition-property: all;
     transition-duration: .15s;
     transition-timing-function: linear;
     cursor: pointer;
   }
   
-  .add-loc-wizard-wrapper > .list-item:hover {
-    background-color: rgba(166, 255, 249, 0.36);  
+.list-item:hover {
+    background-color: #e1eef9;  
   }
 
-  .add-loc-wizard-wrapper > .list-content {
+.list-content {
     padding-left: .5em;
   }
   
-  .add-loc-wizard-wrapper > .selected-list-item {
-    background-color: rgba(166, 255, 249, 0.36);
+.selected-list-item {
+    background-color: #e1eef9;
     font-weight: 500;
+    margin: 0 -1em;
   }
 
 
