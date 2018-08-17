@@ -12,7 +12,9 @@ import { notifyError } from "../../utils/notificationManager";
 const ERR_MSG_ENABLE_LOCATION_SERVICES =
 	"Please enable location services on your browser!";
 const ERR_MSG_TIMEOUT =
-	"Cannot fetch current location. Please refresh page to try again!";
+  "Cannot fetch current location. Please refresh page to try again!";
+
+const URL = `${API_HOST}/locations/user/`;
 
 class MainLocationsPage extends Component {
 	constructor() {
