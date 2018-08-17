@@ -38,6 +38,12 @@ export class MapContainer extends Component {
 						}}
 						onClick={this.onMarkerClick}
 						name={"You are here"}
+						icon={{
+							url:
+								"https://cdn3.iconfinder.com/data/icons/digital-marketing-flat-vol-4/104/user__pin__location__GPS__marker-512.png",
+							origin: new google.maps.Point(0, 0),
+							scaledSize: new google.maps.Size(60, 64)
+						}}
 					/>
 
 					{/* User Location Marker  (BLACK)*/}
@@ -55,7 +61,7 @@ export class MapContainer extends Component {
 										name={place.locationName}
 										icon={{
 											url:
-												"https://cdn.iconscout.com/public/images/icon/premium/png-512/food-point-restaurant-location-navigation-system-court-dining-35adf1e9b6b084fb-512x512.png",
+												"https://image.ibb.co/jAo5se/food_location_Icon.png",
 											origin: new google.maps.Point(0, 0),
 											scaledSize: new google.maps.Size(32, 32)
 										}}
@@ -73,12 +79,6 @@ export class MapContainer extends Component {
 							}}
 							onClick={this.onMarkerClick}
 							name={this.props.userSelectedLocation.address}
-							icon={{
-								url:
-									"https://cdn2.iconfinder.com/data/icons/webstore/512/map_marker-512.png",
-								origin: new google.maps.Point(0, 0),
-								scaledSize: new google.maps.Size(32, 32)
-							}}
 						/>
 					) : null}
 
