@@ -14,13 +14,12 @@
   },
   "scripts": {
     "start": "env PORT=3001 react-scripts start",
-    "start:sim": "NODE_ENV=production REACT_APP_API_HOST=https://food-steps-api.herokuapp.com react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "test:cypress": "env CYPRESS_baseUrl=https://food-steps-ui.herokuapp.com cypress open",
+    "test:cypress": "env NODE_ENV=production CYPRESS_baseUrl=https://food-steps-ui.herokuapp.com cypress open",
     "test:cypress-headless": "env CYPRESS_baseUrl=https://food-steps-ui.herokuapp.com cypress run",
-    "cypress:cleanup": "node cypress/cleanup.js",
+    "test:cypress:cleanup": "node cypress/cleanup.js",
     "cypress:dev": "env PORT=3003 REACT_APP_API_HOST=http://localhost:3002 react-scripts start & wait-on http://localhost:3003 & env CYPRESS_baseUrl=http://localhost:3003 cypress run && exit 0",
     "cypress:staging": "node cypress/cleanup.js && env CYPRESS_baseUrl=https://food-steps-ui.herokuapp.com cypress run && node cypress/cleanup.js"
   },

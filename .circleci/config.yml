@@ -47,13 +47,13 @@ jobs:
             - ~/.cache
       - run: # cleanup test db
           name: Cleanup before Test
-          command: npm run cypress:cleanup
+          command: npm run test:cypress:cleanup
       - run: # run tests
           name: Run Cypress Test (headless)
           command: npm run test:cypress-headless
       - run: # cleanup test db
           name: Cleanup after Test
-          command: npm run cypress:cleanup
+          command: npm run test:cypress:cleanup
       - run:
           command: |
             mkdir -p /tmp/video_dumps
