@@ -3,7 +3,9 @@ import LocationsLists from "../LocationsList/LocationsList";
 import EditLocationModal from "../EditLocationModel/EditLocationModal";
 import {
   notifyDeleteSuccess,
-  deleteErrorModal
+  deleteErrorModal,
+  updateErrorModal,
+  notifyUpdateSuccess
 } from "../UserLocationsPage/UserLocationsHelper";
 import { API_HOST, putToServer } from "../../utils/networkUtils";
 // import { seedData } from './seedData'
@@ -37,42 +39,41 @@ class UserLocationsPage extends Component {
 
   onUserUpdate = async (idOfLocationToUpdate, updatedLocationName) => {
     try {
-      // const locationIdToUpdate = this.state.userLocations[this.state.editIndex]._id;
       const locationIdToUpdate = idOfLocationToUpdate;
       const body = { locationName: updatedLocationName };
       const res = await putToServer(URL.concat(locationIdToUpdate), body, true);
-      const oldLocationList=this.state.userLocations;
+      const oldLocationList = this.state.userLocations;
 
       if (res.ok) {
-
         const updatedLocation = {
           ...this.state.locationCurrentlyEdited,
           locationName: updatedLocationName
         };
-  
+
         const indexOfEditedLocation = oldLocationList.indexOf(
           this.state.locationCurrentlyEdited
         );
-  
+
         const newUserLocations = [
           ...oldLocationList.slice(0, indexOfEditedLocation),
           updatedLocation,
-          ...oldLocationList.slice(indexOfEditedLocation+1)
+          ...oldLocationList.slice(indexOfEditedLocation + 1)
         ];
+
+        notifyUpdateSuccess();
 
         this.setState({
           userLocations: newUserLocations
         });
-      }
 
-      console.log(res.status);
+        this.closeModal();
+      }
     } catch (error) {
-      console.log(error);
+      updateErrorModal();
     }
   };
 
   onUserConfirmDelete = async foodPlacesListIndex => {
-    // console.log("DELETE INDEX in PAGE", foodPlacesListIndex);
     const locationId = this.state.userLocations[foodPlacesListIndex]._id;
     try {
       const res = await fetch(URL.concat(locationId), {
