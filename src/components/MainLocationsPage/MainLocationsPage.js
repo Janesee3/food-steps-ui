@@ -263,7 +263,7 @@ class MainLocationsPage extends Component {
 								</Button>
 							</div>
 
-							<div className="list-container">
+							<div className="locations-list-wrapper">
 								<InfiniteScroll
 									initialLoad={false}
 									pageStart={0}

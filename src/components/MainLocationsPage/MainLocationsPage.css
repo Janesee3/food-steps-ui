@@ -20,7 +20,7 @@
     padding: 0;
 }
 
-.list-container {
+.locations-list-wrapper {
     overflow: auto;
     height: calc(100vh - 64px - 32px);
     padding: 1em;

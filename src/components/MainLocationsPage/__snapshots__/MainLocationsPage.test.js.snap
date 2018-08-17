@@ -44,7 +44,7 @@ exports[`should render snapshot correctly 1`] = `
         </Button>
       </div>
       <div
-        className="list-container"
+        className="locations-list-wrapper"
       >
         <InfiniteScroll
           element="div"
