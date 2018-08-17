@@ -23,16 +23,20 @@ exports[`should render snapshot correctly 1`] = `
     id="right-panel-container"
   >
     <div>
-      <Button
-        ghost={false}
-        icon="plus"
-        loading={false}
-        onClick={[Function]}
-        prefixCls="ant-btn"
-        type="primary"
+      <div
+        className="add-new-loc-btn-wrapper"
       >
-        Add New Food Place
-      </Button>
+        <Button
+          ghost={false}
+          icon="plus"
+          loading={false}
+          onClick={[Function]}
+          prefixCls="ant-btn"
+          type="primary"
+        >
+          Add New Food Place
+        </Button>
+      </div>
       <div
         className="list-container"
       >

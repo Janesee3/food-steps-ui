@@ -1,61 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders snapshot correctly 1`] = `
-<Dropdown
-  mouseEnterDelay={0.15}
-  mouseLeaveDelay={0.1}
-  overlay={
-    <Menu
-      className=""
-      defaultSelectedKeys={Array []}
-      focusable={false}
-      mode="horizontal"
-      prefixCls="ant-menu"
-      style={
-        Object {
-          "lineHeight": "64px",
-        }
-      }
-      theme="dark"
-    >
-      <MenuItem>
-        <Link
-          replace={false}
-          to="/"
-        >
-          Home
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link
-          replace={false}
-          to="/user-locations-page"
-        >
-          My Food Places
-        </Link>
-      </MenuItem>
-    </Menu>
-  }
-  placement="bottomLeft"
-  prefixCls="ant-dropdown"
-  trigger={
-    Array [
-      "click",
-    ]
-  }
+<div
+  className="menu-btn-wrapper"
 >
-  <div>
-    <Button
-      ghost={false}
-      loading={false}
-      prefixCls="ant-btn"
-      type="primary"
-    >
-      Menu 
-      <Icon
-        type="down"
-      />
-    </Button>
-  </div>
-</Dropdown>
+  <Button
+    className="menu-btn"
+    ghost={true}
+    loading={false}
+    onClick={[Function]}
+    prefixCls="ant-btn"
+  >
+    <Icon
+      type="menu-unfold"
+    />
+  </Button>
+  <Drawer
+    className="drawer"
+    closable={false}
+    level={null}
+    maskClosable={true}
+    onClose={[Function]}
+    placement="left"
+    prefixCls="ant-drawer"
+    title=""
+    visible={false}
+    width={256}
+  >
+    <NavBar
+      mode="vertical"
+    />
+  </Drawer>
+</div>
 `;

@@ -2,184 +2,118 @@
 
 exports[`renders snapshot correctly when user is logged in 1`] = `
 <div
-  className="header"
+  className="header-wrapper"
 >
-  <Row
-    align="middle"
-    className="header-mobile"
-    gutter={0}
-    justify="center"
-    type="flex"
+  <Adapter
+    className="header"
   >
-    <Col
-      lg={0}
-      xs={2}
+    <NavBarMobile
+      className="nav-bar-mobile"
+    />
+    <img
+      alt="logo"
+      className="logo"
+      src="FoodStepsLogo.png"
+    />
+    <div
+      className="nav-bar-desktop"
+    >
+      <NavBar
+        mode="horizontal"
+      />
+    </div>
+    <Dropdown
+      className="avatar-dropdown"
+      mouseEnterDelay={0.15}
+      mouseLeaveDelay={0.1}
+      overlay={
+        <Menu
+          className=""
+          focusable={false}
+          mode="inline"
+          prefixCls="ant-menu"
+          style={
+            Object {
+              "lineHeight": "64px",
+            }
+          }
+          theme="dark"
+        >
+          <MenuItem
+            onClick={[Function]}
+          >
+            Sign Out
+          </MenuItem>
+        </Menu>
+      }
+      placement="bottomLeft"
+      prefixCls="ant-dropdown"
+      trigger={
+        Array [
+          "click",
+        ]
+      }
     >
       <div
-        className="logo"
-      />
-    </Col>
-  </Row>
-  <Adapter>
-    <Row
-      gutter={0}
-    >
-      <Col
-        lg={2}
-        xs={0}
+        className="avatar"
       >
-        <div
-          className="logo"
+        <Avatar
+          icon="user"
+          prefixCls="ant-avatar"
+          shape="circle"
+          size="default"
         />
-      </Col>
-      <Col
-        lg={16}
-        md={18}
-        xs={0}
-      >
-        <NavBar />
-      </Col>
-      <Col
-        lg={0}
-        md={0}
-        sm={16}
-        xs={18}
-      >
-        <NavBarMobile />
-      </Col>
-      <Col
-        lg={6}
-        md={6}
-        sm={8}
-        xs={6}
-      >
-        <Dropdown
-          className="avatar-dropdown"
-          mouseEnterDelay={0.15}
-          mouseLeaveDelay={0.1}
-          overlay={
-            <Menu
-              className=""
-              focusable={false}
-              mode="inline"
-              prefixCls="ant-menu"
-              style={
-                Object {
-                  "lineHeight": "64px",
-                }
-              }
-              theme="dark"
-            >
-              <MenuItem
-                onClick={[Function]}
-              >
-                Sign Out
-              </MenuItem>
-            </Menu>
-          }
-          placement="bottomLeft"
-          prefixCls="ant-dropdown"
-          trigger={
-            Array [
-              "click",
-            ]
-          }
-        >
-          <div
-            className="avatar"
-          >
-            <Avatar
-              icon="user"
-              prefixCls="ant-avatar"
-              shape="circle"
-              size="default"
-            />
-            <span
-              className="avatar-username"
-            />
-          </div>
-        </Dropdown>
-        <SignInSignUpModal
-          closeModal={[Function]}
-          isModalVisible={false}
-          onUserLogin={undefined}
+        <span
+          className="avatar-username"
         />
-      </Col>
-    </Row>
+      </div>
+    </Dropdown>
+    <SignInSignUpModal
+      closeModal={[Function]}
+      isModalVisible={false}
+      onUserLogin={undefined}
+    />
   </Adapter>
 </div>
 `;
 
 exports[`renders snapshot correctly when user is not logged in 1`] = `
 <div
-  className="header"
+  className="header-wrapper"
 >
-  <Row
-    align="middle"
-    className="header-mobile"
-    gutter={0}
-    justify="center"
-    type="flex"
+  <Adapter
+    className="header"
   >
-    <Col
-      lg={0}
-      xs={2}
+    <NavBarMobile
+      className="nav-bar-mobile"
+    />
+    <img
+      alt="logo"
+      className="logo"
+      src="FoodStepsLogo.png"
+    />
+    <div
+      className="nav-bar-desktop"
     >
-      <div
-        className="logo"
+      <NavBar
+        mode="horizontal"
       />
-    </Col>
-  </Row>
-  <Adapter>
-    <Row
-      gutter={0}
+    </div>
+    <Button
+      className="sign-up-button"
+      ghost={false}
+      loading={false}
+      onClick={[Function]}
+      prefixCls="ant-btn"
+      type="primary"
     >
-      <Col
-        lg={2}
-        xs={0}
-      >
-        <div
-          className="logo"
-        />
-      </Col>
-      <Col
-        lg={16}
-        md={18}
-        xs={0}
-      >
-        <NavBar />
-      </Col>
-      <Col
-        lg={0}
-        md={0}
-        sm={16}
-        xs={18}
-      >
-        <NavBarMobile />
-      </Col>
-      <Col
-        lg={6}
-        md={6}
-        sm={8}
-        xs={6}
-      >
-        <Button
-          className="sign-up-button"
-          ghost={false}
-          loading={false}
-          onClick={[Function]}
-          prefixCls="ant-btn"
-          type="primary"
-        >
-          Sign Up / Sign In
-        </Button>
-        <SignInSignUpModal
-          closeModal={[Function]}
-          isModalVisible={false}
-          onUserLogin={undefined}
-        />
-      </Col>
-    </Row>
+      Sign Up / Sign In
+    </Button>
+    <SignInSignUpModal
+      closeModal={[Function]}
+      isModalVisible={false}
+      onUserLogin={undefined}
+    />
   </Adapter>
 </div>
 `;
