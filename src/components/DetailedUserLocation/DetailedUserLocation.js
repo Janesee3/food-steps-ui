@@ -13,7 +13,7 @@ const DetailedUserLocation = props => {
         <a
           onClick={() =>
             showDeleteModal(
-              props.foodPlacesListIndex,
+              props.location,
               props.onUserConfirmDelete
             )
           }

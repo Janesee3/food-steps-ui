@@ -4,14 +4,14 @@ const confirm = Modal.confirm;
 const DELETE_SUCCESS_MESSAGE = "Location deleted successfully";
 const UPDATE_SUCCESS_MESSAGE = "Location updated successfully";
 
-export const showDeleteModal = (foodPlacesListIndex, onUserConfirmDelete) => {
+export const showDeleteModal = (location, onUserConfirmDelete) => {
   confirm({
     title: "Confirm Delete?",
     iconType: "exclamation-circle",
     okText: "Yes",
     okType: "danger",
     cancelText: "No",
-    onOk: () => onUserConfirmDelete(foodPlacesListIndex)
+    onOk: () => onUserConfirmDelete(location._id)
   });
 };
 

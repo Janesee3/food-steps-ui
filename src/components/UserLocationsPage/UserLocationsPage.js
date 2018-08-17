@@ -73,16 +73,15 @@ class UserLocationsPage extends Component {
     }
   };
 
-  onUserConfirmDelete = async foodPlacesListIndex => {
-    const locationId = this.state.userLocations[foodPlacesListIndex]._id;
+  onUserConfirmDelete = async locationId => {
     try {
       const res = await fetch(URL.concat(locationId), {
         credentials: "include",
         method: "DELETE"
       });
       if (res.ok) {
-        const newData = this.state.userLocations.filter((location, index) => {
-          return index !== foodPlacesListIndex;
+        const newData = this.state.userLocations.filter(location => {
+          return locationId !== location._id;
         });
         notifyDeleteSuccess();
         this.setState({
