@@ -1,11 +1,16 @@
 .button-container {
-    /* margin: 1em 0; */
+    text-align: center;
+    padding: 0 1em 1em 1em;
+    display: flex;
+    justify-content: space-between
 }
 
-#choose-loc-btn {
-    margin-right: 0.75em;
+.add-loc-wizard-wrapper {
+    padding: 1em;
 }
 
-.add-location-form-wrapper {
-    
+@media screen and (max-width:800px) {
+    .main-locations {
+        display: block;
+    }
 }

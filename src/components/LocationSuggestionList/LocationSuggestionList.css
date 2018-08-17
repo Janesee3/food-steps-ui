@@ -2,12 +2,12 @@
     border-radius: 4px;
   }
 
-  .list-container {
+  .add-loc-wizard-wrapper > .list-container {
     overflow: auto;
     height: calc(100vh - 64px - 32px - 32px - 6.5em);
   }
 
-  .list-item {
+  .add-loc-wizard-wrapper > .list-item {
     border-bottom: 1px solid #cecece;
     margin: 0 1em 0 0;
     transition-property: all;
@@ -16,15 +16,15 @@
     cursor: pointer;
   }
   
-  .list-item:hover {
+  .add-loc-wizard-wrapper > .list-item:hover {
     background-color: rgba(166, 255, 249, 0.36);  
   }
 
-  .list-content {
+  .add-loc-wizard-wrapper > .list-content {
     padding-left: .5em;
   }
   
-  .selected-list-item {
+  .add-loc-wizard-wrapper > .selected-list-item {
     background-color: rgba(166, 255, 249, 0.36);
     font-weight: 500;
   }

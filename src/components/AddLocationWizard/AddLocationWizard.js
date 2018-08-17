@@ -34,11 +34,17 @@ class AddLocationWizard extends Component {
 
 	render() {
 		return this.props.isUserLoggedIn ? (
-			<div>
+			<div className="add-loc-wizard-wrapper">
 				{/* LOCATION SELECTOR PAGE */}
 				{this.state.currentWizardStep === WIZARD_STEP_LOCATION && (
 					<div>
 						<div className="button-container">
+							<Button
+								id="back-btn"
+								onClick={() => this.changeWizardStep(WIZARD_STEP_FORM)}
+								shape="circle"
+								icon="arrow-left"
+							/>
 							<Button
 								id="choose-loc-btn"
 								type="primary"
@@ -46,9 +52,6 @@ class AddLocationWizard extends Component {
 								onClick={() => this.changeWizardStep(WIZARD_STEP_FORM)}
 							>
 								Choose Location
-							</Button>
-							<Button onClick={() => this.changeWizardStep(WIZARD_STEP_FORM)}>
-								Back
 							</Button>
 						</div>
 
@@ -63,7 +66,9 @@ class AddLocationWizard extends Component {
 				{/* ADD NEW LOCATION FORM PAGE */}
 				{this.state.currentWizardStep === WIZARD_STEP_FORM && (
 					<div className="add-location-form-wrapper">
-						<Button onClick={this.cancelWizard}>Cancel</Button>
+						<div className="button-container">
+							<Button onClick={this.cancelWizard}>Cancel</Button>
+						</div>
 						<LocationForm
 							selectedLocation={this.props.selectedLocation}
 							resetSelectedLocation={() => this.props.setSelectedLocation(null)}
@@ -79,8 +84,8 @@ class AddLocationWizard extends Component {
 				)}
 			</div>
 		) : (
-				<SignInRequired />
-			);
+			<SignInRequired />
+		);
 	}
 }
 

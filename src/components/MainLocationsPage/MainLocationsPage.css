@@ -38,5 +38,7 @@
         display: block;
     }
 
-    
+    .map {
+        height: calc(80vh - 64px);
+    }
   }
