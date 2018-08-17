@@ -15,11 +15,6 @@ exports[`snapshot test 1`] = `
     title={
       <span>
         soy chicken rice
-         | 
-        <IconText
-          text={3}
-          type="star"
-        />
       </span>
     }
   />
